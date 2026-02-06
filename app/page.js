@@ -194,7 +194,7 @@ export default async function Home() {
                 Resources
               </p>
               <h2 className="text-3xl md:text-4xl font-semibold text-slate-900 mt-4">
-                Compliance Built for Malta's 2026 Policy
+                Compliance Built for Malta&apos;s 2026 Policy
               </h2>
               <p className="text-slate-600 mt-4">
                 Track mandatory courses, Skills Pass requirements, renewal deadlines, and quota
@@ -253,12 +253,14 @@ export default async function Home() {
             </div>
             <div className="space-y-6">
               <div className="border border-slate-200 rounded-2xl p-6">
-                <p className="text-slate-600">"TCN Comply saved us 15 hours per month on compliance tasks."</p>
+                <p className="text-slate-600">
+                  &ldquo;TCN Comply saved us 15 hours per month on compliance tasks.&rdquo;
+                </p>
                 <p className="text-sm font-semibold text-slate-900 mt-4">HR Director, Hospitality Group</p>
               </div>
               <div className="border border-slate-200 rounded-2xl p-6">
                 <p className="text-slate-600">
-                  "We finally have a single dashboard showing every renewal and Skills Pass status."
+                  &ldquo;We finally have a single dashboard showing every renewal and Skills Pass status.&rdquo;
                 </p>
                 <p className="text-sm font-semibold text-slate-900 mt-4">Operations Lead, Tourism Operator</p>
               </div>

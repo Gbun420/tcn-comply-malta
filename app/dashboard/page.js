@@ -181,7 +181,7 @@ export default function Dashboard() {
                 </div>
               ))}
               {(data?.complianceEvents || []).length === 0 && (
-                <p className="text-sm text-slate-500">No active alerts. You're in good shape.</p>
+                <p className="text-sm text-slate-500">No active alerts. You&apos;re in good shape.</p>
               )}
             </div>
           </div>

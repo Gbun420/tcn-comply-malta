@@ -124,7 +124,7 @@ export default function RootLayout({ children }) {
                   <span className="font-semibold">TCN Comply Malta</span>
                 </div>
                 <p className="text-slate-300 text-sm">
-                  Navigate Malta's 2026 Labour Migration Policy with confidence.
+                  Navigate Malta&apos;s 2026 Labour Migration Policy with confidence.
                 </p>
               </div>
               
@@ -133,7 +133,7 @@ export default function RootLayout({ children }) {
                 <div className="space-y-2 text-sm text-slate-300">
                   <div className="flex items-center">
                     <Mail className="w-4 h-4 mr-2" />
-                    <a href="mailto:bundyglenn@gmail.com">bundyglenn@gmail.com</a>
+                    <a href="mailto:hello@tcncomply.com">hello@tcncomply.com</a>
                   </div>
                   <div className="flex items-center">
                     <Phone className="w-4 h-4 mr-2" />
