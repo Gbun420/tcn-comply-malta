@@ -168,18 +168,18 @@ export default function Home() {
           <div className="bg-slate-50 rounded-xl p-8 border border-slate-200">
             <div className="flex flex-col md:flex-row items-center justify-between gap-6">
               <div className="text-left">
-                <h3 className="text-xl font-semibold text-slate-900 mb-2">Development Version</h3>
+                <h3 className="text-xl font-semibold text-slate-900 mb-2">Book a Compliance Demo</h3>
                 <p className="text-slate-600">
-                  This deployment is maintained by Glenn Bundy for testing purposes.
+                  See how TCN Comply automates onboarding, renewals, and policy tracking for Maltese employers.
                 </p>
                 <p className="text-slate-800 font-medium mt-2">
-                  Contact: <a href="mailto:bundyglenn@gmail.com" className="text-amber-600 hover:underline">
-                    bundyglenn@gmail.com
+                  Contact: <a href="mailto:hello@tcncomply.com" className="text-amber-600 hover:underline">
+                    hello@tcncomply.com
                   </a>
                 </p>
               </div>
               <button className="btn-primary">
-                Request Demo
+                Schedule Demo
               </button>
             </div>
           </div>

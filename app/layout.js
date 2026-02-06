@@ -94,11 +94,8 @@ export default function RootLayout({ children }) {
                 <a href="/auth/login" className="btn-primary">Login</a>
               </nav>
               
-              <div className="flex items-center space-x-4">
-                <span className="hidden sm:inline text-sm text-slate-500">Development Version</span>
-                <div className="w-8 h-8 bg-slate-800 rounded-full flex items-center justify-center">
-                  <span className="text-white text-sm font-medium">GB</span>
-                </div>
+              <div className="hidden md:flex items-center">
+                <a href="/auth/register" className="btn-accent">Free Trial</a>
               </div>
             </div>
           </div>
