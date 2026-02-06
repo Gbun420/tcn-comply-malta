@@ -1,55 +1,54 @@
-import { getFirestore } from 'firebase-admin/firestore'
-import { initializeApp, getApps, cert } from 'firebase-admin/app'
+import { getDb } from '../../../lib/firebase-admin.js'
 
 export const dynamic = 'force-dynamic'
 
-let db = null
+function getOrgId(request) {
+  return request.headers.get('x-user-id')
+}
 
-function getFirebaseAdmin() {
-  if (db) return db
-  
-  if (!getApps().length) {
-    const projectId = process.env.FIREBASE_PROJECT_ID
-    const privateKey = process.env.FIREBASE_PRIVATE_KEY
-    const clientEmail = process.env.FIREBASE_CLIENT_EMAIL
-    
-    if (!projectId || !privateKey || !clientEmail) {
-      return null
-    }
-    
-    try {
-      initializeApp({
-        credential: cert({
-          projectId,
-          privateKey: privateKey.replace(/\\n/g, '\n'),
-          clientEmail,
-        })
-      })
-    } catch (error) {
-      console.warn('Firebase admin initialization skipped:', error.message)
-      return null
-    }
-  }
-  
+export async function GET(request) {
   try {
-    db = getFirestore()
+    const orgId = getOrgId(request)
+    if (!orgId) {
+      return Response.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
+    const db = getDb()
+    if (!db) {
+      return Response.json({ vacancies: [], setupRequired: true })
+    }
+
+    const snapshot = await db
+      .collection('vacancies')
+      .where('orgId', '==', orgId)
+      .get()
+
+    const vacancies = snapshot.docs.map((doc) => doc.data())
+
+    return Response.json({ vacancies })
   } catch (error) {
-    console.warn('Firestore get failed:', error.message)
-    return null
+    console.error('Vacancy API Error:', error)
+    return Response.json(
+      { error: 'Failed to fetch vacancies' },
+      { status: 500 }
+    )
   }
-  
-  return db
 }
 
 export async function POST(request) {
   try {
+    const orgId = getOrgId(request)
+    if (!orgId) {
+      return Response.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
     const body = await request.json()
     const { title, description, salary, sector, durationWeeks = 3 } = body
 
-    const db = getFirebaseAdmin()
+    const db = getDb()
     if (!db) {
       return Response.json(
-        { error: 'Database not configured' },
+        { error: 'Database not configured', setupRequired: true },
         { status: 503 }
       )
     }
@@ -61,16 +60,10 @@ export async function POST(request) {
       )
     }
 
-    const jobsplusResult = {
-      success: true,
-      refNumber: `JPLS${Date.now()}`,
-      euresRef: `EURES${Date.now()}`,
-      confirmationId: `CONF${Date.now()}`
-    }
-
     const vacancyRef = db.collection('vacancies').doc()
     const vacancyData = {
       id: vacancyRef.id,
+      orgId,
       title,
       description,
       salary: parseInt(salary),
@@ -80,15 +73,17 @@ export async function POST(request) {
         jobsplusPosted: new Date().toISOString(),
         euresPosted: new Date().toISOString(),
         requiredDuration: parseInt(durationWeeks),
-        expiresAt: new Date(Date.now() + durationWeeks * 7 * 24 * 60 * 60 * 1000).toISOString()
+        expiresAt: new Date(
+          Date.now() + durationWeeks * 7 * 24 * 60 * 60 * 1000
+        ).toISOString(),
       },
       MaltaCompliance: {
         advertisedOnJobsplus: true,
         advertisedOnEURES: true,
         minimumDurationMet: durationWeeks >= 3,
-        complianceStatus: 'valid'
+        complianceStatus: 'valid',
       },
-      createdAt: new Date().toISOString()
+      createdAt: new Date().toISOString(),
     }
 
     await vacancyRef.set(vacancyData)
@@ -96,35 +91,13 @@ export async function POST(request) {
     return Response.json({
       success: true,
       vacancyId: vacancyRef.id,
-      jobsplusRef: jobsplusResult.refNumber,
       complianceStatus: 'compliant',
-      message: 'Vacancy posted in compliance with Malta 2026 regulations'
+      message: 'Vacancy posted in compliance with Malta 2026 regulations',
     })
-
   } catch (error) {
     console.error('Vacancy API Error:', error)
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    )
-  }
-}
-
-export async function GET() {
-  try {
-    const db = getFirebaseAdmin()
-    if (!db) {
-      return NextResponse.json({ vacancies: [] })
-    }
-
-    const vacanciesRef = db.collection('vacancies')
-    const snapshot = await vacanciesRef.get()
-    const vacancies = snapshot.docs.map(doc => doc.data())
-
-    return Response.json({ vacancies })
-  } catch (error) {
     return Response.json(
-      { error: 'Failed to fetch vacancies' },
+      { error: 'Internal server error' },
       { status: 500 }
     )
   }

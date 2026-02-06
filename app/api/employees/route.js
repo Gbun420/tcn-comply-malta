@@ -1,52 +1,51 @@
-import { getFirestore } from 'firebase-admin/firestore'
-import { initializeApp, getApps, cert } from 'firebase-admin/app'
+import { getDb } from '../../../lib/firebase-admin.js'
 
 export const dynamic = 'force-dynamic'
 
-let db = null
+function getOrgId(request) {
+  return request.headers.get('x-user-id')
+}
 
-function getFirebaseAdmin() {
-  if (db) return db
-  
-  if (!getApps().length) {
-    const projectId = process.env.FIREBASE_PROJECT_ID
-    const privateKey = process.env.FIREBASE_PRIVATE_KEY
-    const clientEmail = process.env.FIREBASE_CLIENT_EMAIL
-    
-    if (!projectId || !privateKey || !clientEmail) {
-      return null
-    }
-    
-    try {
-      initializeApp({
-        credential: cert({
-          projectId,
-          privateKey: privateKey.replace(/\\n/g, '\n'),
-          clientEmail,
-        })
-      })
-    } catch (error) {
-      console.warn('Firebase admin initialization skipped:', error.message)
-      return null
-    }
-  }
-  
+export async function GET(request) {
   try {
-    db = getFirestore()
+    const orgId = getOrgId(request)
+    if (!orgId) {
+      return Response.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
+    const db = getDb()
+    if (!db) {
+      return Response.json({ employees: [], setupRequired: true })
+    }
+
+    const snapshot = await db
+      .collection('employees')
+      .where('orgId', '==', orgId)
+      .get()
+
+    const employees = snapshot.docs.map((doc) => doc.data())
+
+    return Response.json({ employees })
   } catch (error) {
-    console.warn('Firestore get failed:', error.message)
-    return null
+    console.error('Employees API Error:', error)
+    return Response.json(
+      { error: 'Failed to fetch employees' },
+      { status: 500 }
+    )
   }
-  
-  return db
 }
 
 export async function POST(request) {
   try {
-    const db = getFirebaseAdmin()
+    const orgId = getOrgId(request)
+    if (!orgId) {
+      return Response.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
+    const db = getDb()
     if (!db) {
       return Response.json(
-        { error: 'Database not configured' },
+        { error: 'Database not configured', setupRequired: true },
         { status: 503 }
       )
     }
@@ -59,6 +58,7 @@ export async function POST(request) {
     const employeeRef = db.collection('employees').doc()
     const employeeData = {
       id: employeeRef.id,
+      orgId,
       passportNumber,
       nationality,
       position,
@@ -66,7 +66,7 @@ export async function POST(request) {
       email,
       sector,
       status: 'pre_departure_in_progress',
-      
+
       certificates: {
         pre_departure: {
           status: 'enrolled',
@@ -75,24 +75,24 @@ export async function POST(request) {
           paid: false,
           MaltaRequirement: {
             mandatory: true,
-            deadline: new Date(Date.now() + 42 * 24 * 60 * 60 * 1000).toISOString()
-          }
+            deadline: new Date(Date.now() + 42 * 24 * 60 * 60 * 1000).toISOString(),
+          },
         },
         skills_pass: {
           required: requiresSkillsPass,
           status: requiresSkillsPass ? 'pending' : 'not_required',
-          sector: requiresSkillsPass ? sector : null
-        }
+          sector: requiresSkillsPass ? sector : null,
+        },
       },
-      
+
       MaltaCompliance: {
         preDepartureCourseRequired: true,
         skillsPassRequired: requiresSkillsPass,
         electronicSalaryRequired: true,
-        meets2026Standards: false
+        meets2026Standards: false,
       },
-      
-      createdAt: new Date().toISOString()
+
+      createdAt: new Date().toISOString(),
     }
 
     await employeeRef.set(employeeData)
@@ -105,11 +105,12 @@ export async function POST(request) {
         skillsPassRequired: requiresSkillsPass,
         regulatoryRequirements: [
           'Complete pre-departure course within 42 days',
-          requiresSkillsPass ? 'Complete sector-specific Skills Pass' : 'No Skills Pass required'
-        ]
-      }
+          requiresSkillsPass
+            ? 'Complete sector-specific Skills Pass'
+            : 'No Skills Pass required',
+        ],
+      },
     })
-
   } catch (error) {
     console.error('Employee API Error:', error)
     return Response.json(
