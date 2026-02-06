@@ -7,11 +7,18 @@ import { BookOpen, Shield, Users, Clock, AlertTriangle, CheckCircle, LogOut } fr
 export default function Dashboard() {
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [mounted, setMounted] = useState(false)
   const router = useRouter()
 
   useEffect(() => {
-    fetchUser()
+    setMounted(true)
   }, [])
+
+  useEffect(() => {
+    if (mounted) {
+      fetchUser()
+    }
+  }, [mounted])
 
   const fetchUser = async () => {
     try {
@@ -35,7 +42,7 @@ export default function Dashboard() {
     router.refresh()
   }
 
-  if (loading) {
+  if (!mounted || loading) {
     return (
       <div className="min-h-screen bg-slate-50 flex items-center justify-center">
         <div className="text-center">

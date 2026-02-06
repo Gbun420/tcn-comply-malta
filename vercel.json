@@ -21,6 +21,15 @@
         { "key": "Access-Control-Allow-Methods", "value": "GET,POST,PUT,DELETE,OPTIONS" },
         { "key": "Access-Control-Allow-Headers", "value": "X-Requested-With, Content-Type, Authorization" }
       ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Content-Security-Policy",
+          "value": "font-src 'self' *.vercel.com *.gstatic.com data:; script-src 'self' 'unsafe-eval' 'unsafe-inline' *.vercel.com; style-src 'self' 'unsafe-inline' *.vercel.com; img-src 'self' data: *.vercel.com; connect-src 'self' *.vercel.com *.googleapis.com;"
+        }
+      ]
     }
   ]
 }
