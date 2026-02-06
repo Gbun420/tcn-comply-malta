@@ -1,5 +1,13 @@
 import { NextResponse } from 'next/server'
-import { verifyToken } from './lib/auth'
+import { jwtDecode } from 'jwt-decode'
+
+function verifyToken(token) {
+  try {
+    return jwtDecode(token)
+  } catch (error) {
+    return null
+  }
+}
 
 export function middleware(request) {
   const token = request.cookies.get('auth-token')?.value
