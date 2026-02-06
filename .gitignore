@@ -44,3 +44,4 @@ next-env.d.ts
 *.swo
 node_modules
 .env*.local
+.aider*
