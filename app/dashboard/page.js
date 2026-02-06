@@ -1,209 +1,192 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
-import { BookOpen, Shield, Users, Clock, AlertTriangle, CheckCircle, LogOut } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import {
+  Users,
+  BookOpen,
+  Clock,
+  ShieldAlert,
+  Plus,
+  Upload,
+  FileBarChart2,
+} from 'lucide-react'
+import PortalShell from '../../components/PortalShell.js'
 
 export default function Dashboard() {
-  const [user, setUser] = useState(null)
+  const [data, setData] = useState(null)
   const [loading, setLoading] = useState(true)
-  const [mounted, setMounted] = useState(false)
-  const router = useRouter()
 
   useEffect(() => {
-    setMounted(true)
+    const loadDashboard = async () => {
+      try {
+        const response = await fetch('/api/dashboard')
+        const payload = await response.json()
+        setData(payload)
+      } catch (error) {
+        setData({ error: 'Failed to load dashboard' })
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    loadDashboard()
   }, [])
 
-  useEffect(() => {
-    if (mounted) {
-      fetchUser()
-    }
-  }, [mounted])
-
-  const fetchUser = async () => {
-    try {
-      const response = await fetch('/api/auth/me')
-      if (response.ok) {
-        const data = await response.json()
-        setUser(data.user)
-      } else {
-        router.push('/auth/login')
-      }
-    } catch (error) {
-      router.push('/auth/login')
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  const handleLogout = async () => {
-    await fetch('/api/auth/logout', { method: 'POST' })
-    router.push('/auth/login')
-    router.refresh()
-  }
-
-  if (!mounted || loading) {
+  if (loading) {
     return (
-      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+      <div className="min-h-screen bg-slate-100 flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-500 mx-auto"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-amber mx-auto" />
           <p className="mt-4 text-slate-600">Loading dashboard...</p>
         </div>
       </div>
     )
   }
 
-  const stats = [
-    { name: 'Total Employees', value: '24', change: '+12%', icon: Users },
-    { name: 'Courses Completed', value: '18', change: '+25%', icon: BookOpen },
-    { name: 'Pending Renewals', value: '3', change: '-2', icon: Clock },
-    { name: 'Compliance Rate', value: '92%', change: '+5%', icon: CheckCircle },
-  ]
+  if (data?.error) {
+    return (
+      <PortalShell title="Dashboard">
+        <div className="bg-white border border-slate-200 rounded-2xl p-6">
+          <h2 className="text-lg font-semibold text-slate-900">Unable to load dashboard</h2>
+          <p className="text-sm text-slate-600 mt-2">{data.error}</p>
+        </div>
+      </PortalShell>
+    )
+  }
 
-  const employees = [
-    { id: 'EMP001', name: 'Maria Santos', passport: 'PH1234567', status: 'active', course: 'Completed', renewal: '2024-12-15', skillsPass: 'Not Required' },
-    { id: 'EMP002', name: 'Ahmed Hassan', passport: 'EG7654321', status: 'pending', course: 'In Progress', renewal: '2025-01-20', skillsPass: 'Pending' },
-    { id: 'EMP003', name: 'Keiko Tanaka', passport: 'JP1122334', status: 'overdue', course: 'Not Started', renewal: '2024-11-30', skillsPass: 'Not Required' }
+  const stats = [
+    {
+      name: 'Total Employees',
+      value: data?.stats?.totalEmployees ?? '—',
+      icon: Users,
+    },
+    {
+      name: 'Courses Completed',
+      value: data?.stats?.coursesCompleted ?? '—',
+      icon: BookOpen,
+    },
+    {
+      name: 'Pending Renewals',
+      value: data?.stats?.pendingRenewals ?? '—',
+      icon: Clock,
+    },
+    {
+      name: 'Compliance Alerts',
+      value: data?.stats?.complianceAlerts ?? '—',
+      icon: ShieldAlert,
+    },
   ]
 
   return (
-    <div className="min-h-screen bg-slate-50">
-      <header className="bg-white shadow-sm border-b border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex justify-between items-center">
-            <a href="/" className="flex items-center space-x-3">
-              <img src="/logo.svg" alt="TCN Comply Malta Logo" className="w-12 h-12" />
+    <PortalShell
+      title="Dashboard"
+      subtitle="Overview of compliance activity and upcoming deadlines"
+      actions={
+        <div className="flex items-center gap-2">
+          <button className="btn-secondary">Download Report</button>
+          <button className="btn-accent">New Application</button>
+        </div>
+      }
+    >
+      {data?.setupRequired && (
+        <div className="bg-amber-50 border border-amber-200 rounded-2xl p-6 mb-8">
+          <h2 className="text-lg font-semibold text-slate-900">Finish your setup</h2>
+          <p className="text-sm text-slate-700 mt-2">
+            Connect your Firestore project to unlock live compliance tracking and metrics.
+          </p>
+        </div>
+      )}
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {stats.map((stat) => (
+          <div key={stat.name} className="bg-white rounded-2xl border border-slate-200 p-6">
+            <div className="flex items-center justify-between">
               <div>
-                <span className="text-xl font-bold text-slate-800">TCN Comply</span>
-                <span className="text-xl font-bold text-amber-500">Malta</span>
+                <p className="text-sm text-slate-500">{stat.name}</p>
+                <p className="text-2xl font-semibold text-slate-900 mt-2">{stat.value}</p>
               </div>
-            </a>
-            <div className="flex items-center space-x-4">
-              <span className="text-slate-600">{user?.email}</span>
-              <button
-                onClick={handleLogout}
-                className="flex items-center space-x-2 text-slate-600 hover:text-amber-600"
-              >
-                <LogOut className="w-5 h-5" />
-                <span>Logout</span>
-              </button>
+              <div className="w-10 h-10 rounded-lg bg-brand-blue/10 flex items-center justify-center">
+                <stat.icon className="w-5 h-5 text-brand-blue" />
+              </div>
             </div>
           </div>
-        </div>
-      </header>
+        ))}
+      </div>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold text-slate-900">Dashboard</h1>
-          <p className="text-slate-600">Welcome back, {user?.name}. Here's what's happening with your TCN compliance.</p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          {stats.map((stat, index) => (
-            <div key={index} className="bg-white rounded-xl shadow-sm border border-slate-100 p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-medium text-slate-600">{stat.name}</p>
-                  <p className="text-2xl font-bold text-slate-900 mt-1">{stat.value}</p>
-                </div>
-                <div className="p-3 bg-amber-100 rounded-lg">
-                  <stat.icon className="w-6 h-6 text-amber-600" />
-                </div>
-              </div>
-              <p className="text-sm text-emerald-600 font-medium mt-4">{stat.change} from last period</p>
-            </div>
-          ))}
-        </div>
-
-        <div className="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden mb-8">
+      <div className="mt-10 grid lg:grid-cols-[1.2fr_0.8fr] gap-8">
+        <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden">
           <div className="px-6 py-4 border-b border-slate-200">
-            <h2 className="text-lg font-semibold text-slate-900">TCN Employees</h2>
-            <p className="text-sm text-slate-600">Manage your Third-Country National workforce compliance</p>
+            <h2 className="text-lg font-semibold text-slate-900">Recent Applications</h2>
+            <p className="text-sm text-slate-500">Latest TCN applications and statuses</p>
           </div>
           <div className="overflow-x-auto">
             <table className="min-w-full divide-y divide-slate-200">
               <thead className="bg-slate-50">
                 <tr>
-                  <th className="table-header">Employee</th>
+                  <th className="table-header">Applicant</th>
+                  <th className="table-header">Position</th>
                   <th className="table-header">Status</th>
-                  <th className="table-header">Course</th>
-                  <th className="table-header">Skills Pass</th>
-                  <th className="table-header">Renewal</th>
+                  <th className="table-header">Updated</th>
                 </tr>
               </thead>
-              <tbody className="bg-white divide-y divide-slate-200">
-                {employees.map((emp) => (
-                  <tr key={emp.id} className="hover:bg-slate-50">
+              <tbody className="divide-y divide-slate-200">
+                {(data?.recentApplications || []).map((app) => (
+                  <tr key={app.id} className="hover:bg-slate-50">
+                    <td className="table-cell">{app.candidateName || app.name || '—'}</td>
+                    <td className="table-cell">{app.position || '—'}</td>
                     <td className="table-cell">
-                      <div className="flex items-center">
-                        <div className="h-10 w-10 bg-slate-100 rounded-full flex items-center justify-center">
-                          <Users className="w-5 h-5 text-slate-600" />
-                        </div>
-                        <div className="ml-4">
-                          <div className="text-sm font-medium text-slate-900">{emp.name}</div>
-                          <div className="text-sm text-slate-500">{emp.passport}</div>
-                        </div>
-                      </div>
+                      <span className="badge-info">{app.status || 'Pending'}</span>
                     </td>
-                    <td className="table-cell">
-                      <span className={`inline-flex px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                        emp.status === 'active' ? 'bg-emerald-100 text-emerald-800' :
-                        emp.status === 'pending' ? 'bg-amber-100 text-amber-800' :
-                        'bg-rose-100 text-rose-800'
-                      }`}>
-                        {emp.status.charAt(0).toUpperCase() + emp.status.slice(1)}
-                      </span>
-                    </td>
-                    <td className="table-cell text-slate-900">{emp.course}</td>
-                    <td className="table-cell text-slate-900">{emp.skillsPass}</td>
-                    <td className="table-cell text-slate-900">{emp.renewal}</td>
+                    <td className="table-cell">{app.updatedAt || app.createdAt || '—'}</td>
                   </tr>
                 ))}
+                {(data?.recentApplications || []).length === 0 && (
+                  <tr>
+                    <td className="table-cell text-slate-500" colSpan="4">
+                      No applications yet. Start your first application to see it here.
+                    </td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6">
-            <h3 className="text-lg font-semibold text-slate-900 mb-4">Upcoming Renewals</h3>
-            <div className="space-y-4">
-              <div className="flex items-center justify-between p-3 bg-amber-50 rounded-lg">
-                <div>
-                  <p className="font-medium text-slate-900">Keiko Tanaka</p>
-                  <p className="text-sm text-slate-600">Renewal due in 15 days</p>
-                </div>
-                <AlertTriangle className="w-5 h-5 text-amber-600" />
-              </div>
-              <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
-                <div>
-                  <p className="font-medium text-slate-900">Ahmed Hassan</p>
-                  <p className="text-sm text-slate-600">Course completion overdue</p>
-                </div>
-                <AlertTriangle className="w-5 h-5 text-blue-600" />
-              </div>
+        <div className="space-y-6">
+          <div className="bg-white rounded-2xl border border-slate-200 p-6">
+            <h3 className="text-lg font-semibold text-slate-900">Quick Actions</h3>
+            <div className="mt-4 space-y-3">
+              <button className="w-full flex items-center gap-3 px-4 py-3 border border-slate-200 rounded-lg text-sm font-semibold">
+                <Plus className="w-4 h-4" />
+                New Application
+              </button>
+              <button className="w-full flex items-center gap-3 px-4 py-3 border border-slate-200 rounded-lg text-sm font-semibold">
+                <Upload className="w-4 h-4" />
+                Upload Documents
+              </button>
+              <button className="w-full flex items-center gap-3 px-4 py-3 border border-slate-200 rounded-lg text-sm font-semibold">
+                <FileBarChart2 className="w-4 h-4" />
+                View Reports
+              </button>
             </div>
           </div>
 
-          <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6">
-            <h3 className="text-lg font-semibold text-slate-900 mb-4">Compliance Tips</h3>
-            <div className="space-y-3">
-              <div className="flex items-start">
-                <CheckCircle className="w-5 h-5 text-emerald-500 mt-0.5 mr-3" />
-                <p className="text-sm text-slate-700">All vacancies posted for 3+ weeks as required</p>
-              </div>
-              <div className="flex items-start">
-                <CheckCircle className="w-5 h-5 text-emerald-500 mt-0.5 mr-3" />
-                <p className="text-sm text-slate-700">Electronic salary payments verified</p>
-              </div>
-              <div className="flex items-start">
-                <AlertTriangle className="w-5 h-5 text-amber-500 mt-0.5 mr-3" />
-                <p className="text-sm text-slate-700">Approaching workforce quota limit (85%)</p>
-              </div>
+          <div className="bg-white rounded-2xl border border-slate-200 p-6">
+            <h3 className="text-lg font-semibold text-slate-900">Compliance Alerts</h3>
+            <div className="mt-4 space-y-3">
+              {(data?.complianceEvents || []).map((event) => (
+                <div key={event.id} className="border border-slate-100 rounded-lg p-3">
+                  <p className="text-sm font-medium text-slate-900">{event.title || 'Alert'}</p>
+                  <p className="text-xs text-slate-500 mt-1">{event.description || 'Review required.'}</p>
+                </div>
+              ))}
+              {(data?.complianceEvents || []).length === 0 && (
+                <p className="text-sm text-slate-500">No active alerts. You're in good shape.</p>
+              )}
             </div>
           </div>
         </div>
-      </main>
-    </div>
+      </div>
+    </PortalShell>
   )
 }
