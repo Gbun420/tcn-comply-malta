@@ -102,7 +102,7 @@ export default function Login() {
 
             <div className="text-center">
               <p className="text-sm text-slate-600">
-                Demo: bundyglenn@gmail.com / admin123
+                Need access? Contact hello@tcncomply.com
               </p>
             </div>
           </form>

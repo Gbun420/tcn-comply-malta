@@ -1,14 +1,4 @@
-import { NextResponse } from 'next/server'
-import { generateToken, authenticateUser } from '../../../../lib/auth.js'
-
-const DEMO_USER = {
-  uid: 'demo-1',
-  email: 'bundyglenn@gmail.com',
-  password: 'admin123',
-  displayName: 'Glenn Bundy',
-  role: 'admin',
-  company: 'TCN Comply Malta',
-}
+import { generateToken, authenticateUser, isFirebaseConfigured } from '../../../../lib/auth.js'
 
 export async function POST(request) {
   let email = null
@@ -39,19 +29,15 @@ export async function POST(request) {
   let user = null
 
   try {
+    if (!isFirebaseConfigured(process.env)) {
+      return Response.json(
+        { error: 'Authentication not configured', setupRequired: true },
+        { status: 503 }
+      )
+    }
     user = await authenticateUser(email, password)
   } catch (firebaseError) {
     console.log('Firebase auth error:', firebaseError.message)
-  }
-
-  if (!user && email === DEMO_USER.email && password === DEMO_USER.password) {
-    user = {
-      uid: DEMO_USER.uid,
-      email: DEMO_USER.email,
-      name: DEMO_USER.displayName,
-      role: DEMO_USER.role,
-      company: DEMO_USER.company,
-    }
   }
 
   if (!user) {
