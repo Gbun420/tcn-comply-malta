@@ -2,18 +2,18 @@ import './globals.css'
 import { Mail, Phone } from 'lucide-react'
 
 export const metadata = {
-  title: 'TCN Comply Malta - Automated TCN Compliance for Maltese Employers | 2026 Labour Migration Policy',
-  description: 'Streamline Malta TCN compliance with automated pre-departure course tracking, Skills Pass integration, and quota monitoring. Stay compliant with the 2026 Labour Migration Policy.',
+  title: 'TCN Comply Malta | TCN Compliance Software for 2026 Labour Migration Policy',
+  description: 'TCN compliance software for Maltese employers managing Third-Country Nationals under the 2026 Labour Migration Policy.',
   keywords: [
     'Malta TCN compliance', 'Third-Country Nationals Malta', '2026 Labour Migration Policy',
     'Malta immigration software', 'TCN onboarding Malta', 'Jobsplus integration Malta',
     'Skills Pass tracking', 'Malta employer compliance', 'Pre-departure course Malta',
     'Third-country national compliance', 'Malta work permits', 'Malta immigration 2026',
     'TCN hiring Malta', 'Malta labor migration', 'compliance platform Malta',
-    'bundyglenn@gmail.com', 'Malta business software', 'HR compliance Malta'
+    'Malta business software', 'HR compliance Malta'
   ].join(', '),
-  authors: [{ name: 'Glenn Bundy', email: 'bundyglenn@gmail.com' }],
-  creator: 'Glenn Bundy',
+  authors: [{ name: 'TCN Comply Malta' }],
+  creator: 'TCN Comply Malta',
   publisher: 'TCN Comply Malta',
   metadataBase: new URL('https://tcn-comply-malta.vercel.app'),
   alternates: {
@@ -53,6 +53,12 @@ const structuredData = {
     'address': {
       '@type': 'PostalAddress',
       'addressCountry': 'MT'
+    },
+    'contactPoint': {
+      '@type': 'ContactPoint',
+      'contactType': 'sales',
+      'email': 'hello@tcncomply.com',
+      'areaServed': 'MT'
     }
   },
   'offers': {

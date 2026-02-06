@@ -2,10 +2,6 @@ export async function GET() {
   const baseUrl = 'https://tcn-comply-malta.vercel.app'
   const pages = [
     { url: '', changefreq: 'weekly', priority: '1.0' },
-    { url: '/auth/login', changefreq: 'monthly', priority: '0.8' },
-    { url: '/auth/register', changefreq: 'monthly', priority: '0.8' },
-    { url: '/dashboard', changefreq: 'daily', priority: '0.9' },
-    { url: '/dashboard/employees', changefreq: 'daily', priority: '0.8' },
     { url: '/privacy', changefreq: 'yearly', priority: '0.3' },
   ]
 

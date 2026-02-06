@@ -1,11 +1,14 @@
 export const metadata = {
-  title: 'TCN Comply Malta - Automated TCN Compliance for Maltese Employers | 2026 Labour Migration Policy',
-  description: 'Streamline Malta TCN compliance with automated pre-departure course tracking, Skills Pass integration, and quota monitoring. Stay compliant with the 2026 Labour Migration Policy. Start free trial.',
-  keywords: 'Malta TCN compliance, Third-Country Nationals Malta, 2026 Labour Migration Policy, Malta immigration software, TCN onboarding Malta, Jobsplus integration Malta, Skills Pass tracking, Malta employer compliance',
-  authors: [{ name: 'Glenn Bundy', email: 'bundyglenn@gmail.com' }],
+  title: 'TCN Comply Malta | TCN Compliance Software for 2026 Labour Migration Policy',
+  description:
+    'TCN compliance software for Maltese employers. Automate pre-departure course tracking, Skills Pass workflows, quota monitoring, and renewals under the 2026 Labour Migration Policy.',
+  keywords:
+    'TCN compliance Malta, Third-Country Nationals Malta, Labour Migration Policy 2026, Malta immigration software, TCN onboarding Malta, Jobsplus integration Malta, Skills Pass tracking, Malta employer compliance, Malta work permits',
+  authors: [{ name: 'TCN Comply Malta' }],
   openGraph: {
-    title: 'TCN Comply Malta - Automated TCN Compliance Platform',
-    description: 'Stay compliant with Malta\'s 2026 Labour Migration Policy',
+    title: 'TCN Comply Malta - TCN Compliance Platform',
+    description:
+      'Automate Malta TCN compliance workflows for the 2026 Labour Migration Policy.',
     type: 'website',
     locale: 'en_MT',
     siteName: 'TCN Comply Malta',
@@ -14,5 +17,5 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'TCN Comply Malta - TCN Compliance Made Simple',
     description: 'Navigate Malta\'s 2026 Labour Migration Policy with confidence',
-  }
+  },
 }
