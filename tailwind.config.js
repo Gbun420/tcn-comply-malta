@@ -11,6 +11,7 @@ export default {
         'brand-blue': '#1a365d',
         'brand-green': '#2d8659',
         'brand-amber': '#d69e2e',
+        'brand-cloud': '#f7f9fc',
         'malta-red': '#CF142B',
         'malta-blue': '#0057B7',
         'compliance-green': '#00A859',
