@@ -1,23 +1,20 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
   <defs>
-    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#1e3a5f;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#0f172a;stop-opacity:1" />
-    </linearGradient>
-    <linearGradient id="shieldGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#f8fafc;stop-opacity:1" />
+    <linearGradient id="brandGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a365d" />
+      <stop offset="100%" stop-color="#2d8659" />
     </linearGradient>
   </defs>
-  
-  <circle cx="100" cy="100" r="95" fill="url(#bgGradient)"/>
-  
-  <path d="M100 35 L155 55 V95 C155 125 100 155 100 155 C100 155 45 125 45 95 V55 L100 35Z" fill="url(#shieldGradient)"/>
-  
-  <text x="100" y="85" font-family="Arial Black, Arial, sans-serif" font-size="36" font-weight="900" fill="#1e3a5f" text-anchor="middle">TCN</text>
-  
-  <rect x="90" y="100" width="20" height="35" rx="2" fill="#f59e0b"/>
-  <rect x="80" y="110" width="40" height="20" rx="2" fill="#f59e0b"/>
-  
-  <text x="100" y="175" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#f59e0b" text-anchor="middle">MALTA</text>
+  <circle cx="100" cy="100" r="96" fill="url(#brandGradient)" />
+  <path
+    d="M100 28 L160 50 V102 C160 135 131 162 100 176 C69 162 40 135 40 102 V50 L100 28Z"
+    fill="#ffffff"
+  />
+  <path
+    d="M82 104 L95 118 L126 86"
+    stroke="#d69e2e"
+    stroke-width="10"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
 </svg>

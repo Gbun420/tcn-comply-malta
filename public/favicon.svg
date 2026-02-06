@@ -1,8 +1,20 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" fill="#1e3a5f" rx="4"/>
-  <rect x="6" y="4" width="20" height="16" rx="3" fill="white"/>
-  <text x="16" y="15" font-family="Arial Black" font-size="8" font-weight="900" fill="#1e3a5f" text-anchor="middle">TCN</text>
-  <rect x="14" y="16" width="4" height="6" rx="1" fill="#f59e0b"/>
-  <rect x="12" y="17" width="8" height="3" rx="1" fill="#f59e0b"/>
-  <text x="16" y="28" font-family="Arial" font-size="5" font-weight="700" fill="#f59e0b" text-anchor="middle">MALTA</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <defs>
+    <linearGradient id="brandGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a365d" />
+      <stop offset="100%" stop-color="#2d8659" />
+    </linearGradient>
+  </defs>
+  <rect width="32" height="32" rx="6" fill="url(#brandGradient)" />
+  <path
+    d="M16 6 L25 9.5 V16.5 C25 20.5 20.6 23.7 16 26 C11.4 23.7 7 20.5 7 16.5 V9.5 L16 6Z"
+    fill="#ffffff"
+  />
+  <path
+    d="M13 17 L15.2 19.3 L20 14.5"
+    stroke="#d69e2e"
+    stroke-width="2.4"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
 </svg>

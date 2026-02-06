@@ -8,6 +8,9 @@ export default {
   theme: {
     extend: {
       colors: {
+        'brand-blue': '#1a365d',
+        'brand-green': '#2d8659',
+        'brand-amber': '#d69e2e',
         'malta-red': '#CF142B',
         'malta-blue': '#0057B7',
         'compliance-green': '#00A859',
@@ -22,7 +25,8 @@ export default {
         'gray-100': '#F8F9FA',
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['Manrope', 'system-ui', 'sans-serif'],
+        display: ['Space Grotesk', 'Manrope', 'system-ui', 'sans-serif'],
       },
     },
   },
