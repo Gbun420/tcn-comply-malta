@@ -1,0 +1,8 @@
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#CF142B"/>
+  <rect x="100" y="100" width="1000" height="430" rx="20" fill="#0057B7"/>
+  <text x="600" y="280" font-family="Arial, sans-serif" font-size="60" font-weight="bold" fill="white" text-anchor="middle">TCN Comply Malta</text>
+  <text x="600" y="350" font-family="Arial, sans-serif" font-size="32" fill="white" text-anchor="middle">2026 Labour Migration Policy</text>
+  <text x="600" y="420" font-family="Arial, sans-serif" font-size="24" fill="#FFD700" text-anchor="middle">Automated TCN Compliance Platform</text>
+  <text x="600" y="500" font-family="Arial, sans-serif" font-size="20" fill="white" text-anchor="middle">Navigate Malta's TCN Compliance with Confidence</text>
+</svg>
