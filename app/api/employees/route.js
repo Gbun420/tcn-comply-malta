@@ -1,4 +1,3 @@
-import { NextResponse } from 'next/server'
 import { getFirestore } from 'firebase-admin/firestore'
 import { initializeApp, getApps, cert } from 'firebase-admin/app'
 
@@ -46,7 +45,7 @@ export async function POST(request) {
   try {
     const db = getFirebaseAdmin()
     if (!db) {
-      return NextResponse.json(
+      return Response.json(
         { error: 'Database not configured' },
         { status: 503 }
       )
@@ -98,7 +97,7 @@ export async function POST(request) {
 
     await employeeRef.set(employeeData)
 
-    return NextResponse.json({
+    return Response.json({
       success: true,
       employeeId: employeeRef.id,
       MaltaComplianceSummary: {
@@ -113,7 +112,7 @@ export async function POST(request) {
 
   } catch (error) {
     console.error('Employee API Error:', error)
-    return NextResponse.json(
+    return Response.json(
       { error: 'Internal server error' },
       { status: 500 }
     )

@@ -1,4 +1,3 @@
-import { NextResponse } from 'next/server'
 import { getFirestore } from 'firebase-admin/firestore'
 import { initializeApp, getApps, cert } from 'firebase-admin/app'
 
@@ -49,14 +48,14 @@ export async function POST(request) {
 
     const db = getFirebaseAdmin()
     if (!db) {
-      return NextResponse.json(
+      return Response.json(
         { error: 'Database not configured' },
         { status: 503 }
       )
     }
 
     if (durationWeeks < 3) {
-      return NextResponse.json(
+      return Response.json(
         { error: 'Malta regulation requires minimum 3-week vacancy posting' },
         { status: 400 }
       )
@@ -94,7 +93,7 @@ export async function POST(request) {
 
     await vacancyRef.set(vacancyData)
 
-    return NextResponse.json({
+    return Response.json({
       success: true,
       vacancyId: vacancyRef.id,
       jobsplusRef: jobsplusResult.refNumber,
@@ -122,9 +121,9 @@ export async function GET() {
     const snapshot = await vacanciesRef.get()
     const vacancies = snapshot.docs.map(doc => doc.data())
 
-    return NextResponse.json({ vacancies })
+    return Response.json({ vacancies })
   } catch (error) {
-    return NextResponse.json(
+    return Response.json(
       { error: 'Failed to fetch vacancies' },
       { status: 500 }
     )
