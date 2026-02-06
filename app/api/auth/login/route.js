@@ -30,7 +30,7 @@ export async function POST(request) {
   }
 
   if (!email || !password) {
-    return NextResponse.json(
+    return Response.json(
       { error: 'Email and password required' },
       { status: 400 }
     )
@@ -55,7 +55,7 @@ export async function POST(request) {
   }
 
   if (!user) {
-    return NextResponse.json(
+    return Response.json(
       { error: 'Invalid credentials' },
       { status: 401 }
     )
@@ -63,26 +63,23 @@ export async function POST(request) {
 
   const token = generateToken(user)
 
-  const response = NextResponse.json(
-    {
-      success: true,
-      user: {
-        uid: user.uid,
-        email: user.email,
-        name: user.name,
-        role: user.role,
-        company: user.company,
-      },
+  const responseData = {
+    success: true,
+    user: {
+      uid: user.uid,
+      email: user.email,
+      name: user.name,
+      role: user.role,
+      company: user.company,
     },
-    { status: 200 }
-  )
+  }
 
-  response.cookies.set('auth-token', token, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'lax',
-    maxAge: 7 * 24 * 60 * 60,
-    path: '/',
+  const response = new Response(JSON.stringify(responseData), {
+    status: 200,
+    headers: {
+      'Content-Type': 'application/json',
+      'Set-Cookie': `auth-token=${token}; HttpOnly; Path=/; Max-Age=${7 * 24 * 60 * 60}; SameSite=lax${process.env.NODE_ENV === 'production' ? '; Secure' : ''}`
+    }
   })
 
   return response
