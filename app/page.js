@@ -183,9 +183,9 @@ export default function Home() {
 
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          kicker="Separate Pages"
-          title="Each core section now opens on its own dedicated page"
-          description="Use these routes to review solutions, coverage, workflow, contact channels, and audit/test purpose independently."
+          kicker="Explore"
+          title="Quick links for evaluation and rollout"
+          description="Jump to the key pages buyers review during onboarding: product scope, pricing, coverage mapping, and trust documentation."
           align="center"
         />
 
