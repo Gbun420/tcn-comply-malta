@@ -7,7 +7,11 @@ const __dirname = path.dirname(__filename)
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['tcncomply.mt', 'localhost'],
+    remotePatterns: [
+      { protocol: 'https', hostname: 'tcncomply.mt' },
+      { protocol: 'http', hostname: 'localhost' },
+      { protocol: 'http', hostname: '127.0.0.1' },
+    ],
   },
   webpack: (config) => {
     config.resolve.alias['@'] = path.resolve(__dirname)

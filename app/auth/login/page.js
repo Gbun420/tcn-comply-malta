@@ -79,7 +79,7 @@ export default function Login() {
           </div>
 
           <div className="p-6 lg:p-8">
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form method="post" onSubmit={handleSubmit} className="space-y-4">
               {error ? (
                 <div className="flex items-center gap-2 rounded-xl border border-rose-300/40 bg-rose-300/15 px-3 py-2 text-sm text-rose-100">
                   <AlertCircle className="h-4 w-4" />
@@ -90,7 +90,7 @@ export default function Login() {
               <label className="block space-y-2 text-sm text-slate-100">
                 <span>Email</span>
                 <span className="relative block">
-                  <Mail className="pointer-events-none absolute left-3 top-3.5 h-4 w-4 text-slate-200" />
+                  <Mail className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-200" />
                   <input
                     id="email"
                     type="email"
@@ -98,7 +98,7 @@ export default function Login() {
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="input-field pl-10"
+                    className="input-field pl-12"
                     placeholder="name@company.mt"
                   />
                 </span>
@@ -107,7 +107,7 @@ export default function Login() {
               <label className="block space-y-2 text-sm text-slate-100">
                 <span>Password</span>
                 <span className="relative block">
-                  <Lock className="pointer-events-none absolute left-3 top-3.5 h-4 w-4 text-slate-200" />
+                  <Lock className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-200" />
                   <input
                     id="password"
                     type="password"
@@ -115,7 +115,7 @@ export default function Login() {
                     required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="input-field pl-10"
+                    className="input-field pl-12"
                     placeholder="••••••••"
                   />
                 </span>

@@ -100,7 +100,7 @@ export default function Register() {
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-3">
+          <form method="post" onSubmit={handleSubmit} className="space-y-3">
             {error ? (
               <div className="flex items-center gap-2 rounded-xl border border-rose-300/40 bg-rose-300/15 px-3 py-2 text-sm text-rose-100">
                 <AlertCircle className="h-4 w-4" />
@@ -111,7 +111,7 @@ export default function Register() {
             <label className="block space-y-2 text-sm text-slate-100">
               <span>Full name</span>
               <span className="relative block">
-                <User className="pointer-events-none absolute left-3 top-3.5 h-4 w-4 text-slate-200" />
+                <User className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-200" />
                 <input
                   name="name"
                   type="text"
@@ -119,7 +119,7 @@ export default function Register() {
                   required
                   value={formData.name}
                   onChange={handleChange}
-                  className="input-field pl-10"
+                  className="input-field pl-12"
                   placeholder="Jane Smith"
                 />
               </span>
@@ -128,7 +128,7 @@ export default function Register() {
             <label className="block space-y-2 text-sm text-slate-100">
               <span>Email</span>
               <span className="relative block">
-                <Mail className="pointer-events-none absolute left-3 top-3.5 h-4 w-4 text-slate-200" />
+                <Mail className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-200" />
                 <input
                   name="email"
                   type="email"
@@ -136,7 +136,7 @@ export default function Register() {
                   required
                   value={formData.email}
                   onChange={handleChange}
-                  className="input-field pl-10"
+                  className="input-field pl-12"
                   placeholder="name@company.mt"
                 />
               </span>
@@ -145,7 +145,7 @@ export default function Register() {
             <label className="block space-y-2 text-sm text-slate-100">
               <span>Company</span>
               <span className="relative block">
-                <Building className="pointer-events-none absolute left-3 top-3.5 h-4 w-4 text-slate-200" />
+                <Building className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-200" />
                 <input
                   name="company"
                   type="text"
@@ -153,7 +153,7 @@ export default function Register() {
                   required
                   value={formData.company}
                   onChange={handleChange}
-                  className="input-field pl-10"
+                  className="input-field pl-12"
                   placeholder="Example Hospitality Ltd"
                 />
               </span>
@@ -162,7 +162,7 @@ export default function Register() {
             <label className="block space-y-2 text-sm text-slate-100">
               <span>Password</span>
               <span className="relative block">
-                <Lock className="pointer-events-none absolute left-3 top-3.5 h-4 w-4 text-slate-200" />
+                <Lock className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-200" />
                 <input
                   name="password"
                   type="password"
@@ -170,7 +170,7 @@ export default function Register() {
                   required
                   value={formData.password}
                   onChange={handleChange}
-                  className="input-field pl-10"
+                  className="input-field pl-12"
                   placeholder="Minimum 6 characters"
                 />
               </span>
@@ -179,7 +179,7 @@ export default function Register() {
             <label className="block space-y-2 text-sm text-slate-100">
               <span>Confirm password</span>
               <span className="relative block">
-                <Lock className="pointer-events-none absolute left-3 top-3.5 h-4 w-4 text-slate-200" />
+                <Lock className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-200" />
                 <input
                   name="confirmPassword"
                   type="password"
@@ -187,7 +187,7 @@ export default function Register() {
                   required
                   value={formData.confirmPassword}
                   onChange={handleChange}
-                  className="input-field pl-10"
+                  className="input-field pl-12"
                   placeholder="Re-enter password"
                 />
               </span>

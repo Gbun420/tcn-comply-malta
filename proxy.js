@@ -19,7 +19,7 @@ const PUBLIC_PATHS = new Set([
   '/api/auth/logout',
 ])
 
-export function middleware(request) {
+export function proxy(request) {
   const token = request.cookies.get('auth-token')?.value
   const pathname = request.nextUrl.pathname
   const isApiRoute = pathname.startsWith('/api/')
