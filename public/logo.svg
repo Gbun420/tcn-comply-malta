@@ -1,23 +1,38 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" fill="none">
   <defs>
-    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#1e3a5f;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#0f172a;stop-opacity:1" />
+    <linearGradient id="glassBg" x1="22" y1="24" x2="220" y2="216" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#6BDCFF" stop-opacity="0.55"/>
+      <stop offset="0.42" stop-color="#1A78FF" stop-opacity="0.42"/>
+      <stop offset="1" stop-color="#20CFA7" stop-opacity="0.56"/>
     </linearGradient>
-    <linearGradient id="shieldGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#f8fafc;stop-opacity:1" />
+    <linearGradient id="shieldCore" x1="120" y1="50" x2="120" y2="178" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.96"/>
+      <stop offset="1" stop-color="#D8EDFF" stop-opacity="0.92"/>
     </linearGradient>
+    <linearGradient id="accent" x1="66" y1="138" x2="176" y2="138" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2BE8B8"/>
+      <stop offset="1" stop-color="#2BC9FF"/>
+    </linearGradient>
+    <filter id="glow" x="8" y="8" width="224" height="224" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.23 0 0 0 0 0.79 0 0 0 0 1 0 0 0 0.45 0"/>
+    </filter>
   </defs>
-  
-  <circle cx="100" cy="100" r="95" fill="url(#bgGradient)"/>
-  
-  <path d="M100 35 L155 55 V95 C155 125 100 155 100 155 C100 155 45 125 45 95 V55 L100 35Z" fill="url(#shieldGradient)"/>
-  
-  <text x="100" y="85" font-family="Arial Black, Arial, sans-serif" font-size="36" font-weight="900" fill="#1e3a5f" text-anchor="middle">TCN</text>
-  
-  <rect x="90" y="100" width="20" height="35" rx="2" fill="#f59e0b"/>
-  <rect x="80" y="110" width="40" height="20" rx="2" fill="#f59e0b"/>
-  
-  <text x="100" y="175" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#f59e0b" text-anchor="middle">MALTA</text>
+
+  <rect x="20" y="20" width="200" height="200" rx="56" fill="#081A39"/>
+  <rect x="20" y="20" width="200" height="200" rx="56" fill="url(#glassBg)"/>
+  <rect x="20" y="20" width="200" height="200" rx="56" stroke="rgba(255,255,255,0.44)" stroke-width="2"/>
+
+  <g filter="url(#glow)">
+    <circle cx="68" cy="66" r="18" fill="#6BE7FF"/>
+    <circle cx="174" cy="174" r="20" fill="#31D7C6"/>
+  </g>
+
+  <path d="M120 48L170 66V110C170 141 146 167 120 182C94 167 70 141 70 110V66L120 48Z" fill="url(#shieldCore)"/>
+  <path d="M87 139H153L145 152H95L87 139Z" fill="url(#accent)"/>
+  <path d="M112 93H128V152H112V93Z" fill="#0874E8"/>
+  <path d="M89 103H151V118H89V103Z" fill="#0874E8"/>
+  <path d="M82 82H100V100H82V82Z" fill="#2BC9FF"/>
+  <path d="M140 82H158V100H140V82Z" fill="#2BC9FF"/>
+  <text x="120" y="210" text-anchor="middle" fill="#D8F6FF" font-family="Space Grotesk, Avenir Next, sans-serif" font-size="17" font-weight="700" letter-spacing="2.2">TCN MALTA</text>
 </svg>

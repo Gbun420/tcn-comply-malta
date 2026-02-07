@@ -61,11 +61,13 @@ export const metadata = {
     locale: 'en_MT',
     siteName: SITE_NAME,
     url: 'https://tcn-comply-malta.vercel.app',
+    images: ['/og-image.svg'],
   },
   twitter: {
     card: 'summary_large_image',
     title: `${SITE_NAME} - TCN Compliance Made Simple`,
     description: "Navigate Malta's 2026 Labour Migration Policy with confidence",
+    images: ['/og-image.svg'],
   },
   robots: {
     index: true,

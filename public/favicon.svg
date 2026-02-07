@@ -1,8 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" fill="#1e3a5f" rx="4"/>
-  <rect x="6" y="4" width="20" height="16" rx="3" fill="white"/>
-  <text x="16" y="15" font-family="Arial Black" font-size="8" font-weight="900" fill="#1e3a5f" text-anchor="middle">TCN</text>
-  <rect x="14" y="16" width="4" height="6" rx="1" fill="#f59e0b"/>
-  <rect x="12" y="17" width="8" height="3" rx="1" fill="#f59e0b"/>
-  <text x="16" y="28" font-family="Arial" font-size="5" font-weight="700" fill="#f59e0b" text-anchor="middle">MALTA</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="4" y1="4" x2="28" y2="28" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#6BDCFF"/>
+      <stop offset="0.5" stop-color="#1A78FF"/>
+      <stop offset="1" stop-color="#20CFA7"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="28" height="28" rx="8" fill="#081A39"/>
+  <rect x="2" y="2" width="28" height="28" rx="8" fill="url(#bg)" fill-opacity="0.45"/>
+  <path d="M16 7L23 9.8V15.5C23 19.8 19.8 23 16 24.8C12.2 23 9 19.8 9 15.5V9.8L16 7Z" fill="#F0F8FF"/>
+  <path d="M14.8 12H17.2V20H14.8V12Z" fill="#0B73E9"/>
+  <path d="M12 13.5H20V15.8H12V13.5Z" fill="#0B73E9"/>
 </svg>

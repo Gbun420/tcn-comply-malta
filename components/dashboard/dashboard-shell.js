@@ -1,12 +1,20 @@
 'use client'
 
 import Link from 'next/link'
-import { LayoutDashboard, LogOut, Users } from 'lucide-react'
+import { ClipboardCheck, LayoutDashboard, LogOut, Users } from 'lucide-react'
 import { GlassCard } from '../ui/glass-card.js'
+import { DASHBOARD_MODULES } from '../../lib/portal-content.js'
 
 const navItems = [
-  { href: '/dashboard', label: 'Overview', icon: LayoutDashboard },
-  { href: '/dashboard/employees', label: 'Employees', icon: Users },
+  { href: '/dashboard', label: 'Overview', icon: LayoutDashboard, match: '/dashboard' },
+  { href: '/dashboard/employees', label: 'Employees', icon: Users, match: '/dashboard/employees' },
+  {
+    href: '/dashboard/vacancies',
+    label: 'Vacancies',
+    icon: ClipboardCheck,
+    match: '/dashboard/vacancies',
+  },
+  { href: '/dashboard/audit', label: 'Audit', icon: ClipboardCheck, match: '/dashboard/audit' },
 ]
 
 export function DashboardShell({
@@ -33,7 +41,7 @@ export function DashboardShell({
             <div className="flex flex-wrap items-center gap-2">
               {navItems.map((item) => {
                 const Icon = item.icon
-                const isActive = activePath === item.href
+                const isActive = activePath === item.match
                 return (
                   <Link
                     key={item.href}
@@ -68,6 +76,21 @@ export function DashboardShell({
               </button>
             </div>
           </div>
+        </div>
+      </GlassCard>
+
+      <GlassCard className="p-4">
+        <p className="text-xs uppercase tracking-[0.13em] text-slate-300">Portal Modules</p>
+        <div className="mt-2 flex flex-wrap gap-2">
+          {DASHBOARD_MODULES.map((module) => (
+            <Link
+              key={module.href}
+              href={module.href}
+              className="rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs text-slate-100 hover:bg-white/15"
+            >
+              {module.label}
+            </Link>
+          ))}
         </div>
       </GlassCard>
 

@@ -46,10 +46,22 @@ const employeeSeed = [
 ]
 
 export default function EmployeesPage() {
-  const [employees] = useState(employeeSeed)
+  const [employees, setEmployees] = useState(employeeSeed)
   const [searchTerm, setSearchTerm] = useState('')
   const [filterStatus, setFilterStatus] = useState('all')
   const [userEmail, setUserEmail] = useState('')
+  const [showCreateForm, setShowCreateForm] = useState(false)
+  const [saving, setSaving] = useState(false)
+  const [notice, setNotice] = useState('')
+  const [formData, setFormData] = useState({
+    name: '',
+    passportNumber: '',
+    nationality: '',
+    position: '',
+    salary: '',
+    email: '',
+    sector: 'hospitality',
+  })
   const router = useRouter()
 
   const fetchUser = useCallback(async () => {
@@ -95,8 +107,80 @@ export default function EmployeesPage() {
         return 'border-amber-200/40 bg-amber-200/20 text-amber-100'
       case 'overdue':
         return 'border-rose-200/40 bg-rose-200/20 text-rose-100'
+      case 'draft':
+        return 'border-sky-200/40 bg-sky-200/20 text-sky-100'
       default:
         return 'border-white/30 bg-white/10 text-slate-100'
+    }
+  }
+
+  const handleCreateEmployee = async (event) => {
+    event.preventDefault()
+    setSaving(true)
+    setNotice('')
+
+    try {
+      const response = await fetch('/api/employees', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          passportNumber: formData.passportNumber,
+          nationality: formData.nationality,
+          position: formData.position,
+          salary: Number(formData.salary || 0),
+          email: formData.email,
+          sector: formData.sector,
+        }),
+      })
+
+      if (response.status === 401) {
+        router.push('/auth/login')
+        return
+      }
+
+      const data = await response.json()
+
+      if (!response.ok && response.status !== 503) {
+        setNotice(data.error || 'Failed to create employee')
+        return
+      }
+
+      const nextEmployee = {
+        id: data.employeeId || `LOCAL-${Date.now()}`,
+        name: formData.name,
+        passport: formData.passportNumber,
+        nationality: formData.nationality,
+        position: formData.position,
+        status: response.status === 503 ? 'draft' : 'pending',
+        courseStatus: 'in_progress',
+        skillsPass:
+          formData.sector === 'hospitality' || formData.sector === 'tourism'
+            ? 'pending'
+            : 'not_required',
+        permitExpiry: 'Pending assignment',
+        salary: `€${Number(formData.salary || 0).toLocaleString('en-US')}`,
+      }
+
+      setEmployees((current) => [nextEmployee, ...current])
+      setNotice(
+        response.status === 503
+          ? 'Employee saved in local draft mode. Database is not configured.'
+          : 'Employee created successfully.'
+      )
+      setFormData({
+        name: '',
+        passportNumber: '',
+        nationality: '',
+        position: '',
+        salary: '',
+        email: '',
+        sector: 'hospitality',
+      })
+      setShowCreateForm(false)
+    } catch {
+      setNotice('Network error while creating employee.')
+    } finally {
+      setSaving(false)
     }
   }
 
@@ -108,12 +192,115 @@ export default function EmployeesPage() {
       userEmail={userEmail}
       onLogout={handleLogout}
       actions={
-        <button type="button" className="cta-primary inline-flex items-center gap-2">
+        <button
+          type="button"
+          onClick={() => setShowCreateForm((value) => !value)}
+          className="cta-primary inline-flex items-center gap-2"
+        >
           <Plus className="h-4 w-4" />
-          Add Employee
+          {showCreateForm ? 'Close Form' : 'Add Employee'}
         </button>
       }
     >
+      {showCreateForm ? (
+        <GlassCard className="p-5">
+          <form onSubmit={handleCreateEmployee} className="grid gap-3 md:grid-cols-2">
+            <label className="block space-y-2 text-sm text-slate-100">
+              <span>Full name</span>
+              <input
+                required
+                value={formData.name}
+                onChange={(event) => setFormData({ ...formData, name: event.target.value })}
+                className="input-field"
+                placeholder="Employee name"
+              />
+            </label>
+            <label className="block space-y-2 text-sm text-slate-100">
+              <span>Passport number</span>
+              <input
+                required
+                value={formData.passportNumber}
+                onChange={(event) =>
+                  setFormData({ ...formData, passportNumber: event.target.value })
+                }
+                className="input-field"
+                placeholder="AB1234567"
+              />
+            </label>
+            <label className="block space-y-2 text-sm text-slate-100">
+              <span>Nationality</span>
+              <input
+                required
+                value={formData.nationality}
+                onChange={(event) => setFormData({ ...formData, nationality: event.target.value })}
+                className="input-field"
+                placeholder="Philippines"
+              />
+            </label>
+            <label className="block space-y-2 text-sm text-slate-100">
+              <span>Position</span>
+              <input
+                required
+                value={formData.position}
+                onChange={(event) => setFormData({ ...formData, position: event.target.value })}
+                className="input-field"
+                placeholder="Hotel Receptionist"
+              />
+            </label>
+            <label className="block space-y-2 text-sm text-slate-100">
+              <span>Annual salary (EUR)</span>
+              <input
+                required
+                min="0"
+                type="number"
+                value={formData.salary}
+                onChange={(event) => setFormData({ ...formData, salary: event.target.value })}
+                className="input-field"
+              />
+            </label>
+            <label className="block space-y-2 text-sm text-slate-100">
+              <span>Email</span>
+              <input
+                required
+                type="email"
+                value={formData.email}
+                onChange={(event) => setFormData({ ...formData, email: event.target.value })}
+                className="input-field"
+                placeholder="employee@company.mt"
+              />
+            </label>
+            <label className="block space-y-2 text-sm text-slate-100 md:col-span-2">
+              <span>Sector</span>
+              <select
+                value={formData.sector}
+                onChange={(event) => setFormData({ ...formData, sector: event.target.value })}
+                className="input-field"
+              >
+                <option value="hospitality">Hospitality</option>
+                <option value="tourism">Tourism</option>
+                <option value="general">General</option>
+              </select>
+            </label>
+            <div className="md:col-span-2">
+              <button
+                type="submit"
+                disabled={saving}
+                className="cta-primary inline-flex items-center gap-2"
+              >
+                <Plus className="h-4 w-4" />
+                {saving ? 'Creating...' : 'Create employee'}
+              </button>
+            </div>
+          </form>
+        </GlassCard>
+      ) : null}
+
+      {notice ? (
+        <GlassCard className="p-4">
+          <p className="text-sm text-cyan-100">{notice}</p>
+        </GlassCard>
+      ) : null}
+
       <GlassCard className="p-5">
         <div className="grid gap-3 md:grid-cols-[1fr_auto_auto] md:items-center">
           <label className="relative block">
@@ -136,6 +323,7 @@ export default function EmployeesPage() {
             <option value="active">Active</option>
             <option value="pending">Pending</option>
             <option value="overdue">Overdue</option>
+            <option value="draft">Draft</option>
           </select>
 
           <button type="button" className="cta-ghost inline-flex items-center justify-center gap-2">

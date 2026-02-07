@@ -13,6 +13,7 @@ import {
 } from 'lucide-react'
 import { DashboardShell } from '../../components/dashboard/dashboard-shell.js'
 import { GlassCard } from '../../components/ui/glass-card.js'
+import { DASHBOARD_MODULES } from '../../lib/portal-content.js'
 
 const statCards = [
   { name: 'Total Employees', value: '24', change: '+12%', icon: Users },
@@ -113,16 +114,42 @@ export default function Dashboard() {
       userEmail={user?.email}
       onLogout={handleLogout}
       actions={
-        <button
-          type="button"
-          onClick={() => router.push('/dashboard/employees')}
-          className="cta-primary inline-flex items-center gap-2"
-        >
-          Employee Console
-          <ArrowUpRight className="h-4 w-4" />
-        </button>
+        <div className="flex flex-wrap items-center gap-2">
+          <button
+            type="button"
+            onClick={() => router.push('/dashboard/employees')}
+            className="cta-primary inline-flex items-center gap-2"
+          >
+            Employee Console
+            <ArrowUpRight className="h-4 w-4" />
+          </button>
+          <button
+            type="button"
+            onClick={() => router.push('/dashboard/vacancies')}
+            className="cta-ghost inline-flex items-center gap-2"
+          >
+            Vacancy Console
+          </button>
+        </div>
       }
     >
+      <GlassCard className="p-5">
+        <h2 className="font-display text-2xl font-semibold text-white">Client Portal Modules</h2>
+        <div className="mt-4 grid gap-3 md:grid-cols-2">
+          {DASHBOARD_MODULES.map((module) => (
+            <button
+              type="button"
+              key={module.href}
+              onClick={() => router.push(module.href)}
+              className="rounded-xl border border-white/15 bg-white/8 px-4 py-3 text-left transition hover:bg-white/15"
+            >
+              <p className="font-semibold text-white">{module.label}</p>
+              <p className="mt-1 text-sm text-slate-200">{module.summary}</p>
+            </button>
+          ))}
+        </div>
+      </GlassCard>
+
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {statCards.map((item) => {
           const Icon = item.icon

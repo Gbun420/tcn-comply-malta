@@ -12,6 +12,7 @@ import {
 } from 'lucide-react'
 import { GlassCard } from '../components/ui/glass-card.js'
 import { SectionHeading } from '../components/ui/section-heading.js'
+import { PORTAL_OFFERINGS } from '../lib/portal-content.js'
 import { SITE_CONTACT_EMAIL, SITE_NAME } from '../lib/site-content.js'
 
 const featureCards = [
@@ -54,11 +55,32 @@ const trustStats = [
   { label: 'Potential Penalties Avoided', value: '€200k+' },
 ]
 
-const workflowSteps = [
-  'Capture vacancy and application metadata in one flow.',
-  'Detect policy edge-cases before submission deadlines.',
-  'Monitor workforce obligations through a live compliance cockpit.',
-  'Export audit evidence for legal and regulator-facing reviews.',
+const quickPageCards = [
+  {
+    href: '/solutions',
+    title: 'Solutions',
+    copy: 'See what we offer clients across onboarding, renewal, and audit readiness.',
+  },
+  {
+    href: '/coverage',
+    title: 'Coverage',
+    copy: 'Map legal requirements to tracked controls and evidence surfaces.',
+  },
+  {
+    href: '/workflow',
+    title: 'Workflow',
+    copy: 'Understand the end-to-end execution pattern inside the portal.',
+  },
+  {
+    href: '/contact',
+    title: 'Contact',
+    copy: 'Coordinate rollout, implementation, and client support.',
+  },
+  {
+    href: '/audit-app',
+    title: 'Audit App',
+    copy: 'Open the dedicated testing and audit page in a separate route.',
+  },
 ]
 
 export default function Home() {
@@ -70,11 +92,11 @@ export default function Home() {
             <div className="space-y-5">
               <span className="glass-chip">2026 Glass Console</span>
               <h1 className="font-display text-balance text-4xl font-semibold leading-tight text-white md:text-6xl">
-                A New Compliance Interface for Malta&apos;s 2026 Labour Framework
+                Portal and Dashboard Operations for Malta&apos;s 2026 Compliance Model
               </h1>
               <p className="max-w-2xl text-lg text-slate-100/90 md:text-xl">
-                {SITE_NAME} now runs on a glassmorphic operations layer that keeps legal
-                requirements, hiring velocity, and audit evidence visible in a single live surface.
+                {SITE_NAME} provides a client-ready workspace where policy controls, workflow
+                execution, and audit evidence stay visible in one operating layer.
               </p>
 
               <div className="flex flex-wrap gap-3">
@@ -84,6 +106,9 @@ export default function Home() {
                 </Link>
                 <Link href="/dashboard" className="cta-ghost inline-flex items-center gap-2">
                   Open Interactive Dashboard
+                </Link>
+                <Link href="/audit-app" className="cta-ghost inline-flex items-center gap-2">
+                  Audit App
                 </Link>
               </div>
 
@@ -105,15 +130,15 @@ export default function Home() {
             </div>
 
             <GlassCard className="p-5 md:p-6">
-              <p className="glass-chip">Live Workflow</p>
+              <p className="glass-chip">Client Offering Snapshot</p>
               <h2 className="mt-4 font-display text-2xl font-semibold text-white">
-                Policy Execution Loop
+                What We Offer Clients
               </h2>
               <ul className="mt-5 space-y-3">
-                {workflowSteps.map((step) => (
-                  <li key={step} className="flex items-start gap-3 text-sm text-slate-100/95">
+                {PORTAL_OFFERINGS.solutions.slice(0, 4).map((item) => (
+                  <li key={item.title} className="flex items-start gap-3 text-sm text-slate-100/95">
                     <CheckCircle2 className="mt-0.5 h-4 w-4 flex-shrink-0 text-cyan-200" />
-                    <span>{step}</span>
+                    <span>{item.title}</span>
                   </li>
                 ))}
               </ul>
@@ -132,7 +157,32 @@ export default function Home() {
         </GlassCard>
       </section>
 
-      <section id="features" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <SectionHeading
+          kicker="Separate Pages"
+          title="Each core section now opens on its own dedicated page"
+          description="Use these routes to review solutions, coverage, workflow, contact channels, and audit/test purpose independently."
+          align="center"
+        />
+
+        <div className="glass-grid sm:grid-cols-2 lg:grid-cols-3">
+          {quickPageCards.map((item) => (
+            <GlassCard key={item.href} className="p-5 md:p-6">
+              <h3 className="font-display text-xl font-semibold text-white">{item.title}</h3>
+              <p className="mt-2 text-sm leading-6 text-slate-200">{item.copy}</p>
+              <Link
+                href={item.href}
+                className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-cyan-100"
+              >
+                Open page
+                <ArrowUpRight className="h-4 w-4" />
+              </Link>
+            </GlassCard>
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           kicker="Platform Modules"
           title="Purpose-built glass layers for each compliance workload"
@@ -156,35 +206,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="coverage" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <GlassCard className="grid gap-8 p-7 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:p-10">
-          <div>
-            <SectionHeading
-              kicker="Coverage"
-              title="From vacancy publication to renewal, every compliance stage stays visible"
-              description="The 2026 design brings all policy-critical checkpoints into a single line of sight for HR, ops, and legal teams."
-            />
-          </div>
-
-          <div className="space-y-3">
-            {[
-              'Mandatory pre-departure course completion controls',
-              '3-week Jobsplus and EURES posting requirement tracking',
-              'Sector-specific Skills Pass and qualification monitoring',
-              'Quota and termination ratio awareness for decision-making',
-            ].map((item) => (
-              <div
-                key={item}
-                className="rounded-xl border border-white/15 bg-white/8 px-4 py-3 text-slate-100"
-              >
-                {item}
-              </div>
-            ))}
-          </div>
-        </GlassCard>
-      </section>
-
-      <section id="workflow" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <GlassCard className="p-7 text-center md:p-10">
           <p className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs uppercase tracking-[0.14em] text-cyan-100">
             <Sparkles className="h-3.5 w-3.5" />
@@ -194,20 +216,17 @@ export default function Home() {
             Built to reduce audit anxiety and speed up compliant hiring
           </h2>
           <p className="mx-auto mt-3 max-w-2xl text-slate-200/95">
-            The new interface structure favors fast scanning, high contrast status cues, and
-            consistent action placement across marketing, auth, and dashboard surfaces.
+            The portal structure now includes dedicated operations, vacancy, and audit surfaces to
+            cover workflows that previously had no front-end implementation.
           </p>
 
-          <div id="contact" className="mt-8 flex flex-wrap items-center justify-center gap-3">
-            <Link href="/auth/login" className="cta-primary inline-flex items-center gap-2">
-              Access Employer Portal
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+            <Link href="/dashboard/audit" className="cta-primary inline-flex items-center gap-2">
+              Open Audit Dashboard
             </Link>
-            <a
-              href={`mailto:${SITE_CONTACT_EMAIL}`}
-              className="cta-ghost inline-flex items-center gap-2"
-            >
+            <Link href="/contact" className="cta-ghost inline-flex items-center gap-2">
               Contact Team
-            </a>
+            </Link>
           </div>
         </GlassCard>
       </section>

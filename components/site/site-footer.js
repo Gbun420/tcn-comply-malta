@@ -1,16 +1,28 @@
 import { Mail, Phone } from 'lucide-react'
 import Link from 'next/link'
+import { MARKETING_NAV_LINKS } from '../../lib/portal-content.js'
 
 export function SiteFooter({ siteName, contactEmail, contactPhone }) {
   return (
     <footer className="px-4 pb-10 pt-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl rounded-3xl border border-white/15 bg-white/10 p-6 shadow-2xl backdrop-blur-xl md:p-8">
-        <div className="grid gap-8 md:grid-cols-3">
+        <div className="grid gap-8 md:grid-cols-4">
           <div>
             <p className="font-display text-xl font-semibold text-white">{siteName}</p>
             <p className="mt-2 max-w-xs text-sm text-slate-200">
               Compliance intelligence for Malta&apos;s 2026 labour migration era.
             </p>
+          </div>
+
+          <div>
+            <p className="mb-3 text-xs uppercase tracking-[0.2em] text-cyan-200">Explore</p>
+            <div className="space-y-2 text-sm text-slate-100">
+              {MARKETING_NAV_LINKS.map((link) => (
+                <Link key={link.href} href={link.href} className="block hover:text-cyan-200">
+                  {link.label}
+                </Link>
+              ))}
+            </div>
           </div>
 
           <div>
