@@ -1,0 +1,12 @@
+node_modules/
+.next/
+dist/
+.env.local
+.env
+.supabase/
+supabase/.temp/
+supabase/.branches/
+supabase/.settings/
+supabase/.cache/
+*.log
+
