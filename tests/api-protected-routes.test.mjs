@@ -74,7 +74,7 @@ test('OPTIONS /api/employees returns 204 for preflight without auth', async () =
   const request = new Request('http://localhost/api/employees', {
     method: 'OPTIONS',
     headers: {
-      origin: 'https://tcncomply.mt',
+      origin: 'https://tcn-comply-malta.vercel.app',
       'access-control-request-method': 'POST',
       'access-control-request-headers': 'Content-Type, Authorization',
     },
@@ -83,7 +83,10 @@ test('OPTIONS /api/employees returns 204 for preflight without auth', async () =
   const response = await employeesOptions(request)
 
   assert.equal(response.status, 204)
-  assert.equal(response.headers.get('access-control-allow-origin'), 'https://tcncomply.mt')
+  assert.equal(
+    response.headers.get('access-control-allow-origin'),
+    'https://tcn-comply-malta.vercel.app'
+  )
   assert.match(response.headers.get('access-control-allow-methods') || '', /OPTIONS/)
 })
 
@@ -91,7 +94,7 @@ test('OPTIONS /api/vacancies returns 204 for preflight without auth', async () =
   const request = new Request('http://localhost/api/vacancies', {
     method: 'OPTIONS',
     headers: {
-      origin: 'https://tcncomply.mt',
+      origin: 'https://tcn-comply-malta.vercel.app',
       'access-control-request-method': 'POST',
       'access-control-request-headers': 'Content-Type, Authorization',
     },
@@ -100,6 +103,9 @@ test('OPTIONS /api/vacancies returns 204 for preflight without auth', async () =
   const response = await vacanciesOptions(request)
 
   assert.equal(response.status, 204)
-  assert.equal(response.headers.get('access-control-allow-origin'), 'https://tcncomply.mt')
+  assert.equal(
+    response.headers.get('access-control-allow-origin'),
+    'https://tcn-comply-malta.vercel.app'
+  )
   assert.match(response.headers.get('access-control-allow-methods') || '', /OPTIONS/)
 })

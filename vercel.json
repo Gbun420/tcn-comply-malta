@@ -10,14 +10,14 @@
     }
   },
   "env": {
-    "NEXTAUTH_URL": "https://tcncomply.mt"
+    "NEXTAUTH_URL": "https://tcn-comply-malta.vercel.app"
   },
   "regions": ["fra1"],
   "headers": [
     {
       "source": "/api/(.*)",
       "headers": [
-        { "key": "Access-Control-Allow-Origin", "value": "https://tcncomply.mt" },
+        { "key": "Access-Control-Allow-Origin", "value": "https://tcn-comply-malta.vercel.app" },
         { "key": "Access-Control-Allow-Methods", "value": "GET,POST,PUT,DELETE,OPTIONS" },
         {
           "key": "Access-Control-Allow-Headers",

@@ -95,14 +95,14 @@ async function run() {
         request('/api/employees', {
           method: 'OPTIONS',
           headers: {
-            Origin: 'https://tcncomply.mt',
+            Origin: 'https://tcn-comply-malta.vercel.app',
             'Access-Control-Request-Method': 'POST',
             'Access-Control-Request-Headers': 'Content-Type, Authorization',
           },
         }),
       assert: (result) =>
         result.status === 204 &&
-        (result.headers['access-control-allow-origin'] === 'https://tcncomply.mt' ||
+        (result.headers['access-control-allow-origin'] === 'https://tcn-comply-malta.vercel.app' ||
           result.headers['access-control-allow-origin'] === '*'),
     },
     {
@@ -111,14 +111,14 @@ async function run() {
         request('/api/vacancies', {
           method: 'OPTIONS',
           headers: {
-            Origin: 'https://tcncomply.mt',
+            Origin: 'https://tcn-comply-malta.vercel.app',
             'Access-Control-Request-Method': 'POST',
             'Access-Control-Request-Headers': 'Content-Type, Authorization',
           },
         }),
       assert: (result) =>
         result.status === 204 &&
-        (result.headers['access-control-allow-origin'] === 'https://tcncomply.mt' ||
+        (result.headers['access-control-allow-origin'] === 'https://tcn-comply-malta.vercel.app' ||
           result.headers['access-control-allow-origin'] === '*'),
     },
   ]

@@ -8,7 +8,7 @@ const __dirname = path.dirname(__filename)
 const nextConfig = {
   images: {
     remotePatterns: [
-      { protocol: 'https', hostname: 'tcncomply.mt' },
+      { protocol: 'https', hostname: 'tcn-comply-malta.vercel.app' },
       { protocol: 'http', hostname: 'localhost' },
       { protocol: 'http', hostname: '127.0.0.1' },
     ],
