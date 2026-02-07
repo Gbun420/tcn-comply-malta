@@ -26,7 +26,7 @@ test('all public marketing pages have an app router implementation', () => {
     assert.equal(
       existsAny(candidates),
       true,
-      `missing page implementation for ${route} (expected one of: ${candidates.join(', ')})`,
+      `missing page implementation for ${route} (expected one of: ${candidates.join(', ')})`
     )
   }
 })

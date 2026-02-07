@@ -25,11 +25,7 @@ export default function AuditAppPage() {
           Book Demo
           <ArrowUpRight className="h-4 w-4" />
         </Link>,
-        <Link
-          key="pricing"
-          href="/pricing"
-          className="cta-ghost inline-flex items-center gap-2"
-        >
+        <Link key="pricing" href="/pricing" className="cta-ghost inline-flex items-center gap-2">
           View Pricing
         </Link>,
       ]}

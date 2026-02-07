@@ -154,7 +154,12 @@ export function DemoForm() {
 
         <label className="space-y-2 text-sm">
           <span>Primary sector</span>
-          <select className="input-field" name="sector" value={formData.sector} onChange={updateField}>
+          <select
+            className="input-field"
+            name="sector"
+            value={formData.sector}
+            onChange={updateField}
+          >
             <option value="">Select</option>
             <option value="hospitality">Hospitality</option>
             <option value="construction">Construction</option>
@@ -176,7 +181,10 @@ export function DemoForm() {
       </label>
 
       {error ? (
-        <div aria-live="polite" className="rounded-xl border border-rose-300/40 bg-rose-300/15 px-3 py-2 text-sm text-rose-100">
+        <div
+          aria-live="polite"
+          className="rounded-xl border border-rose-300/40 bg-rose-300/15 px-3 py-2 text-sm text-rose-100"
+        >
           {error}
         </div>
       ) : null}

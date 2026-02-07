@@ -9,10 +9,7 @@ function unauthorized() {
 export async function POST(request) {
   const expectedSecret = process.env.INTERNAL_CRON_SECRET
   if (!expectedSecret) {
-    return Response.json(
-      { error: 'INTERNAL_CRON_SECRET is not configured' },
-      { status: 503 },
-    )
+    return Response.json({ error: 'INTERNAL_CRON_SECRET is not configured' }, { status: 503 })
   }
 
   const providedSecret = request.headers.get('x-internal-secret') || ''
@@ -29,7 +26,7 @@ export async function POST(request) {
         success: false,
         error: error instanceof Error ? error.message : String(error),
       },
-      { status: 500 },
+      { status: 500 }
     )
   }
 }

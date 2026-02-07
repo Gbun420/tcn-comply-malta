@@ -60,10 +60,16 @@ export function TurnstileWidget({
 
   return (
     <div className="space-y-2 rounded-xl border border-white/15 bg-white/5 p-3">
-      <p className="text-xs text-slate-200">Complete human verification to continue registration.</p>
+      <p className="text-xs text-slate-200">
+        Complete human verification to continue registration.
+      </p>
       {siteKey ? (
         <>
-          <Script src={TURNSTILE_SCRIPT_URL} strategy="afterInteractive" onLoad={() => setScriptReady(true)} />
+          <Script
+            src={TURNSTILE_SCRIPT_URL}
+            strategy="afterInteractive"
+            onLoad={() => setScriptReady(true)}
+          />
           <div ref={containerRef} />
         </>
       ) : null}

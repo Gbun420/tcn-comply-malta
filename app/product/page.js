@@ -63,10 +63,15 @@ export default function ProductPage() {
           </GlassCard>
 
           <GlassCard className="p-6">
-            <h2 className="font-display text-2xl font-semibold text-white">Typical rollout timeline</h2>
+            <h2 className="font-display text-2xl font-semibold text-white">
+              Typical rollout timeline
+            </h2>
             <div className="mt-4 space-y-3">
               {rollout.map((item) => (
-                <div key={item.step} className="rounded-xl border border-white/12 bg-white/6 px-4 py-3">
+                <div
+                  key={item.step}
+                  className="rounded-xl border border-white/12 bg-white/6 px-4 py-3"
+                >
                   <p className="text-xs uppercase tracking-[0.12em] text-cyan-100">{item.step}</p>
                   <p className="mt-1 text-sm text-slate-100">{item.detail}</p>
                 </div>

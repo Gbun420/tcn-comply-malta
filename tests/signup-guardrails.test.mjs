@@ -1,10 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 
-import {
-  buildSignupRateLimitKey,
-  getSignupRateLimitConfig,
-} from '../lib/signup/rate-limit.js'
+import { buildSignupRateLimitKey, getSignupRateLimitConfig } from '../lib/signup/rate-limit.js'
 import { getTurnstileConfig, verifyTurnstileToken } from '../lib/signup/turnstile.js'
 
 test('rate-limit key is deterministic and depends on email/ip', () => {

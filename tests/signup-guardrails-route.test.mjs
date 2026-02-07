@@ -29,7 +29,7 @@ test('register route returns 400 when consent checkboxes are not accepted', asyn
       turnstileToken: 'token',
       consentTerms: false,
       consentPrivacy: true,
-    }),
+    })
   )
   const body = await response.json()
 
@@ -46,7 +46,7 @@ test('register route returns 400 when turnstile token is missing', async () => {
       company: 'Example Co',
       consentTerms: true,
       consentPrivacy: true,
-    }),
+    })
   )
   const body = await response.json()
 
@@ -64,7 +64,7 @@ test('register route returns 503 when signup guardrails storage is unavailable',
       turnstileToken: 'token',
       consentTerms: true,
       consentPrivacy: true,
-    }),
+    })
   )
   const body = await response.json()
 

@@ -15,8 +15,10 @@ test('firebase admin config is unavailable when env vars are placeholders', () =
 
 test('firebase admin config normalizes escaped private key newlines', () => {
   process.env.FIREBASE_PROJECT_ID = 'tcn-comply-malta'
-  process.env.FIREBASE_CLIENT_EMAIL = 'firebase-adminsdk-xyz@tcn-comply-malta.iam.gserviceaccount.com'
-  process.env.FIREBASE_PRIVATE_KEY = '-----BEGIN PRIVATE KEY-----\\nabc\\n-----END PRIVATE KEY-----\\n'
+  process.env.FIREBASE_CLIENT_EMAIL =
+    'firebase-adminsdk-xyz@tcn-comply-malta.iam.gserviceaccount.com'
+  process.env.FIREBASE_PRIVATE_KEY =
+    '-----BEGIN PRIVATE KEY-----\\nabc\\n-----END PRIVATE KEY-----\\n'
 
   const config = getFirebaseAdminConfig()
   assert.ok(config)

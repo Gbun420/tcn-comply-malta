@@ -27,7 +27,11 @@ const plans = [
     name: 'Enterprise',
     price: 'Custom pricing',
     description: 'For groups requiring custom governance controls and integration workflows.',
-    items: ['Custom roles and governance model', 'Implementation-led rollout', 'Security and legal review support'],
+    items: [
+      'Custom roles and governance model',
+      'Implementation-led rollout',
+      'Security and legal review support',
+    ],
     cta: '/contact?subject=Enterprise%20pricing%20request',
     ctaLabel: 'Talk to sales',
   },

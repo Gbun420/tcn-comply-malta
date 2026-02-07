@@ -27,7 +27,12 @@ const nextConfig = {
 
     const hstsHeader =
       process.env.NODE_ENV === 'production'
-        ? [{ key: 'Strict-Transport-Security', value: 'max-age=31536000; includeSubDomains; preload' }]
+        ? [
+            {
+              key: 'Strict-Transport-Security',
+              value: 'max-age=31536000; includeSubDomains; preload',
+            },
+          ]
         : []
 
     return [

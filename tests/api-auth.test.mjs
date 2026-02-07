@@ -55,7 +55,7 @@ test('POST /api/auth/login returns 200 with session context fields when auth suc
       {
         status: 200,
         headers: { 'Content-Type': 'application/json' },
-      },
+      }
     )
 
   try {

@@ -191,19 +191,22 @@ test('processSignupWebhookQueue marks event dead_letter after max retries', asyn
   const db = new FakeDb()
   const eventId = 'event-dead-letter'
 
-  await db.collection('signup_webhook_queue').doc(eventId).set({
-    id: eventId,
-    eventType: 'signup.created',
-    targetUrl: 'https://example.com/webhook',
-    payload: { hello: 'world' },
-    signature: 'sig',
-    attempts: 2,
-    maxAttempts: 3,
-    status: 'pending',
-    nextAttemptAt: '2026-02-07T09:00:00.000Z',
-    createdAt: '2026-02-07T08:00:00.000Z',
-    updatedAt: '2026-02-07T08:00:00.000Z',
-  })
+  await db
+    .collection('signup_webhook_queue')
+    .doc(eventId)
+    .set({
+      id: eventId,
+      eventType: 'signup.created',
+      targetUrl: 'https://example.com/webhook',
+      payload: { hello: 'world' },
+      signature: 'sig',
+      attempts: 2,
+      maxAttempts: 3,
+      status: 'pending',
+      nextAttemptAt: '2026-02-07T09:00:00.000Z',
+      createdAt: '2026-02-07T08:00:00.000Z',
+      updatedAt: '2026-02-07T08:00:00.000Z',
+    })
 
   const summary = await processSignupWebhookQueue({
     db,

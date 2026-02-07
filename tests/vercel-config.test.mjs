@@ -38,7 +38,7 @@ test('vercel CSP allows Cloudflare Turnstile script and frame origins', () => {
 
 test('vercel config contains signup webhook retry cron route', () => {
   const cron = (vercelConfig.crons || []).find(
-    (entry) => entry.path === '/api/internal/signup-webhook-retry',
+    (entry) => entry.path === '/api/internal/signup-webhook-retry'
   )
   assert.ok(cron, 'expected cron for /api/internal/signup-webhook-retry')
   assert.match(cron.schedule, /\*/)

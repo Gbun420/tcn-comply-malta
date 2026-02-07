@@ -43,7 +43,10 @@ export default function GuidesPage() {
           <GlassCard key={guide.href} className="p-5">
             <h2 className="font-display text-xl font-semibold text-white">{guide.title}</h2>
             <p className="mt-2 text-sm text-slate-200">{guide.description}</p>
-            <Link href={guide.href} className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-cyan-100">
+            <Link
+              href={guide.href}
+              className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-cyan-100"
+            >
               Read guide
               <ArrowUpRight className="h-4 w-4" />
             </Link>

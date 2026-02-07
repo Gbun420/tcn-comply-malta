@@ -33,7 +33,10 @@ export default function SubprocessorsPage() {
         <h2 className="font-display text-2xl font-semibold text-white">Current subprocessors</h2>
         <div className="mt-4 space-y-3">
           {subprocessors.map((item) => (
-            <div key={item.vendor} className="rounded-xl border border-white/12 bg-white/6 px-4 py-3">
+            <div
+              key={item.vendor}
+              className="rounded-xl border border-white/12 bg-white/6 px-4 py-3"
+            >
               <p className="text-sm font-semibold text-white">{item.vendor}</p>
               <p className="mt-1 text-sm text-slate-200">{item.purpose}</p>
             </div>

@@ -7,7 +7,7 @@ import {
   FOOTER_RESOURCE_LINKS,
   MARKETING_NAV_LINKS,
   PORTAL_OFFERINGS,
-  PUBLIC_MARKETING_PATHS
+  PUBLIC_MARKETING_PATHS,
 } from '../lib/portal-content.js'
 import { GET as sitemapGet } from '../app/sitemap.xml/route.js'
 import { INDEXABLE_ROUTES } from '../lib/public-pages.js'
@@ -27,7 +27,7 @@ test('portal offerings define sections for client value proposition', () => {
   assert.equal(PORTAL_OFFERINGS.contactChannels.length >= 1, true)
   assert.equal(
     PORTAL_OFFERINGS.contactChannels.some((channel) => channel.label === 'Demo Request'),
-    true,
+    true
   )
 })
 

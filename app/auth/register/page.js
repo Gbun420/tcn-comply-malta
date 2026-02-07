@@ -262,7 +262,10 @@ export default function Register() {
               />
               <span>
                 I agree to the{' '}
-                <Link href="/terms" className="font-semibold text-cyan-100 underline underline-offset-4">
+                <Link
+                  href="/terms"
+                  className="font-semibold text-cyan-100 underline underline-offset-4"
+                >
                   Terms
                 </Link>
                 .

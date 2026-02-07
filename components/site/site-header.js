@@ -61,14 +61,14 @@ export function SiteHeader({ supportTagline }) {
             <span className="hidden items-center gap-2 rounded-full border border-white/15 bg-white/8 px-3 py-1 text-xs text-slate-200 md:inline-flex">
               {supportTagline}
             </span>
-            <Link
-              href="/demo"
-              className="cta-primary inline-flex items-center gap-2 text-sm"
-            >
+            <Link href="/demo" className="cta-primary inline-flex items-center gap-2 text-sm">
               Book Demo
               <ArrowUpRight className="h-4 w-4" />
             </Link>
-            <Link href="/auth/login" className="cta-ghost hidden items-center gap-2 text-sm sm:inline-flex">
+            <Link
+              href="/auth/login"
+              className="cta-ghost hidden items-center gap-2 text-sm sm:inline-flex"
+            >
               Portal
             </Link>
           </div>

@@ -216,7 +216,9 @@ export default function Home() {
 
         <div className="grid gap-4 lg:grid-cols-2">
           <GlassCard className="p-6">
-            <h3 className="font-display text-2xl font-semibold text-white">Audit Readiness Outputs</h3>
+            <h3 className="font-display text-2xl font-semibold text-white">
+              Audit Readiness Outputs
+            </h3>
             <ul className="mt-4 space-y-3 text-sm text-slate-100">
               <li className="rounded-xl border border-white/12 bg-white/6 px-3 py-2">
                 Vacancy evidence trails with source references and publication windows.
@@ -236,7 +238,8 @@ export default function Home() {
           <GlassCard className="p-6">
             <h3 className="font-display text-2xl font-semibold text-white">Update Cadence</h3>
             <p className="mt-3 text-sm text-slate-200">
-              Coverage mappings are reviewed when official guidance changes and during scheduled audit checks.
+              Coverage mappings are reviewed when official guidance changes and during scheduled
+              audit checks.
             </p>
             <div className="mt-5 space-y-3 text-sm text-slate-100">
               <p className="rounded-xl border border-white/12 bg-white/6 px-3 py-2">

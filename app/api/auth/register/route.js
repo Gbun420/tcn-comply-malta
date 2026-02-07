@@ -70,7 +70,10 @@ export async function POST(request) {
   }
 
   if (!turnstileToken) {
-    return withCors(request, NextResponse.json({ error: 'Turnstile token is required' }, { status: 400 }))
+    return withCors(
+      request,
+      NextResponse.json({ error: 'Turnstile token is required' }, { status: 400 })
+    )
   }
 
   const rateLimit = await enforceSignupRateLimit({ request, email })
@@ -80,13 +83,7 @@ export async function POST(request) {
         ? 'Self-registration is temporarily unavailable. Please contact support to activate your account.'
         : rateLimit.error
 
-    return withCors(
-      request,
-      NextResponse.json(
-        { error: message },
-        { status: rateLimit.status }
-      )
-    )
+    return withCors(request, NextResponse.json({ error: message }, { status: rateLimit.status }))
   }
 
   const turnstileResult = await verifyTurnstileToken({
@@ -96,7 +93,10 @@ export async function POST(request) {
   if (!turnstileResult.success) {
     return withCors(
       request,
-      NextResponse.json({ error: 'CAPTCHA verification failed. Please try again.' }, { status: 400 })
+      NextResponse.json(
+        { error: 'CAPTCHA verification failed. Please try again.' },
+        { status: 400 }
+      )
     )
   }
 
@@ -127,14 +127,20 @@ export async function POST(request) {
     if (errorType === 'WEAK_PASSWORD') {
       return withCors(
         request,
-        NextResponse.json({ error: 'Password does not meet security requirements' }, { status: 400 })
+        NextResponse.json(
+          { error: 'Password does not meet security requirements' },
+          { status: 400 }
+        )
       )
     }
 
     if (errorType === 'RATE_LIMITED') {
       return withCors(
         request,
-        NextResponse.json({ error: 'Too many signup attempts. Please try again shortly.' }, { status: 429 })
+        NextResponse.json(
+          { error: 'Too many signup attempts. Please try again shortly.' },
+          { status: 429 }
+        )
       )
     }
 

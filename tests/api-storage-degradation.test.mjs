@@ -48,4 +48,3 @@ test('GET /api/vacancies returns 503 when database is not configured', async () 
   assert.equal(response.status, 503)
   assert.match(body.error, /database not configured/i)
 })
-

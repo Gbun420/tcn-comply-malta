@@ -34,7 +34,7 @@ async function run() {
 
     if (data.failCount > 0) {
       report += `### API Failures\n`
-      for (const res of data.results.filter(r => !r.pass)) {
+      for (const res of data.results.filter((r) => !r.pass)) {
         report += `- ${res.name}: ${res.error || 'Assertion failed'}\n`
       }
       report += `\n`

@@ -15,11 +15,7 @@ export default function ContactPage() {
       title="Plan client rollout, onboarding, and support with our compliance team"
       description="Use these channels to scope implementation, align portal modules to your process, and confirm integration/security requirements with stakeholders."
       actions={[
-        <Link
-          key="demo"
-          href="/demo"
-          className="cta-primary inline-flex items-center gap-2"
-        >
+        <Link key="demo" href="/demo" className="cta-primary inline-flex items-center gap-2">
           Book Demo
           <ArrowUpRight className="h-4 w-4" />
         </Link>,

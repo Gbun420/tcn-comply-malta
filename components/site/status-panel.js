@@ -18,7 +18,11 @@ export function StatusPanel() {
         if (stopped) return
 
         if (!response.ok) {
-          setState({ status: 'error', payload: null, error: payload.error || 'Health check failed' })
+          setState({
+            status: 'error',
+            payload: null,
+            error: payload.error || 'Health check failed',
+          })
           return
         }
 

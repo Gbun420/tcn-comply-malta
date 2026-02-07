@@ -10,12 +10,18 @@ test('classifies duplicate-account errors', () => {
 
 test('classifies provider misconfiguration errors', () => {
   assert.equal(classifyFirebaseAuthError('API_KEY_HTTP_REFERRER_BLOCKED'), 'PROVIDER_MISCONFIGURED')
-  assert.equal(classifyFirebaseAuthError('API key not valid. Please pass a valid API key.'), 'PROVIDER_MISCONFIGURED')
+  assert.equal(
+    classifyFirebaseAuthError('API key not valid. Please pass a valid API key.'),
+    'PROVIDER_MISCONFIGURED'
+  )
   assert.equal(classifyFirebaseAuthError('Firebase not configured'), 'PROVIDER_MISCONFIGURED')
 })
 
 test('classifies weak password and rate limits', () => {
-  assert.equal(classifyFirebaseAuthError('WEAK_PASSWORD : Password should be at least 6 characters'), 'WEAK_PASSWORD')
+  assert.equal(
+    classifyFirebaseAuthError('WEAK_PASSWORD : Password should be at least 6 characters'),
+    'WEAK_PASSWORD'
+  )
   assert.equal(classifyFirebaseAuthError('TOO_MANY_ATTEMPTS_TRY_LATER'), 'RATE_LIMITED')
 })
 
