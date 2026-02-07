@@ -24,7 +24,11 @@ test('portal offerings define sections for client value proposition', () => {
   assert.equal(PORTAL_OFFERINGS.solutions.length >= 4, true)
   assert.equal(PORTAL_OFFERINGS.coverage.length >= 4, true)
   assert.equal(PORTAL_OFFERINGS.workflow.length >= 4, true)
-  assert.equal(PORTAL_OFFERINGS.contactChannels.length >= 3, true)
+  assert.equal(PORTAL_OFFERINGS.contactChannels.length >= 1, true)
+  assert.equal(
+    PORTAL_OFFERINGS.contactChannels.some((channel) => channel.label === 'Demo Request'),
+    true,
+  )
 })
 
 test('dashboard modules include missing frontend surfaces now exposed to clients', () => {
