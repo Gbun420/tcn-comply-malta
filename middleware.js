@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { evaluateMiddlewareRequest } from './lib/middleware-policy.js'
 
 const PUBLIC_PATHS = new Set([
   '/',
@@ -24,16 +25,20 @@ export function middleware(request) {
   const isApiRoute = pathname.startsWith('/api/')
   const isAuthApiRoute = pathname.startsWith('/api/auth/')
 
-  if (isApiRoute && !isAuthApiRoute && !token) {
+  const outcome = evaluateMiddlewareRequest({
+    pathname,
+    hasToken: Boolean(token),
+    isApiRoute,
+    isAuthApiRoute,
+    publicPaths: PUBLIC_PATHS,
+  })
+
+  if (outcome === 'api-unauthorized') {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
-  if (!PUBLIC_PATHS.has(pathname) && !isApiRoute && !token) {
+  if (outcome === 'redirect-login') {
     return NextResponse.redirect(new URL('/auth/login', request.url))
-  }
-
-  if (token && (pathname === '/auth/login' || pathname === '/auth/register')) {
-    return NextResponse.redirect(new URL('/dashboard', request.url))
   }
 
   return NextResponse.next()

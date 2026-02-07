@@ -69,6 +69,7 @@ test('GET /api/auth/me returns 401 for tampered token', async () => {
 
   assert.equal(response.status, 401)
   assert.equal(body.error, 'Invalid token')
+  assert.match(response.headers.get('set-cookie') || '', /auth-token=.*Max-Age=0/i)
 })
 
 test('GET /api/auth/me returns 200 with a valid signed token', async () => {
