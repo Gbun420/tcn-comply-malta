@@ -102,17 +102,21 @@ export default function Register() {
 
           <form method="post" onSubmit={handleSubmit} className="space-y-3">
             {error ? (
-              <div className="flex items-center gap-2 rounded-xl border border-rose-300/40 bg-rose-300/15 px-3 py-2 text-sm text-rose-100">
+              <div
+                aria-live="polite"
+                className="flex items-center gap-2 rounded-xl border border-rose-300/40 bg-rose-300/15 px-3 py-2 text-sm text-rose-100"
+              >
                 <AlertCircle className="h-4 w-4" />
                 {error}
               </div>
             ) : null}
 
-            <label className="block space-y-2 text-sm text-slate-100">
+            <label htmlFor="register-name" className="block space-y-2 text-sm text-slate-100">
               <span>Full name</span>
               <span className="relative block">
                 <User className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-200" />
                 <input
+                  id="register-name"
                   name="name"
                   type="text"
                   autoComplete="name"
@@ -125,11 +129,12 @@ export default function Register() {
               </span>
             </label>
 
-            <label className="block space-y-2 text-sm text-slate-100">
+            <label htmlFor="register-email" className="block space-y-2 text-sm text-slate-100">
               <span>Email</span>
               <span className="relative block">
                 <Mail className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-200" />
                 <input
+                  id="register-email"
                   name="email"
                   type="email"
                   autoComplete="email"
@@ -142,11 +147,12 @@ export default function Register() {
               </span>
             </label>
 
-            <label className="block space-y-2 text-sm text-slate-100">
+            <label htmlFor="register-company" className="block space-y-2 text-sm text-slate-100">
               <span>Company</span>
               <span className="relative block">
                 <Building className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-200" />
                 <input
+                  id="register-company"
                   name="company"
                   type="text"
                   autoComplete="organization"
@@ -159,11 +165,12 @@ export default function Register() {
               </span>
             </label>
 
-            <label className="block space-y-2 text-sm text-slate-100">
+            <label htmlFor="register-password" className="block space-y-2 text-sm text-slate-100">
               <span>Password</span>
               <span className="relative block">
                 <Lock className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-200" />
                 <input
+                  id="register-password"
                   name="password"
                   type="password"
                   autoComplete="new-password"
@@ -176,11 +183,15 @@ export default function Register() {
               </span>
             </label>
 
-            <label className="block space-y-2 text-sm text-slate-100">
+            <label
+              htmlFor="register-confirm-password"
+              className="block space-y-2 text-sm text-slate-100"
+            >
               <span>Confirm password</span>
               <span className="relative block">
                 <Lock className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-200" />
                 <input
+                  id="register-confirm-password"
                   name="confirmPassword"
                   type="password"
                   autoComplete="new-password"

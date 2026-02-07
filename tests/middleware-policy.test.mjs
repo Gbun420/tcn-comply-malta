@@ -2,24 +2,7 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 
 import { evaluateMiddlewareRequest } from '../lib/middleware-policy.js'
-
-const publicPaths = new Set([
-  '/',
-  '/auth/login',
-  '/auth/register',
-  '/privacy',
-  '/terms',
-  '/audit-app',
-  '/solutions',
-  '/coverage',
-  '/workflow',
-  '/contact',
-  '/robots.txt',
-  '/sitemap.xml',
-  '/api/auth/login',
-  '/api/auth/register',
-  '/api/auth/logout',
-])
+import { PUBLIC_PATHS } from '../lib/public-pages.js'
 
 test('auth login remains reachable even when auth cookie exists', () => {
   const outcome = evaluateMiddlewareRequest({
@@ -28,7 +11,7 @@ test('auth login remains reachable even when auth cookie exists', () => {
     hasToken: true,
     isApiRoute: false,
     isAuthApiRoute: false,
-    publicPaths,
+    publicPaths: PUBLIC_PATHS,
   })
 
   assert.equal(outcome, 'allow')
@@ -41,7 +24,7 @@ test('dashboard without token redirects to login', () => {
     hasToken: false,
     isApiRoute: false,
     isAuthApiRoute: false,
-    publicPaths,
+    publicPaths: PUBLIC_PATHS,
   })
 
   assert.equal(outcome, 'redirect-login')
@@ -54,7 +37,7 @@ test('protected api without token returns unauthorized action', () => {
     hasToken: false,
     isApiRoute: true,
     isAuthApiRoute: false,
-    publicPaths,
+    publicPaths: PUBLIC_PATHS,
   })
 
   assert.equal(outcome, 'api-unauthorized')
@@ -63,11 +46,11 @@ test('protected api without token returns unauthorized action', () => {
 test('public marketing pages remain accessible without token', () => {
   const outcome = evaluateMiddlewareRequest({
     method: 'GET',
-    pathname: '/workflow',
+    pathname: '/pricing',
     hasToken: false,
     isApiRoute: false,
     isAuthApiRoute: false,
-    publicPaths,
+    publicPaths: PUBLIC_PATHS,
   })
 
   assert.equal(outcome, 'allow')
@@ -80,7 +63,7 @@ test('api preflight requests bypass authentication', () => {
     hasToken: false,
     isApiRoute: true,
     isAuthApiRoute: false,
-    publicPaths,
+    publicPaths: PUBLIC_PATHS,
   })
 
   assert.equal(outcome, 'api-preflight')

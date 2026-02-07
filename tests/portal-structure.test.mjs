@@ -3,18 +3,21 @@ import test from 'node:test'
 
 import {
   DASHBOARD_MODULES,
+  FOOTER_TRUST_LINKS,
+  FOOTER_RESOURCE_LINKS,
   MARKETING_NAV_LINKS,
   PORTAL_OFFERINGS,
-  PUBLIC_MARKETING_PATHS,
+  PUBLIC_MARKETING_PATHS
 } from '../lib/portal-content.js'
 import { GET as sitemapGet } from '../app/sitemap.xml/route.js'
+import { INDEXABLE_ROUTES } from '../lib/public-pages.js'
 
-test('marketing navigation includes required separate pages', () => {
+test('marketing navigation aligns with conversion funnel', () => {
   const labels = MARKETING_NAV_LINKS.map((item) => item.label)
   const paths = MARKETING_NAV_LINKS.map((item) => item.href)
 
-  assert.deepEqual(labels, ['Audit App', 'Solutions', 'Coverage', 'Workflow', 'Contact'])
-  assert.deepEqual(paths, ['/audit-app', '/solutions', '/coverage', '/workflow', '/contact'])
+  assert.deepEqual(labels, ['Product', 'Pricing', 'Demo', 'Coverage', 'Guides', 'Security'])
+  assert.deepEqual(paths, ['/product', '/pricing', '/demo', '/coverage', '/guides', '/security'])
 })
 
 test('portal offerings define sections for client value proposition', () => {
@@ -34,7 +37,7 @@ test('dashboard modules include missing frontend surfaces now exposed to clients
 })
 
 test('public marketing paths align with separate-page routing', () => {
-  const expected = ['/audit-app', '/solutions', '/coverage', '/workflow', '/contact']
+  const expected = ['/product', '/pricing', '/demo', '/coverage', '/guides', '/security']
   assert.deepEqual(PUBLIC_MARKETING_PATHS, expected)
 })
 
@@ -42,14 +45,16 @@ test('sitemap includes only public/legal indexable routes', async () => {
   const response = await sitemapGet()
   const xml = await response.text()
 
-  assert.equal(xml.includes('/audit-app'), true)
-  assert.equal(xml.includes('/solutions'), true)
-  assert.equal(xml.includes('/coverage'), true)
-  assert.equal(xml.includes('/workflow'), true)
-  assert.equal(xml.includes('/contact'), true)
-  assert.equal(xml.includes('/privacy'), true)
-  assert.equal(xml.includes('/terms'), true)
+  for (const route of INDEXABLE_ROUTES) {
+    assert.equal(xml.includes(route), true)
+  }
+
   assert.equal(xml.includes('/dashboard'), false)
   assert.equal(xml.includes('/auth/login'), false)
   assert.equal(xml.includes('/auth/register'), false)
+})
+
+test('footer includes trust and resource sections for buyer enablement', () => {
+  assert.equal(FOOTER_RESOURCE_LINKS.length >= 4, true)
+  assert.equal(FOOTER_TRUST_LINKS.length >= 4, true)
 })

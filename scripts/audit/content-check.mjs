@@ -1,22 +1,11 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
+import { EXCLUDED_SITEMAP_PATHS, INDEXABLE_ROUTES } from '../../lib/public-pages.js'
 
 const BASE_URL = process.env.AUDIT_BASE_URL || 'https://tcn-comply-malta.vercel.app'
 const OUTPUT_DIR = path.join(process.cwd(), 'docs', 'audits')
 
-const INDEXABLE_ROUTES = [
-  '/',
-  '/audit-app',
-  '/solutions',
-  '/coverage',
-  '/workflow',
-  '/contact',
-  '/privacy',
-  '/terms',
-]
-
 const AUTH_ROUTES = ['/auth/login', '/auth/register']
-const EXCLUDED_SITEMAP_PATHS = ['/auth/login', '/auth/register', '/dashboard']
 
 const PROHIBITED_CLAIMS = [
   { label: 'guaranteed compliance', pattern: /guaranteed compliance/i },

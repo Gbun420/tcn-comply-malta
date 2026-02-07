@@ -2,23 +2,13 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 import lighthouse from 'lighthouse'
 import { launch as launchChrome } from 'chrome-launcher'
+import { INDEXABLE_ROUTES, LIGHTHOUSE_SEO_ROUTES } from '../../lib/public-pages.js'
 
 const BASE_URL = process.env.AUDIT_BASE_URL || 'https://tcn-comply-malta.vercel.app'
 const MIN_SEO_SCORE = Number.parseInt(process.env.AUDIT_MIN_SEO_SCORE || '95', 10)
 const OUTPUT_DIR = path.join(process.cwd(), 'docs', 'audits')
 
-const INDEXABLE_ROUTES = [
-  '/',
-  '/audit-app',
-  '/solutions',
-  '/coverage',
-  '/workflow',
-  '/contact',
-  '/privacy',
-  '/terms',
-]
-
-const SEO_SCORE_ROUTES = ['/', '/audit-app', '/solutions', '/coverage', '/workflow', '/contact']
+const SEO_SCORE_ROUTES = LIGHTHOUSE_SEO_ROUTES
 
 function stamp() {
   return new Date().toISOString().replace(/[:.]/g, '-')

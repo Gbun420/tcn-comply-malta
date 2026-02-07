@@ -11,6 +11,7 @@ import {
   Sparkles,
 } from 'lucide-react'
 import { GlassCard } from '../components/ui/glass-card.js'
+import { JsonLd } from '../components/JsonLd.js'
 import { SectionHeading } from '../components/ui/section-heading.js'
 import { PORTAL_OFFERINGS } from '../lib/portal-content.js'
 import { buildPageMetadata } from '../lib/seo.js'
@@ -54,9 +55,19 @@ export const metadata = buildPageMetadata(PUBLIC_PAGE_COPY.home)
 
 const quickPageCards = [
   {
-    href: '/solutions',
-    title: 'Solutions',
-    copy: 'See what we offer clients across onboarding, renewal, and audit readiness.',
+    href: '/product',
+    title: 'Product',
+    copy: 'Understand modules, rollout scope, and evidence outputs.',
+  },
+  {
+    href: '/pricing',
+    title: 'Pricing',
+    copy: 'Review plan options and rollout paths by team size.',
+  },
+  {
+    href: '/demo',
+    title: 'Demo',
+    copy: 'Book a walkthrough tailored to your operating model.',
   },
   {
     href: '/coverage',
@@ -64,25 +75,40 @@ const quickPageCards = [
     copy: 'Map legal requirements to tracked controls and evidence surfaces.',
   },
   {
-    href: '/workflow',
-    title: 'Workflow',
-    copy: 'Understand the end-to-end execution pattern inside the portal.',
-  },
-  {
-    href: '/contact',
-    title: 'Contact',
-    copy: 'Coordinate rollout, implementation, and client support.',
-  },
-  {
-    href: '/audit-app',
-    title: 'Audit App',
-    copy: 'Open the dedicated testing and audit page in a separate route.',
+    href: '/security',
+    title: 'Security',
+    copy: 'Review controls, processing standards, and trust documentation.',
   },
 ]
 
 export default function Home() {
+  const homeSchema = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      name: SITE_NAME,
+      url: 'https://tcn-comply-malta.vercel.app',
+      email: SITE_CONTACT_EMAIL || undefined,
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'SoftwareApplication',
+      name: SITE_NAME,
+      applicationCategory: 'BusinessApplication',
+      operatingSystem: 'Web',
+      description:
+        'Compliance operations platform for Maltese employers managing TCN onboarding, vacancy evidence, and renewals.',
+      offers: {
+        '@type': 'Offer',
+        priceCurrency: 'EUR',
+        price: '0',
+      },
+    },
+  ]
+
   return (
     <div className="space-y-20 pb-20 pt-8 sm:pt-12">
+      <JsonLd data={homeSchema} />
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <GlassCard intense className="overflow-hidden p-7 md:p-10 xl:p-12">
           <div className="grid items-center gap-8 lg:grid-cols-[1.2fr_0.8fr]">
@@ -94,15 +120,15 @@ export default function Home() {
               <p className="lead-copy text-lg md:text-xl">{HOME_COPY.description}</p>
 
               <div className="flex flex-wrap gap-3">
-                <Link href="/auth/register" className="cta-primary inline-flex items-center gap-2">
+                <Link href="/demo" className="cta-primary inline-flex items-center gap-2">
                   Book a Demo
                   <ArrowUpRight className="h-4 w-4" />
                 </Link>
-                <Link href="/dashboard" className="cta-ghost inline-flex items-center gap-2">
-                  Open Dashboard Preview
+                <Link href="/pricing" className="cta-ghost inline-flex items-center gap-2">
+                  View Pricing
                 </Link>
-                <Link href="/audit-app" className="cta-ghost inline-flex items-center gap-2">
-                  Audit App
+                <Link href="/coverage" className="cta-ghost inline-flex items-center gap-2">
+                  See Coverage Matrix
                 </Link>
               </div>
 
@@ -134,16 +160,22 @@ export default function Home() {
                   </li>
                 ))}
               </ul>
-              <p className="mt-6 rounded-xl border border-cyan-200/30 bg-cyan-200/10 px-3 py-2 text-sm text-cyan-100">
-                Need onboarding support? Contact{' '}
-                <a
-                  href={`mailto:${SITE_CONTACT_EMAIL}`}
-                  className="font-semibold underline underline-offset-4"
-                >
-                  {SITE_CONTACT_EMAIL}
-                </a>
-                .
-              </p>
+              {SITE_CONTACT_EMAIL ? (
+                <p className="mt-6 rounded-xl border border-cyan-200/30 bg-cyan-200/10 px-3 py-2 text-sm text-cyan-100">
+                  Need onboarding support? Contact{' '}
+                  <a
+                    href={`mailto:${SITE_CONTACT_EMAIL}`}
+                    className="font-semibold underline underline-offset-4"
+                  >
+                    {SITE_CONTACT_EMAIL}
+                  </a>
+                  .
+                </p>
+              ) : (
+                <p className="mt-6 rounded-xl border border-cyan-200/30 bg-cyan-200/10 px-3 py-2 text-sm text-cyan-100">
+                  Need onboarding support? Use the demo request form.
+                </p>
+              )}
             </GlassCard>
           </div>
         </GlassCard>
@@ -171,6 +203,50 @@ export default function Home() {
               </Link>
             </GlassCard>
           ))}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <SectionHeading
+          kicker="Proof"
+          title="What auditors ask for"
+          description="These are the evidence outputs teams most commonly need when preparing files for internal and external review."
+          align="center"
+        />
+
+        <div className="grid gap-4 lg:grid-cols-2">
+          <GlassCard className="p-6">
+            <h3 className="font-display text-2xl font-semibold text-white">Audit Readiness Outputs</h3>
+            <ul className="mt-4 space-y-3 text-sm text-slate-100">
+              <li className="rounded-xl border border-white/12 bg-white/6 px-3 py-2">
+                Vacancy evidence trails with source references and publication windows.
+              </li>
+              <li className="rounded-xl border border-white/12 bg-white/6 px-3 py-2">
+                Onboarding record completeness with timestamped ownership.
+              </li>
+              <li className="rounded-xl border border-white/12 bg-white/6 px-3 py-2">
+                Renewal checkpoint logs and escalation history.
+              </li>
+              <li className="rounded-xl border border-white/12 bg-white/6 px-3 py-2">
+                Export-ready evidence packs for legal and regulator-facing review.
+              </li>
+            </ul>
+          </GlassCard>
+
+          <GlassCard className="p-6">
+            <h3 className="font-display text-2xl font-semibold text-white">Update Cadence</h3>
+            <p className="mt-3 text-sm text-slate-200">
+              Coverage mappings are reviewed when official guidance changes and during scheduled audit checks.
+            </p>
+            <div className="mt-5 space-y-3 text-sm text-slate-100">
+              <p className="rounded-xl border border-white/12 bg-white/6 px-3 py-2">
+                Weekly route and metadata verification.
+              </p>
+              <p className="rounded-xl border border-white/12 bg-white/6 px-3 py-2">
+                Monthly policy-source review and copy verification.
+              </p>
+            </div>
+          </GlassCard>
         </div>
       </section>
 
@@ -213,11 +289,11 @@ export default function Home() {
           </p>
 
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-            <Link href="/dashboard/audit" className="cta-primary inline-flex items-center gap-2">
-              Open Audit Dashboard
+            <Link href="/demo" className="cta-primary inline-flex items-center gap-2">
+              Book Demo
             </Link>
-            <Link href="/contact" className="cta-ghost inline-flex items-center gap-2">
-              Contact Team
+            <Link href="/pricing" className="cta-ghost inline-flex items-center gap-2">
+              View Pricing
             </Link>
           </div>
         </GlassCard>

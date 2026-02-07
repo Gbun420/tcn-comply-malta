@@ -92,7 +92,11 @@ export default function PrivacyPage() {
         <p className="mt-2 text-sm text-slate-100">
           <strong>{SITE_NAME} Privacy Team</strong>
         </p>
-        <p className="text-sm text-slate-100">Email: {SITE_CONTACT_EMAIL}</p>
+        {SITE_CONTACT_EMAIL ? (
+          <p className="text-sm text-slate-100">Email: {SITE_CONTACT_EMAIL}</p>
+        ) : (
+          <p className="text-sm text-slate-100">Email available on request via contact page.</p>
+        )}
         <p className="text-sm text-slate-100">Location: {SITE_CONTACT_LOCATION}</p>
       </GlassCard>
     </div>

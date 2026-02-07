@@ -81,18 +81,22 @@ export default function Login() {
           <div className="p-6 lg:p-8">
             <form method="post" onSubmit={handleSubmit} className="space-y-4">
               {error ? (
-                <div className="flex items-center gap-2 rounded-xl border border-rose-300/40 bg-rose-300/15 px-3 py-2 text-sm text-rose-100">
+                <div
+                  aria-live="polite"
+                  className="flex items-center gap-2 rounded-xl border border-rose-300/40 bg-rose-300/15 px-3 py-2 text-sm text-rose-100"
+                >
                   <AlertCircle className="h-4 w-4" />
                   {error}
                 </div>
               ) : null}
 
-              <label className="block space-y-2 text-sm text-slate-100">
+              <label htmlFor="email" className="block space-y-2 text-sm text-slate-100">
                 <span>Email</span>
                 <span className="relative block">
                   <Mail className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-200" />
                   <input
                     id="email"
+                    name="email"
                     type="email"
                     autoComplete="email"
                     required
@@ -104,12 +108,13 @@ export default function Login() {
                 </span>
               </label>
 
-              <label className="block space-y-2 text-sm text-slate-100">
+              <label htmlFor="password" className="block space-y-2 text-sm text-slate-100">
                 <span>Password</span>
                 <span className="relative block">
                   <Lock className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-200" />
                   <input
                     id="password"
+                    name="password"
                     type="password"
                     autoComplete="current-password"
                     required
@@ -133,12 +138,21 @@ export default function Login() {
 
             <p className="mt-5 text-sm text-slate-200">
               Need credentials?{' '}
-              <a
-                href={`mailto:${SITE_CONTACT_EMAIL}`}
-                className="font-semibold text-cyan-100 underline underline-offset-4"
-              >
-                Contact support
-              </a>
+              {SITE_CONTACT_EMAIL ? (
+                <a
+                  href={`mailto:${SITE_CONTACT_EMAIL}`}
+                  className="font-semibold text-cyan-100 underline underline-offset-4"
+                >
+                  Contact support
+                </a>
+              ) : (
+                <Link
+                  href="/contact"
+                  className="font-semibold text-cyan-100 underline underline-offset-4"
+                >
+                  Contact support
+                </Link>
+              )}
               .
             </p>
             <p className="mt-2 text-sm text-slate-200">

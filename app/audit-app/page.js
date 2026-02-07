@@ -21,20 +21,16 @@ export default function AuditAppPage() {
       title="Dedicated audit and test workspace for compliance verification"
       description="This separate page is purpose-built for audit preparation, API checks, and evidence readiness reviews with direct paths into the operational dashboard."
       actions={[
-        <Link
-          key="audit-portal"
-          href="/dashboard/audit"
-          className="cta-primary inline-flex items-center gap-2"
-        >
-          Open Audit Dashboard
+        <Link key="demo" href="/demo" className="cta-primary inline-flex items-center gap-2">
+          Book Demo
           <ArrowUpRight className="h-4 w-4" />
         </Link>,
         <Link
-          key="main-portal"
-          href="/dashboard"
+          key="pricing"
+          href="/pricing"
           className="cta-ghost inline-flex items-center gap-2"
         >
-          Back to Main Portal
+          View Pricing
         </Link>,
       ]}
     >
@@ -62,6 +58,14 @@ export default function AuditAppPage() {
             Use this area to verify portal integrity before client demos, regulator requests, and
             production rollouts.
           </p>
+          <div className="rounded-xl border border-white/12 bg-white/6 px-4 py-3 text-sm text-slate-100">
+            <p className="font-semibold text-white">Audit output bundle includes:</p>
+            <ul className="mt-2 space-y-1">
+              <li>• API route health checks and auth expectations</li>
+              <li>• SEO and metadata consistency checks</li>
+              <li>• Evidence coverage summaries for internal review</li>
+            </ul>
+          </div>
           <p className="inline-flex items-center gap-2 text-sm font-semibold text-cyan-100">
             <ShieldCheck className="h-4 w-4" />
             Evidence-first verification flow

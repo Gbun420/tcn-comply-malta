@@ -47,16 +47,22 @@ export default function TermsPage() {
 
       <GlassCard className="p-6">
         <h2 className="font-display text-2xl font-semibold text-white">Contact</h2>
-        <p className="mt-3 text-sm text-slate-100/95">
-          For terms-related questions, contact{' '}
-          <a
-            className="font-semibold text-cyan-100 underline underline-offset-4"
-            href={`mailto:${SITE_CONTACT_EMAIL}`}
-          >
-            {SITE_CONTACT_EMAIL}
-          </a>
-          .
-        </p>
+        {SITE_CONTACT_EMAIL ? (
+          <p className="mt-3 text-sm text-slate-100/95">
+            For terms-related questions, contact{' '}
+            <a
+              className="font-semibold text-cyan-100 underline underline-offset-4"
+              href={`mailto:${SITE_CONTACT_EMAIL}`}
+            >
+              {SITE_CONTACT_EMAIL}
+            </a>
+            .
+          </p>
+        ) : (
+          <p className="mt-3 text-sm text-slate-100/95">
+            For terms-related questions, submit a request through the contact page.
+          </p>
+        )}
       </GlassCard>
     </div>
   )
