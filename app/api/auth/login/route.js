@@ -4,6 +4,7 @@ import {
   generateToken,
   isFirebaseAuthConfigured,
 } from '../../../../lib/auth.js'
+import { enrichSessionUser } from '../../../../lib/auth-session-enrichment.js'
 import { applyCorsHeaders, preflightResponse } from '../../../../lib/api-cors.js'
 
 export const dynamic = 'force-dynamic'
@@ -52,10 +53,18 @@ export async function POST(request) {
     return withCors(request, Response.json({ error: 'Invalid credentials' }, { status: 401 }))
   }
 
+  let sessionUser = user
+
+  try {
+    sessionUser = await enrichSessionUser(user)
+  } catch (error) {
+    console.error('Session enrichment failed:', error)
+  }
+
   let token = null
 
   try {
-    token = generateToken(user)
+    token = generateToken(sessionUser)
   } catch (error) {
     if (error?.message === JWT_SECRET_PRODUCTION_ERROR) {
       return withCors(
@@ -70,11 +79,12 @@ export async function POST(request) {
   const responseData = {
     success: true,
     user: {
-      uid: user.uid,
-      email: user.email,
-      name: user.name,
-      role: user.role,
-      company: user.company,
+      uid: sessionUser.uid,
+      email: sessionUser.email,
+      name: sessionUser.name,
+      role: sessionUser.role,
+      company: sessionUser.company,
+      workspaceId: sessionUser.workspaceId || '',
     },
   }
 

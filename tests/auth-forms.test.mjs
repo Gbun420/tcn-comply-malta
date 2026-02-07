@@ -27,3 +27,12 @@ test('login page provides guided fallback messaging for auth provider outages', 
 
   assert.match(loginPage, /Sign-in is temporarily unavailable/i)
 })
+
+test('register page includes required terms/privacy consent and turnstile token wiring', () => {
+  const registerPage = read('app/auth/register/page.js')
+
+  assert.match(registerPage, /consentTerms/)
+  assert.match(registerPage, /consentPrivacy/)
+  assert.match(registerPage, /turnstileToken/)
+  assert.match(registerPage, /TurnstileWidget/)
+})

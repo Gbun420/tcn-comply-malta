@@ -59,6 +59,7 @@ export async function GET(request) {
         name: payload.name || payload.email?.split('@')[0] || 'User',
         role: payload.role || 'employer',
         company: payload.company || '',
+        workspaceId: payload.workspaceId || '',
       },
     })
   )

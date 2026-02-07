@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { AlertCircle, ArrowUpRight, Building, Lock, Mail, User } from 'lucide-react'
 import { useState } from 'react'
+import { TurnstileWidget } from '../../../components/auth/turnstile-widget.js'
 import { GlassCard } from '../../../components/ui/glass-card.js'
 import { SITE_CONTACT_EMAIL } from '../../../lib/site-content.js'
 
@@ -37,6 +38,9 @@ export default function Register() {
   })
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+  const [turnstileToken, setTurnstileToken] = useState('')
+  const [consentTerms, setConsentTerms] = useState(false)
+  const [consentPrivacy, setConsentPrivacy] = useState(false)
   const router = useRouter()
 
   const handleChange = (e) => {
@@ -54,11 +58,28 @@ export default function Register() {
       return
     }
 
+    if (!consentTerms || !consentPrivacy) {
+      setError('Please accept the Terms and Privacy Policy before continuing.')
+      setLoading(false)
+      return
+    }
+
+    if (!turnstileToken) {
+      setError('Complete human verification before creating your account.')
+      setLoading(false)
+      return
+    }
+
     try {
       const response = await fetch('/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          turnstileToken,
+          consentTerms,
+          consentPrivacy,
+        }),
       })
 
       const data = await response.json()
@@ -224,9 +245,58 @@ export default function Register() {
               </span>
             </label>
 
+            <TurnstileWidget onTokenChange={setTurnstileToken} />
+
+            <label
+              htmlFor="consent-terms"
+              className="flex items-start gap-3 rounded-xl border border-white/15 bg-white/5 px-3 py-2 text-sm text-slate-100"
+            >
+              <input
+                id="consent-terms"
+                name="consentTerms"
+                type="checkbox"
+                checked={consentTerms}
+                onChange={(event) => setConsentTerms(event.target.checked)}
+                className="mt-0.5 h-4 w-4 rounded border-white/30 bg-transparent text-cyan-300"
+                required
+              />
+              <span>
+                I agree to the{' '}
+                <Link href="/terms" className="font-semibold text-cyan-100 underline underline-offset-4">
+                  Terms
+                </Link>
+                .
+              </span>
+            </label>
+
+            <label
+              htmlFor="consent-privacy"
+              className="flex items-start gap-3 rounded-xl border border-white/15 bg-white/5 px-3 py-2 text-sm text-slate-100"
+            >
+              <input
+                id="consent-privacy"
+                name="consentPrivacy"
+                type="checkbox"
+                checked={consentPrivacy}
+                onChange={(event) => setConsentPrivacy(event.target.checked)}
+                className="mt-0.5 h-4 w-4 rounded border-white/30 bg-transparent text-cyan-300"
+                required
+              />
+              <span>
+                I agree to the{' '}
+                <Link
+                  href="/privacy"
+                  className="font-semibold text-cyan-100 underline underline-offset-4"
+                >
+                  Privacy Policy
+                </Link>
+                .
+              </span>
+            </label>
+
             <button
               type="submit"
-              disabled={loading}
+              disabled={loading || !consentTerms || !consentPrivacy || !turnstileToken}
               className="cta-primary inline-flex w-full items-center justify-center gap-2 py-3"
             >
               {loading ? 'Creating account...' : 'Create account'}

@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server'
+import { NextResponse } from 'next/server.js'
 import {
   JWT_SECRET_PRODUCTION_ERROR,
   classifyFirebaseAuthError,
@@ -9,6 +9,8 @@ import { applyCorsHeaders, preflightResponse } from '../../../../lib/api-cors.js
 import { enforceSignupRateLimit, extractRequestIp } from '../../../../lib/signup/rate-limit.js'
 import { provisionWorkspaceForSignup } from '../../../../lib/signup/provision-workspace.js'
 import { verifyTurnstileToken } from '../../../../lib/signup/turnstile.js'
+import { queueWelcomeEmail } from '../../../../lib/signup/welcome-email.js'
+import { dispatchSignupCreatedWebhook } from '../../../../lib/signup/webhook-dispatch.js'
 
 export const dynamic = 'force-dynamic'
 const CORS_OPTIONS = { methods: 'POST,OPTIONS' }
@@ -73,10 +75,15 @@ export async function POST(request) {
 
   const rateLimit = await enforceSignupRateLimit({ request, email })
   if (!rateLimit.allowed) {
+    const message =
+      rateLimit.status === 503
+        ? 'Self-registration is temporarily unavailable. Please contact support to activate your account.'
+        : rateLimit.error
+
     return withCors(
       request,
       NextResponse.json(
-        { error: rateLimit.error },
+        { error: message },
         { status: rateLimit.status }
       )
     )
@@ -177,6 +184,24 @@ export async function POST(request) {
         { status: 503 }
       )
     )
+  }
+
+  const welcomeEmailResult = await queueWelcomeEmail({
+    user: newUser,
+    workspace,
+  })
+
+  if (!welcomeEmailResult.queued) {
+    console.warn('Welcome email queue skipped:', welcomeEmailResult.reason || 'unknown')
+  }
+
+  const webhookResult = await dispatchSignupCreatedWebhook({
+    user: newUser,
+    workspace,
+  })
+
+  if (!webhookResult.delivered && !webhookResult.queued && !webhookResult.skipped) {
+    console.warn('Signup webhook dispatch failed without queue fallback:', webhookResult.reason)
   }
 
   let token = null

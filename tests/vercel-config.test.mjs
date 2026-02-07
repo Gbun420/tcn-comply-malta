@@ -29,3 +29,17 @@ test('vercel CSP allows fallback font host used by browser helpers', () => {
   const csp = getCspHeaderValue()
   assert.match(csp, /font-src[^;]*r2cdn\.perplexity\.ai/i)
 })
+
+test('vercel CSP allows Cloudflare Turnstile script and frame origins', () => {
+  const csp = getCspHeaderValue()
+  assert.match(csp, /script-src[^;]*challenges\.cloudflare\.com/i)
+  assert.match(csp, /frame-src[^;]*challenges\.cloudflare\.com/i)
+})
+
+test('vercel config contains signup webhook retry cron route', () => {
+  const cron = (vercelConfig.crons || []).find(
+    (entry) => entry.path === '/api/internal/signup-webhook-retry',
+  )
+  assert.ok(cron, 'expected cron for /api/internal/signup-webhook-retry')
+  assert.match(cron.schedule, /\*/)
+})

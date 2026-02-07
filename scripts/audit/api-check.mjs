@@ -47,6 +47,41 @@ async function run() {
       assert: (result) => result.status === 401,
     },
     {
+      name: 'register without turnstile token returns 400',
+      run: () =>
+        request('/api/auth/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: 'Audit User',
+            email: 'audit-user@example.com',
+            password: 'password123',
+            company: 'Audit Co',
+            consentTerms: true,
+            consentPrivacy: true,
+          }),
+        }),
+      assert: (result) => result.status === 400,
+    },
+    {
+      name: 'register without consent returns 400',
+      run: () =>
+        request('/api/auth/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: 'Audit User',
+            email: 'audit-user@example.com',
+            password: 'password123',
+            company: 'Audit Co',
+            turnstileToken: 'invalid-for-smoke-test',
+            consentTerms: false,
+            consentPrivacy: true,
+          }),
+        }),
+      assert: (result) => result.status === 400,
+    },
+    {
       name: 'employees GET without token returns 401',
       run: () => request('/api/employees'),
       assert: (result) => result.status === 401,

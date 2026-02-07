@@ -13,6 +13,12 @@
     "NEXTAUTH_URL": "https://tcn-comply-malta.vercel.app"
   },
   "regions": ["fra1"],
+  "crons": [
+    {
+      "path": "/api/internal/signup-webhook-retry",
+      "schedule": "0 3 * * *"
+    }
+  ],
   "headers": [
     {
       "source": "/api/(.*)",

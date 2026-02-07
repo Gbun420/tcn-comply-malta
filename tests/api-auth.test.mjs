@@ -40,6 +40,54 @@ test('POST /api/auth/login returns 503 when auth provider is not configured', as
   assert.equal(body.error, 'Authentication provider is not configured. Please contact support.')
 })
 
+test('POST /api/auth/login returns 200 with session context fields when auth succeeds', async () => {
+  const originalFetch = global.fetch
+  const originalApiKey = process.env.FIREBASE_API_KEY
+  process.env.FIREBASE_API_KEY = 'AIzaSyTestKey12345678901234567890'
+
+  global.fetch = async () =>
+    new Response(
+      JSON.stringify({
+        localId: 'uid-123',
+        email: 'valid@example.com',
+        displayName: 'Valid User',
+      }),
+      {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' },
+      },
+    )
+
+  try {
+    const request = new Request('http://localhost/api/auth/login', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({
+        email: 'valid@example.com',
+        password: 'test-password',
+      }),
+    })
+
+    const response = await loginPost(request)
+    const body = await response.json()
+
+    assert.equal(response.status, 200)
+    assert.equal(body.success, true)
+    assert.equal(body.user.email, 'valid@example.com')
+    assert.equal(body.user.role, 'employer')
+    assert.equal(body.user.company, '')
+    assert.equal(body.user.workspaceId, '')
+    assert.match(response.headers.get('set-cookie') || '', /auth-token=/i)
+  } finally {
+    global.fetch = originalFetch
+    if (originalApiKey) {
+      process.env.FIREBASE_API_KEY = originalApiKey
+    } else {
+      delete process.env.FIREBASE_API_KEY
+    }
+  }
+})
+
 test('GET /api/auth/me returns 401 without auth cookie', async () => {
   const request = new Request('http://localhost/api/auth/me')
 
