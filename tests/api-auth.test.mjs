@@ -80,6 +80,7 @@ test('GET /api/auth/me returns 200 with a valid signed token', async () => {
     role: 'employer',
     company: 'Valid Co',
     name: 'Valid User',
+    workspaceId: 'workspace-123',
   })
 
   const request = new Request('http://localhost/api/auth/me', {
@@ -95,6 +96,7 @@ test('GET /api/auth/me returns 200 with a valid signed token', async () => {
   assert.equal(body.user.email, 'valid@example.com')
   assert.equal(body.user.role, 'employer')
   assert.equal(body.user.name, 'Valid User')
+  assert.equal(body.user.workspaceId, 'workspace-123')
 })
 
 test('POST /api/auth/logout returns 200 and clears auth cookie', async () => {

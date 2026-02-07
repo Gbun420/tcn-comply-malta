@@ -6,6 +6,9 @@ import {
   generateToken,
 } from '../../../../lib/auth.js'
 import { applyCorsHeaders, preflightResponse } from '../../../../lib/api-cors.js'
+import { enforceSignupRateLimit, extractRequestIp } from '../../../../lib/signup/rate-limit.js'
+import { provisionWorkspaceForSignup } from '../../../../lib/signup/provision-workspace.js'
+import { verifyTurnstileToken } from '../../../../lib/signup/turnstile.js'
 
 export const dynamic = 'force-dynamic'
 const CORS_OPTIONS = { methods: 'POST,OPTIONS' }
@@ -23,6 +26,9 @@ export async function POST(request) {
   let email = null
   let password = null
   let company = null
+  let turnstileToken = null
+  let consentTerms = false
+  let consentPrivacy = false
 
   try {
     const contentType = request.headers.get('content-type') || ''
@@ -31,10 +37,13 @@ export async function POST(request) {
       const bodyText = await request.text()
       if (bodyText) {
         const body = JSON.parse(bodyText)
-        name = body?.name
-        email = body?.email
+        name = body?.name?.trim()
+        email = body?.email?.trim()
         password = body?.password
-        company = body?.company
+        company = body?.company?.trim()
+        turnstileToken = body?.turnstileToken
+        consentTerms = body?.consentTerms === true
+        consentPrivacy = body?.consentPrivacy === true
       }
     }
   } catch (parseError) {
@@ -48,6 +57,42 @@ export async function POST(request) {
     )
   }
 
+  if (!consentTerms || !consentPrivacy) {
+    return withCors(
+      request,
+      NextResponse.json(
+        { error: 'You must accept the Terms and Privacy Policy to continue.' },
+        { status: 400 }
+      )
+    )
+  }
+
+  if (!turnstileToken) {
+    return withCors(request, NextResponse.json({ error: 'Turnstile token is required' }, { status: 400 }))
+  }
+
+  const rateLimit = await enforceSignupRateLimit({ request, email })
+  if (!rateLimit.allowed) {
+    return withCors(
+      request,
+      NextResponse.json(
+        { error: rateLimit.error },
+        { status: rateLimit.status }
+      )
+    )
+  }
+
+  const turnstileResult = await verifyTurnstileToken({
+    token: turnstileToken,
+    remoteIp: extractRequestIp(request),
+  })
+  if (!turnstileResult.success) {
+    return withCors(
+      request,
+      NextResponse.json({ error: 'CAPTCHA verification failed. Please try again.' }, { status: 400 })
+    )
+  }
+
   if (password.length < 6) {
     return withCors(
       request,
@@ -56,9 +101,10 @@ export async function POST(request) {
   }
 
   let newUser = null
+  let workspace = null
 
   try {
-    newUser = await createUser({ name, email, password, company, role: 'employer' })
+    newUser = await createUser({ name, email, password, company, role: 'owner' })
   } catch (createError) {
     console.error('Create user error:', createError)
 
@@ -107,6 +153,32 @@ export async function POST(request) {
     )
   }
 
+  try {
+    const provisioned = await provisionWorkspaceForSignup({
+      uid: newUser.uid,
+      email: newUser.email,
+      name: newUser.name,
+      company: newUser.company,
+    })
+
+    workspace = provisioned.workspace
+    newUser = {
+      ...newUser,
+      role: provisioned.userProfile.role,
+      workspaceId: provisioned.userProfile.workspaceId,
+      company: provisioned.userProfile.company,
+    }
+  } catch (provisionError) {
+    console.error('Workspace provisioning error:', provisionError)
+    return withCors(
+      request,
+      NextResponse.json(
+        { error: 'Workspace provisioning failed. Please contact support.' },
+        { status: 503 }
+      )
+    )
+  }
+
   let token = null
 
   try {
@@ -128,6 +200,7 @@ export async function POST(request) {
       {
         success: true,
         user: newUser,
+        workspace,
       },
       { status: 201 }
     )
