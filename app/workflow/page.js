@@ -15,12 +15,12 @@ export default function WorkflowPage() {
       title="A workflow clients can operate daily without compliance blind spots"
       description="Our workflow model aligns product behavior with legal process order so HR, compliance, and operations can execute with shared visibility."
       actions={[
-        <Link key="contact" href="/contact" className="cta-ghost inline-flex items-center gap-2">
-          Talk to Implementation Team
-        </Link>,
-        <Link key="portal" href="/dashboard" className="cta-primary inline-flex items-center gap-2">
-          Launch Dashboard
+        <Link key="demo" href="/demo" className="cta-primary inline-flex items-center gap-2">
+          Book Demo
           <ArrowUpRight className="h-4 w-4" />
+        </Link>,
+        <Link key="pricing" href="/pricing" className="cta-ghost inline-flex items-center gap-2">
+          View Pricing
         </Link>,
       ]}
     >
