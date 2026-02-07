@@ -8,6 +8,25 @@ import { useState } from 'react'
 import { GlassCard } from '../../../components/ui/glass-card.js'
 import { SITE_CONTACT_EMAIL } from '../../../lib/site-content.js'
 
+function normalizeLoginError(errorMessage) {
+  if (!errorMessage) {
+    return 'Login failed'
+  }
+
+  if (
+    /Authentication provider is not configured/i.test(errorMessage) ||
+    /Authentication service unavailable/i.test(errorMessage)
+  ) {
+    if (SITE_CONTACT_EMAIL) {
+      return `Sign-in is temporarily unavailable. Contact ${SITE_CONTACT_EMAIL} for access support.`
+    }
+
+    return 'Sign-in is temporarily unavailable. Please contact support.'
+  }
+
+  return errorMessage
+}
+
 export default function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -33,7 +52,7 @@ export default function Login() {
         router.push('/dashboard')
         router.refresh()
       } else {
-        setError(data.error || 'Login failed')
+        setError(normalizeLoginError(data.error))
       }
     } catch {
       setError('Network error. Please try again.')

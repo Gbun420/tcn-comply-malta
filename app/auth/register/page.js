@@ -6,6 +6,26 @@ import { useRouter } from 'next/navigation'
 import { AlertCircle, ArrowUpRight, Building, Lock, Mail, User } from 'lucide-react'
 import { useState } from 'react'
 import { GlassCard } from '../../../components/ui/glass-card.js'
+import { SITE_CONTACT_EMAIL } from '../../../lib/site-content.js'
+
+const SELF_REGISTRATION_PAUSED_ERROR =
+  'Self-registration is temporarily unavailable. Please contact support to activate your account.'
+
+function normalizeRegisterError(errorMessage) {
+  if (!errorMessage) {
+    return 'Registration failed'
+  }
+
+  if (errorMessage === SELF_REGISTRATION_PAUSED_ERROR) {
+    if (SITE_CONTACT_EMAIL) {
+      return `Self-registration is currently paused. Email ${SITE_CONTACT_EMAIL} to activate your account.`
+    }
+
+    return 'Self-registration is currently paused. Please contact support to activate your account.'
+  }
+
+  return errorMessage
+}
 
 export default function Register() {
   const [formData, setFormData] = useState({
@@ -47,7 +67,7 @@ export default function Register() {
         router.push('/dashboard')
         router.refresh()
       } else {
-        setError(data.error || 'Registration failed')
+        setError(normalizeRegisterError(data.error))
       }
     } catch {
       setError('Network error. Please try again.')
