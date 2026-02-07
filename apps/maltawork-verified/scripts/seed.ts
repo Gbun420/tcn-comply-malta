@@ -1,8 +1,26 @@
-import { createSupabaseServiceClient } from '@/lib/supabase/service'
-import { slugify } from '@/lib/slug'
+import { createClient } from '@supabase/supabase-js'
+
+function requireEnv(name: string) {
+  const v = process.env[name]
+  if (!v) throw new Error(`Missing required env var: ${name}`)
+  return v
+}
+
+function slugify(input: string): string {
+  return (input || '')
+    .toLowerCase()
+    .trim()
+    .replace(/['"]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+}
 
 async function main() {
-  const supabase = createSupabaseServiceClient()
+  const supabaseUrl = requireEnv('NEXT_PUBLIC_SUPABASE_URL')
+  const serviceKey = requireEnv('SUPABASE_SERVICE_ROLE_KEY')
+  const supabase = createClient(supabaseUrl, serviceKey, {
+    auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false },
+  })
 
   const seedEmail = 'seed.admin@maltawork.local'
   const seedPassword = 'password-please-change'

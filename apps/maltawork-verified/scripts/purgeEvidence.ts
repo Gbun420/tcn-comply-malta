@@ -1,8 +1,21 @@
-import { createSupabaseServiceClient } from '@/lib/supabase/service'
-import { getEvidenceBucket } from '@/lib/env'
+import { createClient } from '@supabase/supabase-js'
+
+function requireEnv(name: string) {
+  const v = process.env[name]
+  if (!v) throw new Error(`Missing required env var: ${name}`)
+  return v
+}
+
+function getEvidenceBucket(): string {
+  return process.env.MWV_EVIDENCE_BUCKET || 'evidence_private'
+}
 
 async function main() {
-  const supabase = createSupabaseServiceClient()
+  const supabaseUrl = requireEnv('NEXT_PUBLIC_SUPABASE_URL')
+  const serviceKey = requireEnv('SUPABASE_SERVICE_ROLE_KEY')
+  const supabase = createClient(supabaseUrl, serviceKey, {
+    auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false },
+  })
   const nowIso = new Date().toISOString()
 
   const { data: rows, error } = await supabase
