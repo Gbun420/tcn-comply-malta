@@ -67,7 +67,7 @@ export default function Register() {
             </h1>
             <p className="text-sm text-slate-200">
               Register your company, assign your first admin account, and launch into the compliance
-              cockpit immediately.
+              workspace immediately.
             </p>
 
             <div className="rounded-2xl border border-white/15 bg-white/8 p-4">

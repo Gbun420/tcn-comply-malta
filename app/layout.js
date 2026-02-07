@@ -91,9 +91,8 @@ export default function RootLayout({ children }) {
       </head>
       <body className={`${bodyFont.variable} ${displayFont.variable}`}>
         <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-          <span className="absolute -left-40 top-10 h-80 w-80 rounded-full bg-cyan-300/20 blur-[90px]" />
-          <span className="absolute right-0 top-1/3 h-96 w-96 rounded-full bg-emerald-300/20 blur-[110px]" />
-          <span className="absolute bottom-0 left-1/3 h-72 w-72 rounded-full bg-sky-400/25 blur-[100px]" />
+          <span className="absolute -left-48 top-0 h-80 w-80 rounded-full bg-sky-300/12 blur-[110px]" />
+          <span className="absolute right-[-8rem] top-1/3 h-96 w-96 rounded-full bg-teal-300/10 blur-[130px]" />
         </div>
 
         <div className="relative z-10 min-h-screen">

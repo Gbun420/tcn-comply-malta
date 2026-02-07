@@ -5,20 +5,20 @@ import { MARKETING_NAV_LINKS } from '../../lib/portal-content.js'
 export function SiteFooter({ siteName, contactEmail, contactPhone }) {
   return (
     <footer className="px-4 pb-10 pt-4 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-7xl rounded-3xl border border-white/15 bg-white/10 p-6 shadow-2xl backdrop-blur-xl md:p-8">
+      <div className="mx-auto max-w-7xl rounded-3xl border border-white/12 bg-slate-950/40 p-6 shadow-2xl backdrop-blur-xl md:p-8">
         <div className="grid gap-8 md:grid-cols-4">
           <div>
             <p className="font-display text-xl font-semibold text-white">{siteName}</p>
             <p className="mt-2 max-w-xs text-sm text-slate-200">
-              Compliance intelligence for Malta&apos;s 2026 labour migration era.
+              Audit-ready compliance operations for Malta&apos;s TCN workforce requirements.
             </p>
           </div>
 
           <div>
-            <p className="mb-3 text-xs uppercase tracking-[0.2em] text-cyan-200">Explore</p>
+            <p className="mb-3 text-xs uppercase tracking-[0.2em] text-teal-100">Explore</p>
             <div className="space-y-2 text-sm text-slate-100">
               {MARKETING_NAV_LINKS.map((link) => (
-                <Link key={link.href} href={link.href} className="block hover:text-cyan-200">
+                <Link key={link.href} href={link.href} className="block hover:text-teal-100">
                   {link.label}
                 </Link>
               ))}
@@ -26,11 +26,11 @@ export function SiteFooter({ siteName, contactEmail, contactPhone }) {
           </div>
 
           <div>
-            <p className="mb-3 text-xs uppercase tracking-[0.2em] text-cyan-200">Contact</p>
+            <p className="mb-3 text-xs uppercase tracking-[0.2em] text-teal-100">Contact</p>
             <div className="space-y-2 text-sm text-slate-100">
               <a
                 href={`mailto:${contactEmail}`}
-                className="inline-flex items-center gap-2 hover:text-cyan-200"
+                className="inline-flex items-center gap-2 hover:text-teal-100"
               >
                 <Mail className="h-4 w-4" />
                 {contactEmail}
@@ -43,12 +43,12 @@ export function SiteFooter({ siteName, contactEmail, contactPhone }) {
           </div>
 
           <div>
-            <p className="mb-3 text-xs uppercase tracking-[0.2em] text-cyan-200">Legal</p>
+            <p className="mb-3 text-xs uppercase tracking-[0.2em] text-teal-100">Legal</p>
             <div className="space-y-2 text-sm text-slate-100">
-              <Link href="/privacy" className="block hover:text-cyan-200">
+              <Link href="/privacy" className="block hover:text-teal-100">
                 Privacy Policy
               </Link>
-              <Link href="/terms" className="block hover:text-cyan-200">
+              <Link href="/terms" className="block hover:text-teal-100">
                 Terms of Service
               </Link>
             </div>

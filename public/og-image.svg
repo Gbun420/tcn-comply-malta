@@ -1,34 +1,45 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg" fill="none">
   <defs>
-    <linearGradient id="bg" x1="116" y1="32" x2="1128" y2="626" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#071533"/>
-      <stop offset="0.48" stop-color="#0D2A5E"/>
-      <stop offset="1" stop-color="#0B1B36"/>
+    <linearGradient id="bg" x1="90" y1="40" x2="1120" y2="620" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0E1A2E"/>
+      <stop offset="1" stop-color="#091425"/>
     </linearGradient>
-    <linearGradient id="glass" x1="168" y1="116" x2="1018" y2="532" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#74DEFF" stop-opacity="0.34"/>
-      <stop offset="0.56" stop-color="#2A86FF" stop-opacity="0.24"/>
-      <stop offset="1" stop-color="#23D0A5" stop-opacity="0.3"/>
+    <linearGradient id="panel" x1="150" y1="90" x2="1030" y2="540" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.08"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0.03"/>
+    </linearGradient>
+    <linearGradient id="brandAccent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7ED2C4"/>
+      <stop offset="1" stop-color="#4F9CB6"/>
     </linearGradient>
   </defs>
 
   <rect width="1200" height="630" fill="url(#bg)"/>
-  <circle cx="170" cy="98" r="170" fill="#2ACBFF" fill-opacity="0.2"/>
-  <circle cx="1040" cy="550" r="200" fill="#2DD7B5" fill-opacity="0.18"/>
+  <circle cx="1080" cy="80" r="220" fill="#6EA8C5" fill-opacity="0.1"/>
+  <circle cx="150" cy="620" r="220" fill="#5EA89A" fill-opacity="0.08"/>
 
-  <rect x="110" y="72" width="980" height="486" rx="42" fill="#FFFFFF" fill-opacity="0.08" stroke="#FFFFFF" stroke-opacity="0.2"/>
-  <rect x="110" y="72" width="980" height="486" rx="42" fill="url(#glass)"/>
+  <rect x="100" y="70" width="1000" height="490" rx="36" fill="url(#panel)" stroke="#FFFFFF" stroke-opacity="0.14"/>
 
-  <g transform="translate(160 145)">
-    <rect x="0" y="0" width="120" height="120" rx="34" fill="#081A39"/>
-    <rect x="0" y="0" width="120" height="120" rx="34" fill="#6BDCFF" fill-opacity="0.3"/>
-    <path d="M60 20L90 32V58C90 76 76 91 60 99C44 91 30 76 30 58V32L60 20Z" fill="#F0F8FF"/>
-    <path d="M55 42H65V78H55V42Z" fill="#0B73E9"/>
-    <path d="M43 49H77V58H43V49Z" fill="#0B73E9"/>
+  <g transform="translate(170 180)">
+    <rect x="0" y="0" width="160" height="160" rx="42" fill="#0F1A2E"/>
+    <rect x="0" y="0" width="160" height="160" rx="42" stroke="#FFFFFF" stroke-opacity="0.2" stroke-width="2"/>
+    <path
+      d="M80 30L118 46V80C118 106 101 127 80 138C59 127 42 106 42 80V46L80 30Z"
+      stroke="#EAF2FB"
+      stroke-width="8"
+      stroke-linejoin="round"
+    />
+    <path d="M61 86L75 100L99 76" stroke="url(#brandAccent)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M80 56V114" stroke="#DCE7F5" stroke-opacity="0.75" stroke-width="3.5" stroke-linecap="round"/>
   </g>
 
-  <text x="312" y="220" fill="#E7F5FF" font-family="Space Grotesk, Avenir Next, sans-serif" font-size="66" font-weight="700">TCN Comply Malta</text>
-  <text x="312" y="287" fill="#97DFFF" font-family="Manrope, Segoe UI, sans-serif" font-size="34" font-weight="600">Client Portals • Dashboards • Audit Operations</text>
-  <text x="312" y="354" fill="#D6EEFF" font-family="Manrope, Segoe UI, sans-serif" font-size="30">2026 Glass Compliance Platform for Maltese Employers</text>
-  <text x="312" y="430" fill="#8EF1D3" font-family="Manrope, Segoe UI, sans-serif" font-size="26">Solutions • Coverage • Workflow • Contact • Audit App</text>
+  <text x="380" y="250" fill="#ECF4FF" font-family="Space Grotesk, Avenir Next, sans-serif" font-size="68" font-weight="700">
+    TCN Comply Malta
+  </text>
+  <text x="380" y="312" fill="#BDD3E8" font-family="Manrope, Segoe UI, sans-serif" font-size="30" font-weight="600">
+    Compliance Operations Platform for Maltese Employers
+  </text>
+  <text x="380" y="380" fill="#D7E8F6" font-family="Manrope, Segoe UI, sans-serif" font-size="28">
+    Audit-ready workflows, controlled access, and regulator-ready evidence trails.
+  </text>
 </svg>

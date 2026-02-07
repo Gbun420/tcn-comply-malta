@@ -177,7 +177,7 @@ export default function Home() {
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           kicker="Platform Modules"
-          title="Purpose-built glass layers for each compliance workload"
+          title="Purpose-built modules for each compliance workload"
           description="Each module is tuned for high-frequency employer workflows with fast visual parsing, policy context, and evidence visibility."
           align="center"
         />
@@ -202,7 +202,7 @@ export default function Home() {
         <GlassCard className="p-7 text-center md:p-10">
           <p className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs uppercase tracking-[0.14em] text-cyan-100">
             <Sparkles className="h-3.5 w-3.5" />
-            2026 Redesign Rollout
+            2026 Platform Release
           </p>
           <h2 className="mt-4 font-display text-3xl font-semibold text-white md:text-4xl">
             Built to reduce audit anxiety and speed up compliant hiring

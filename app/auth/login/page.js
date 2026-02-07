@@ -50,7 +50,7 @@ export default function Login() {
             <div className="glass-chip">Secure Access</div>
             <h1 className="mt-4 font-display text-3xl font-semibold text-white">Welcome back</h1>
             <p className="mt-3 text-sm text-slate-200">
-              Sign in to manage employee compliance, renewals, and audit evidence in one glass
+              Sign in to manage employee compliance, renewals, and audit evidence from one secure
               workspace.
             </p>
 
@@ -67,7 +67,7 @@ export default function Login() {
                 </div>
                 <div>
                   <p className="text-sm font-semibold text-white">Employer Workspace</p>
-                  <p className="text-xs text-slate-200">Malta 2026 Compliance Console</p>
+                  <p className="text-xs text-slate-200">Professional Compliance Console</p>
                 </div>
               </div>
             </div>
