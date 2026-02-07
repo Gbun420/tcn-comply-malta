@@ -1,5 +1,10 @@
 import { NextResponse } from 'next/server'
-import { JWT_SECRET_PRODUCTION_ERROR, createUser, generateToken } from '../../../../lib/auth.js'
+import {
+  JWT_SECRET_PRODUCTION_ERROR,
+  classifyFirebaseAuthError,
+  createUser,
+  generateToken,
+} from '../../../../lib/auth.js'
 import { applyCorsHeaders, preflightResponse } from '../../../../lib/api-cors.js'
 
 export const dynamic = 'force-dynamic'
@@ -57,10 +62,39 @@ export async function POST(request) {
   } catch (createError) {
     console.error('Create user error:', createError)
 
-    if (createError.message === 'User already exists') {
+    const errorType = classifyFirebaseAuthError(createError?.message)
+
+    if (errorType === 'USER_EXISTS') {
       return withCors(
         request,
         NextResponse.json({ error: 'User with this email already exists' }, { status: 409 })
+      )
+    }
+
+    if (errorType === 'WEAK_PASSWORD') {
+      return withCors(
+        request,
+        NextResponse.json({ error: 'Password does not meet security requirements' }, { status: 400 })
+      )
+    }
+
+    if (errorType === 'RATE_LIMITED') {
+      return withCors(
+        request,
+        NextResponse.json({ error: 'Too many signup attempts. Please try again shortly.' }, { status: 429 })
+      )
+    }
+
+    if (errorType === 'PROVIDER_MISCONFIGURED') {
+      return withCors(
+        request,
+        NextResponse.json(
+          {
+            error:
+              'Self-registration is temporarily unavailable. Please contact support to activate your account.',
+          },
+          { status: 503 }
+        )
       )
     }
 

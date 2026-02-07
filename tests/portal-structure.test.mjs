@@ -40,7 +40,7 @@ test('dashboard modules include missing frontend surfaces now exposed to clients
   assert.equal(routeSet.has('/dashboard/audit'), true)
 })
 
-test('public marketing paths align with separate-page routing', () => {
+test('public marketing paths align with dedicated route structure', () => {
   const expected = ['/product', '/pricing', '/demo', '/coverage', '/guides', '/security']
   assert.deepEqual(PUBLIC_MARKETING_PATHS, expected)
 })

@@ -68,3 +68,16 @@ test('api preflight requests bypass authentication', () => {
 
   assert.equal(outcome, 'api-preflight')
 })
+
+test('public api routes remain accessible without token', () => {
+  const outcome = evaluateMiddlewareRequest({
+    method: 'GET',
+    pathname: '/api/health',
+    hasToken: false,
+    isApiRoute: true,
+    isAuthApiRoute: false,
+    publicPaths: PUBLIC_PATHS,
+  })
+
+  assert.equal(outcome, 'allow')
+})

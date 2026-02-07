@@ -83,7 +83,7 @@ export default function Register() {
                 </div>
                 <div>
                   <p className="text-sm font-semibold text-white">Fast onboarding</p>
-                  <p className="text-xs text-slate-200">No separate setup wizard required</p>
+                  <p className="text-xs text-slate-200">No additional setup wizard required</p>
                 </div>
               </div>
             </div>

@@ -19,7 +19,7 @@ export default function AuditAppPage() {
     <MarketingPageShell
       kicker="Audit App"
       title="Dedicated audit and test workspace for compliance verification"
-      description="This separate page is purpose-built for audit preparation, API checks, and evidence readiness reviews with direct paths into the operational dashboard."
+      description="This workspace is purpose-built for audit preparation, API checks, and evidence readiness reviews with direct paths into the operational dashboard."
       actions={[
         <Link key="demo" href="/demo" className="cta-primary inline-flex items-center gap-2">
           Book Demo
