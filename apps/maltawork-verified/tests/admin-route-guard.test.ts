@@ -1,8 +1,8 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { NextRequest } from 'next/server'
-import { middleware } from '../middleware'
-import { requireEnvOrSkip } from './helpers/supabaseTestEnv'
+import { NextRequest } from 'next/server.js'
+import { middleware } from '../middleware.ts'
+import { requireEnvOrSkip } from './helpers/supabaseTestEnv.ts'
 
 test('non-authenticated user is redirected away from /admin', async (t) => {
   requireEnvOrSkip(t)

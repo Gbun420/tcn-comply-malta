@@ -5,7 +5,7 @@ import {
   createServiceClient,
   getAuthedClient,
   requireEnvOrSkip,
-} from './helpers/supabaseTestEnv'
+} from './helpers/supabaseTestEnv.ts'
 
 test('publishing a review creates statements_of_reasons and audit_log rows', async (t) => {
   const env = requireEnvOrSkip(t)

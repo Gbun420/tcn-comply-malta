@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { createAnonClient, requireEnvOrSkip } from './helpers/supabaseTestEnv'
+import { createAnonClient, requireEnvOrSkip } from './helpers/supabaseTestEnv.ts'
 
 test('published_reviews_public_view never returns author_user_id or narrative_raw', async (t) => {
   const env = requireEnvOrSkip(t)
