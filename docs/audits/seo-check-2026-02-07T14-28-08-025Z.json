@@ -1,0 +1,233 @@
+{
+  "generatedAt": "2026-02-07T14:28:08.025Z",
+  "baseUrl": "http://127.0.0.1:4010",
+  "minSeoScore": 95,
+  "passCount": 6,
+  "failCount": 19,
+  "pages": [
+    {
+      "route": "/",
+      "url": "http://127.0.0.1:4010/",
+      "status": 200,
+      "title": "TCN Compliance Platform for Maltese Employers | TCN Comply Malta",
+      "description": "Manage TCN onboarding, vacancy proof, and renewal readiness with audit-first workflows aligned to Malta’s 2026 labour migration policy.",
+      "canonical": "https://tcn-comply-malta.vercel.app",
+      "robots": "index, follow"
+    },
+    {
+      "route": "/product",
+      "url": "http://127.0.0.1:4010/product",
+      "status": 200,
+      "title": "Product Overview for TCN Compliance Operations | TCN Comply Malta",
+      "description": "Explore the compliance modules, workflow controls, and audit exports built for Malta employers managing TCN obligations.",
+      "canonical": "https://tcn-comply-malta.vercel.app/product",
+      "robots": "index, follow"
+    },
+    {
+      "route": "/pricing",
+      "url": "http://127.0.0.1:4010/pricing",
+      "status": 200,
+      "title": "Pricing Plans for Compliance Operations Teams | TCN Comply Malta",
+      "description": "Compare Starter, Growth, and Enterprise plans designed for employer compliance teams and partner-led rollouts.",
+      "canonical": "https://tcn-comply-malta.vercel.app/pricing",
+      "robots": "index, follow"
+    },
+    {
+      "route": "/demo",
+      "url": "http://127.0.0.1:4010/demo",
+      "status": 200,
+      "title": "Book a Demo for TCN Comply Malta | TCN Comply Malta",
+      "description": "Schedule a walkthrough to evaluate coverage controls, workflow timelines, and evidence pack outputs for your organization.",
+      "canonical": "https://tcn-comply-malta.vercel.app/demo",
+      "robots": "index, follow"
+    },
+    {
+      "route": "/solutions",
+      "url": "http://127.0.0.1:4010/solutions",
+      "status": 200,
+      "title": "Compliance Solutions for TCN Workforce Operations | TCN Comply Malta",
+      "description": "Review portal modules that support onboarding checks, vacancy publication evidence, and renewal governance for Maltese employers.",
+      "canonical": "https://tcn-comply-malta.vercel.app/solutions",
+      "robots": "index, follow"
+    },
+    {
+      "route": "/coverage",
+      "url": "http://127.0.0.1:4010/coverage",
+      "status": 200,
+      "title": "Coverage Matrix for Malta TCN Compliance Controls | TCN Comply Malta",
+      "description": "Map each compliance obligation to evidence checkpoints, responsible actions, and audit outputs across your workforce workflows.",
+      "canonical": "https://tcn-comply-malta.vercel.app/coverage",
+      "robots": "index, follow"
+    },
+    {
+      "route": "/workflow",
+      "url": "http://127.0.0.1:4010/workflow",
+      "status": 200,
+      "title": "Operational Workflow for TCN Compliance Execution | TCN Comply Malta",
+      "description": "Run intake, validation, operation, and audit stages in a single compliance workflow for Maltese employer teams.",
+      "canonical": "https://tcn-comply-malta.vercel.app/workflow",
+      "robots": "index, follow"
+    },
+    {
+      "route": "/audit-app",
+      "url": "http://127.0.0.1:4010/audit-app",
+      "status": 200,
+      "title": "Audit and Testing Workspace for Compliance Verification | TCN Comply Malta",
+      "description": "Use the dedicated audit app to verify API behavior, workflow readiness, and evidence completeness before stakeholder reviews.",
+      "canonical": "https://tcn-comply-malta.vercel.app/audit-app",
+      "robots": "index, follow"
+    },
+    {
+      "route": "/guides",
+      "url": "http://127.0.0.1:4010/guides",
+      "status": 200,
+      "title": "Guides and Operational Templates for Malta TCN Compliance | TCN Comply Malta",
+      "description": "Use implementation guides and checklist templates to standardize onboarding, vacancy evidence, and renewal monitoring.",
+      "canonical": "https://tcn-comply-malta.vercel.app/guides",
+      "robots": "index, follow"
+    },
+    {
+      "route": "/guides/onboarding-checklist",
+      "url": "http://127.0.0.1:4010/guides/onboarding-checklist",
+      "status": 200,
+      "title": "Onboarding Checklist Guide | TCN Comply Malta",
+      "description": "Use this onboarding checklist to capture required records and evidence at intake for Malta TCN compliance workflows.",
+      "canonical": "https://tcn-comply-malta.vercel.app/guides/onboarding-checklist",
+      "robots": "index, follow"
+    },
+    {
+      "route": "/guides/vacancy-evidence",
+      "url": "http://127.0.0.1:4010/guides/vacancy-evidence",
+      "status": 200,
+      "title": "Vacancy Evidence Guide | TCN Comply Malta",
+      "description": "How to capture vacancy publication evidence and archive references for regulator and internal audits.",
+      "canonical": "https://tcn-comply-malta.vercel.app/guides/vacancy-evidence",
+      "robots": "index, follow"
+    },
+    {
+      "route": "/guides/renewal-monitoring",
+      "url": "http://127.0.0.1:4010/guides/renewal-monitoring",
+      "status": 200,
+      "title": "Renewal Monitoring Guide | TCN Comply Malta",
+      "description": "Operational guide for running renewal timelines, escalation points, and document completeness checks.",
+      "canonical": "https://tcn-comply-malta.vercel.app/guides/renewal-monitoring",
+      "robots": "index, follow"
+    },
+    {
+      "route": "/security",
+      "url": "http://127.0.0.1:4010/security",
+      "status": 200,
+      "title": "Security and Data Handling | TCN Comply Malta",
+      "description": "Review platform security controls, access management, audit logging, and operational safeguards for compliance teams.",
+      "canonical": "https://tcn-comply-malta.vercel.app/security",
+      "robots": "index, follow"
+    },
+    {
+      "route": "/dpa",
+      "url": "http://127.0.0.1:4010/dpa",
+      "status": 200,
+      "title": "Data Processing Addendum Summary | TCN Comply Malta",
+      "description": "Understand processor responsibilities, security measures, and data governance commitments for customer compliance data.",
+      "canonical": "https://tcn-comply-malta.vercel.app/dpa",
+      "robots": "index, follow"
+    },
+    {
+      "route": "/subprocessors",
+      "url": "http://127.0.0.1:4010/subprocessors",
+      "status": 200,
+      "title": "Subprocessors and Infrastructure Services | TCN Comply Malta",
+      "description": "See infrastructure and service subprocessors used to deliver secure, reliable TCN Comply Malta operations.",
+      "canonical": "https://tcn-comply-malta.vercel.app/subprocessors",
+      "robots": "index, follow"
+    },
+    {
+      "route": "/status",
+      "url": "http://127.0.0.1:4010/status",
+      "status": 200,
+      "title": "Service Status and Uptime Health | TCN Comply Malta",
+      "description": "Monitor service availability and API health for production compliance workflows and partner integrations.",
+      "canonical": "https://tcn-comply-malta.vercel.app/status",
+      "robots": "index, follow"
+    },
+    {
+      "route": "/contact",
+      "url": "http://127.0.0.1:4010/contact",
+      "status": 200,
+      "title": "Contact the TCN Compliance Implementation Team | TCN Comply Malta",
+      "description": "Coordinate rollout planning, onboarding support, and partner integration requirements for your compliance program.",
+      "canonical": "https://tcn-comply-malta.vercel.app/contact",
+      "robots": "index, follow"
+    },
+    {
+      "route": "/privacy",
+      "url": "http://127.0.0.1:4010/privacy",
+      "status": 200,
+      "title": "Privacy Policy | TCN Comply Malta",
+      "description": "Read how TCN Comply Malta handles personal and operational data for secure, GDPR-aligned compliance operations.",
+      "canonical": "https://tcn-comply-malta.vercel.app/privacy",
+      "robots": "index, follow"
+    },
+    {
+      "route": "/terms",
+      "url": "http://127.0.0.1:4010/terms",
+      "status": 200,
+      "title": "Terms of Service | TCN Comply Malta",
+      "description": "Review service scope, account responsibilities, and regulatory boundaries for the TCN Comply Malta platform.",
+      "canonical": "https://tcn-comply-malta.vercel.app/terms",
+      "robots": "index, follow"
+    }
+  ],
+  "lighthouseResults": [
+    {
+      "route": "/",
+      "url": "http://127.0.0.1:4010/",
+      "seoScore": 100
+    },
+    {
+      "route": "/product",
+      "url": "http://127.0.0.1:4010/product",
+      "seoScore": 100
+    },
+    {
+      "route": "/pricing",
+      "url": "http://127.0.0.1:4010/pricing",
+      "seoScore": 100
+    },
+    {
+      "route": "/demo",
+      "url": "http://127.0.0.1:4010/demo",
+      "seoScore": 100
+    },
+    {
+      "route": "/coverage",
+      "url": "http://127.0.0.1:4010/coverage",
+      "seoScore": 100
+    },
+    {
+      "route": "/security",
+      "url": "http://127.0.0.1:4010/security",
+      "seoScore": 100
+    }
+  ],
+  "failures": [
+    "/: canonical mismatch (expected http://127.0.0.1:4010/, got https://tcn-comply-malta.vercel.app/)",
+    "/product: canonical mismatch (expected http://127.0.0.1:4010/product, got https://tcn-comply-malta.vercel.app/product)",
+    "/pricing: canonical mismatch (expected http://127.0.0.1:4010/pricing, got https://tcn-comply-malta.vercel.app/pricing)",
+    "/demo: canonical mismatch (expected http://127.0.0.1:4010/demo, got https://tcn-comply-malta.vercel.app/demo)",
+    "/solutions: canonical mismatch (expected http://127.0.0.1:4010/solutions, got https://tcn-comply-malta.vercel.app/solutions)",
+    "/coverage: canonical mismatch (expected http://127.0.0.1:4010/coverage, got https://tcn-comply-malta.vercel.app/coverage)",
+    "/workflow: canonical mismatch (expected http://127.0.0.1:4010/workflow, got https://tcn-comply-malta.vercel.app/workflow)",
+    "/audit-app: canonical mismatch (expected http://127.0.0.1:4010/audit-app, got https://tcn-comply-malta.vercel.app/audit-app)",
+    "/guides: canonical mismatch (expected http://127.0.0.1:4010/guides, got https://tcn-comply-malta.vercel.app/guides)",
+    "/guides/onboarding-checklist: canonical mismatch (expected http://127.0.0.1:4010/guides/onboarding-checklist, got https://tcn-comply-malta.vercel.app/guides/onboarding-checklist)",
+    "/guides/vacancy-evidence: canonical mismatch (expected http://127.0.0.1:4010/guides/vacancy-evidence, got https://tcn-comply-malta.vercel.app/guides/vacancy-evidence)",
+    "/guides/renewal-monitoring: canonical mismatch (expected http://127.0.0.1:4010/guides/renewal-monitoring, got https://tcn-comply-malta.vercel.app/guides/renewal-monitoring)",
+    "/security: canonical mismatch (expected http://127.0.0.1:4010/security, got https://tcn-comply-malta.vercel.app/security)",
+    "/dpa: canonical mismatch (expected http://127.0.0.1:4010/dpa, got https://tcn-comply-malta.vercel.app/dpa)",
+    "/subprocessors: canonical mismatch (expected http://127.0.0.1:4010/subprocessors, got https://tcn-comply-malta.vercel.app/subprocessors)",
+    "/status: canonical mismatch (expected http://127.0.0.1:4010/status, got https://tcn-comply-malta.vercel.app/status)",
+    "/contact: canonical mismatch (expected http://127.0.0.1:4010/contact, got https://tcn-comply-malta.vercel.app/contact)",
+    "/privacy: canonical mismatch (expected http://127.0.0.1:4010/privacy, got https://tcn-comply-malta.vercel.app/privacy)",
+    "/terms: canonical mismatch (expected http://127.0.0.1:4010/terms, got https://tcn-comply-malta.vercel.app/terms)"
+  ]
+}

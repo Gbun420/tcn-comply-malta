@@ -1,0 +1,189 @@
+{
+  "generatedAt": "2026-02-07T14:27:01.931Z",
+  "baseUrl": "https://tcn-comply-malta.vercel.app",
+  "passCount": -1,
+  "failCount": 24,
+  "pages": [
+    {
+      "pathname": "/",
+      "status": 200,
+      "title": "TCN Compliance Platform for Maltese Employers | TCN Comply Malta",
+      "description": "Manage TCN onboarding, vacancy proof, and renewal readiness with audit-first workflows aligned to Malta’s 2026 labour migration policy.",
+      "robots": "index, follow"
+    },
+    {
+      "pathname": "/product",
+      "status": 200,
+      "title": "Employer Portal Access | TCN Comply Malta",
+      "description": "Secure sign-in and registration for authorized employer users managing TCN compliance workflows.",
+      "robots": "noindex, nofollow, nocache"
+    },
+    {
+      "pathname": "/pricing",
+      "status": 200,
+      "title": "Employer Portal Access | TCN Comply Malta",
+      "description": "Secure sign-in and registration for authorized employer users managing TCN compliance workflows.",
+      "robots": "noindex, nofollow, nocache"
+    },
+    {
+      "pathname": "/demo",
+      "status": 200,
+      "title": "Employer Portal Access | TCN Comply Malta",
+      "description": "Secure sign-in and registration for authorized employer users managing TCN compliance workflows.",
+      "robots": "noindex, nofollow, nocache"
+    },
+    {
+      "pathname": "/solutions",
+      "status": 200,
+      "title": "Compliance Solutions for TCN Workforce Operations | TCN Comply Malta",
+      "description": "Review portal modules that support onboarding checks, vacancy publication evidence, and renewal governance for Maltese employers.",
+      "robots": "index, follow"
+    },
+    {
+      "pathname": "/coverage",
+      "status": 200,
+      "title": "Coverage Matrix for Malta TCN Compliance Controls | TCN Comply Malta",
+      "description": "Map each compliance obligation to evidence checkpoints, responsible actions, and audit outputs across your workforce workflows.",
+      "robots": "index, follow"
+    },
+    {
+      "pathname": "/workflow",
+      "status": 200,
+      "title": "Operational Workflow for TCN Compliance Execution | TCN Comply Malta",
+      "description": "Run intake, validation, operation, and audit stages in a single compliance workflow for Maltese employer teams.",
+      "robots": "index, follow"
+    },
+    {
+      "pathname": "/audit-app",
+      "status": 200,
+      "title": "Audit and Testing Workspace for Compliance Verification | TCN Comply Malta",
+      "description": "Use the dedicated audit app to verify API behavior, workflow readiness, and evidence completeness before stakeholder reviews.",
+      "robots": "index, follow"
+    },
+    {
+      "pathname": "/guides",
+      "status": 200,
+      "title": "Employer Portal Access | TCN Comply Malta",
+      "description": "Secure sign-in and registration for authorized employer users managing TCN compliance workflows.",
+      "robots": "noindex, nofollow, nocache"
+    },
+    {
+      "pathname": "/guides/onboarding-checklist",
+      "status": 200,
+      "title": "Employer Portal Access | TCN Comply Malta",
+      "description": "Secure sign-in and registration for authorized employer users managing TCN compliance workflows.",
+      "robots": "noindex, nofollow, nocache"
+    },
+    {
+      "pathname": "/guides/vacancy-evidence",
+      "status": 200,
+      "title": "Employer Portal Access | TCN Comply Malta",
+      "description": "Secure sign-in and registration for authorized employer users managing TCN compliance workflows.",
+      "robots": "noindex, nofollow, nocache"
+    },
+    {
+      "pathname": "/guides/renewal-monitoring",
+      "status": 200,
+      "title": "Employer Portal Access | TCN Comply Malta",
+      "description": "Secure sign-in and registration for authorized employer users managing TCN compliance workflows.",
+      "robots": "noindex, nofollow, nocache"
+    },
+    {
+      "pathname": "/security",
+      "status": 200,
+      "title": "Employer Portal Access | TCN Comply Malta",
+      "description": "Secure sign-in and registration for authorized employer users managing TCN compliance workflows.",
+      "robots": "noindex, nofollow, nocache"
+    },
+    {
+      "pathname": "/dpa",
+      "status": 200,
+      "title": "Employer Portal Access | TCN Comply Malta",
+      "description": "Secure sign-in and registration for authorized employer users managing TCN compliance workflows.",
+      "robots": "noindex, nofollow, nocache"
+    },
+    {
+      "pathname": "/subprocessors",
+      "status": 200,
+      "title": "Employer Portal Access | TCN Comply Malta",
+      "description": "Secure sign-in and registration for authorized employer users managing TCN compliance workflows.",
+      "robots": "noindex, nofollow, nocache"
+    },
+    {
+      "pathname": "/status",
+      "status": 200,
+      "title": "Employer Portal Access | TCN Comply Malta",
+      "description": "Secure sign-in and registration for authorized employer users managing TCN compliance workflows.",
+      "robots": "noindex, nofollow, nocache"
+    },
+    {
+      "pathname": "/contact",
+      "status": 200,
+      "title": "Contact the TCN Compliance Implementation Team | TCN Comply Malta",
+      "description": "Coordinate rollout planning, onboarding support, and partner integration requirements for your compliance program.",
+      "robots": "index, follow"
+    },
+    {
+      "pathname": "/privacy",
+      "status": 200,
+      "title": "Privacy Policy | TCN Comply Malta",
+      "description": "Read how TCN Comply Malta handles personal and operational data for secure, GDPR-aligned compliance operations.",
+      "robots": "index, follow"
+    },
+    {
+      "pathname": "/terms",
+      "status": 200,
+      "title": "Terms of Service | TCN Comply Malta",
+      "description": "Review service scope, account responsibilities, and regulatory boundaries for the TCN Comply Malta platform.",
+      "robots": "index, follow"
+    }
+  ],
+  "authPages": [
+    {
+      "pathname": "/auth/login",
+      "status": 200,
+      "robots": "noindex, nofollow, nocache"
+    },
+    {
+      "pathname": "/auth/register",
+      "status": 200,
+      "robots": "noindex, nofollow, nocache"
+    }
+  ],
+  "sitemapPaths": [
+    "/",
+    "/solutions",
+    "/coverage",
+    "/workflow",
+    "/audit-app",
+    "/contact",
+    "/privacy",
+    "/terms"
+  ],
+  "failures": [
+    "/product: indexable route has noindex robots metadata",
+    "/pricing: indexable route has noindex robots metadata",
+    "/demo: indexable route has noindex robots metadata",
+    "/guides: indexable route has noindex robots metadata",
+    "/guides/onboarding-checklist: indexable route has noindex robots metadata",
+    "/guides/vacancy-evidence: indexable route has noindex robots metadata",
+    "/guides/renewal-monitoring: indexable route has noindex robots metadata",
+    "/security: indexable route has noindex robots metadata",
+    "/dpa: indexable route has noindex robots metadata",
+    "/subprocessors: indexable route has noindex robots metadata",
+    "/status: indexable route has noindex robots metadata",
+    "duplicate title across routes: /product, /pricing, /demo, /guides, /guides/onboarding-checklist, /guides/vacancy-evidence, /guides/renewal-monitoring, /security, /dpa, /subprocessors, /status",
+    "duplicate description across routes: /product, /pricing, /demo, /guides, /guides/onboarding-checklist, /guides/vacancy-evidence, /guides/renewal-monitoring, /security, /dpa, /subprocessors, /status",
+    "sitemap.xml: missing expected route /product",
+    "sitemap.xml: missing expected route /pricing",
+    "sitemap.xml: missing expected route /demo",
+    "sitemap.xml: missing expected route /guides",
+    "sitemap.xml: missing expected route /guides/onboarding-checklist",
+    "sitemap.xml: missing expected route /guides/vacancy-evidence",
+    "sitemap.xml: missing expected route /guides/renewal-monitoring",
+    "sitemap.xml: missing expected route /security",
+    "sitemap.xml: missing expected route /dpa",
+    "sitemap.xml: missing expected route /subprocessors",
+    "sitemap.xml: missing expected route /status"
+  ]
+}

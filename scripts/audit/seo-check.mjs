@@ -5,6 +5,10 @@ import { launch as launchChrome } from 'chrome-launcher'
 import { INDEXABLE_ROUTES, LIGHTHOUSE_SEO_ROUTES } from '../../lib/public-pages.js'
 
 const BASE_URL = process.env.AUDIT_BASE_URL || 'https://tcn-comply-malta.vercel.app'
+const CANONICAL_BASE_URL =
+  process.env.AUDIT_CANONICAL_BASE_URL ||
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  'https://tcn-comply-malta.vercel.app'
 const MIN_SEO_SCORE = Number.parseInt(process.env.AUDIT_MIN_SEO_SCORE || '95', 10)
 const OUTPUT_DIR = path.join(process.cwd(), 'docs', 'audits')
 
@@ -28,6 +32,10 @@ function normalizeComparableUrl(value) {
   } catch {
     return value
   }
+}
+
+function buildExpectedCanonical(route) {
+  return normalizeComparableUrl(new URL(route, CANONICAL_BASE_URL).toString())
 }
 
 function readTagValue(html, pattern) {
@@ -129,7 +137,7 @@ async function run() {
     if (!page.canonical) {
       failures.push(`${route}: missing canonical link`)
     } else {
-      const expected = normalizeComparableUrl(new URL(route, BASE_URL).toString())
+      const expected = buildExpectedCanonical(route)
       const actual = normalizeComparableUrl(new URL(page.canonical, BASE_URL).toString())
       if (expected !== actual) {
         failures.push(`${route}: canonical mismatch (expected ${expected}, got ${actual})`)
