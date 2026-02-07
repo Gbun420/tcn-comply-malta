@@ -4,6 +4,7 @@ import { createAnonClient, requireEnvOrSkip } from './helpers/supabaseTestEnv.ts
 
 test('published_reviews_public_view never returns author_user_id or narrative_raw', async (t) => {
   const env = requireEnvOrSkip(t)
+  if (!env) return
   const supabase = createAnonClient(env)
 
   const { data, error } = await supabase.from('published_reviews_public_view').select('*').limit(5)
@@ -17,6 +18,7 @@ test('published_reviews_public_view never returns author_user_id or narrative_ra
 
 test('anon cannot select from reviews base table', async (t) => {
   const env = requireEnvOrSkip(t)
+  if (!env) return
   const supabase = createAnonClient(env)
   const { error } = await supabase.from('reviews').select('*').limit(1)
   assert.ok(error, 'expected error due to revoked privileges/RLS')

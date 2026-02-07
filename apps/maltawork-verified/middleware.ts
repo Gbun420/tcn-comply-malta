@@ -1,4 +1,4 @@
-import { NextResponse, type NextRequest } from 'next/server'
+import { NextResponse, type NextRequest } from 'next/server.js'
 import { createServerClient } from '@supabase/ssr'
 
 const PUBLIC_PREFIXES = ['/', '/jobs', '/employers', '/legal', '/dsa', '/transparency', '/auth']

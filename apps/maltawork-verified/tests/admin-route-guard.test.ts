@@ -5,7 +5,8 @@ import { middleware } from '../middleware.ts'
 import { requireEnvOrSkip } from './helpers/supabaseTestEnv.ts'
 
 test('non-authenticated user is redirected away from /admin', async (t) => {
-  requireEnvOrSkip(t)
+  const env = requireEnvOrSkip(t)
+  if (!env) return
 
   const req = new NextRequest('http://localhost:3001/admin')
   const res = await middleware(req)

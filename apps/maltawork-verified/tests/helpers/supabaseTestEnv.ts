@@ -1,4 +1,3 @@
-import assert from 'node:assert/strict'
 import { createClient } from '@supabase/supabase-js'
 
 export function getRequiredEnv() {
@@ -35,7 +34,7 @@ export function requireEnvOrSkip(t: { skip: (reason: string) => void }) {
     t.skip(
       'Missing SUPABASE env vars; start Supabase local and export NEXT_PUBLIC_SUPABASE_URL/NEXT_PUBLIC_SUPABASE_ANON_KEY/SUPABASE_SERVICE_ROLE_KEY.'
     )
+    return null
   }
-  assert(env)
   return env
 }

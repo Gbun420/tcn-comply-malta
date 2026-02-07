@@ -9,6 +9,7 @@ import {
 
 test('publishing a review creates statements_of_reasons and audit_log rows', async (t) => {
   const env = requireEnvOrSkip(t)
+  if (!env) return
   const service = createServiceClient(env)
   const anon = createAnonClient(env)
 
@@ -109,6 +110,7 @@ test('publishing a review creates statements_of_reasons and audit_log rows', asy
 
 test('employer role cannot select review_evidence for other users', async (t) => {
   const env = requireEnvOrSkip(t)
+  if (!env) return
   const service = createServiceClient(env)
   const anon = createAnonClient(env)
 
