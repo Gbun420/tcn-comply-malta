@@ -1,8 +1,11 @@
 'use client'
 
-import { useState } from 'react'
+import Image from 'next/image'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { AlertCircle, Lock, Mail } from 'lucide-react'
+import { AlertCircle, ArrowUpRight, Lock, Mail, ShieldCheck } from 'lucide-react'
+import { useState } from 'react'
+import { GlassCard } from '../../../components/ui/glass-card.js'
 import { SITE_CONTACT_EMAIL } from '../../../lib/site-content.js'
 
 export default function Login() {
@@ -12,7 +15,7 @@ export default function Login() {
   const [loading, setLoading] = useState(false)
   const router = useRouter()
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault()
     setLoading(true)
     setError('')
@@ -40,84 +43,101 @@ export default function Login() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-800 to-slate-900 px-4 py-12">
-      <div className="w-full max-w-md">
-        <div className="rounded-2xl bg-white p-8 shadow-xl">
-          <div className="mb-8 text-center">
-            <div className="mx-auto mb-4">
-              <img src="/logo.svg" alt="TCN Comply Malta Logo" className="mx-auto h-20 w-20" />
+    <div className="mx-auto grid max-w-5xl gap-6 px-4 pb-16 pt-8 sm:px-6 lg:px-8">
+      <GlassCard intense className="overflow-hidden">
+        <div className="grid lg:grid-cols-[0.92fr_1.08fr]">
+          <div className="border-b border-white/15 bg-white/6 p-6 lg:border-b-0 lg:border-r lg:p-8">
+            <div className="glass-chip">Secure Access</div>
+            <h1 className="mt-4 font-display text-3xl font-semibold text-white">Welcome back</h1>
+            <p className="mt-3 text-sm text-slate-200">
+              Sign in to manage employee compliance, renewals, and audit evidence in one glass
+              workspace.
+            </p>
+
+            <div className="mt-6 rounded-2xl border border-white/15 bg-white/8 p-4">
+              <div className="flex items-center gap-3">
+                <div className="relative h-10 w-10 overflow-hidden rounded-lg border border-white/20 bg-white/10">
+                  <Image src="/logo.svg" alt="TCN Comply Malta" fill sizes="40px" className="object-contain p-1.5" />
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-white">Employer Workspace</p>
+                  <p className="text-xs text-slate-200">Malta 2026 Compliance Console</p>
+                </div>
+              </div>
             </div>
-            <h2 className="text-3xl font-bold text-slate-900">Sign in to TCN Comply</h2>
-            <p className="mt-2 text-sm text-slate-600">
-              Enter your credentials to access the dashboard
+
+            <p className="mt-6 inline-flex items-center gap-2 text-xs text-cyan-100">
+              <ShieldCheck className="h-4 w-4" />
+              Signed JWT sessions with role-aware route protection
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {error && (
-              <div className="flex items-center rounded-lg border border-rose-200 bg-rose-50 p-4">
-                <AlertCircle className="mr-2 h-5 w-5 text-rose-500" />
-                <span className="text-sm text-rose-700">{error}</span>
-              </div>
-            )}
+          <div className="p-6 lg:p-8">
+            <form onSubmit={handleSubmit} className="space-y-4">
+              {error ? (
+                <div className="flex items-center gap-2 rounded-xl border border-rose-300/40 bg-rose-300/15 px-3 py-2 text-sm text-rose-100">
+                  <AlertCircle className="h-4 w-4" />
+                  {error}
+                </div>
+              ) : null}
 
-            <div>
-              <label htmlFor="email" className="sr-only">
-                Email address
+              <label className="block space-y-2 text-sm text-slate-100">
+                <span>Email</span>
+                <span className="relative block">
+                  <Mail className="pointer-events-none absolute left-3 top-3.5 h-4 w-4 text-slate-200" />
+                  <input
+                    id="email"
+                    type="email"
+                    autoComplete="email"
+                    required
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    className="input-field pl-10"
+                    placeholder="name@company.mt"
+                  />
+                </span>
               </label>
-              <div className="relative">
-                <Mail className="absolute left-3 top-3 h-5 w-5 text-slate-400" />
-                <input
-                  id="email"
-                  type="email"
-                  autoComplete="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="input-field pl-10"
-                  placeholder="Email address"
-                />
-              </div>
-            </div>
 
-            <div>
-              <label htmlFor="password" className="sr-only">
-                Password
+              <label className="block space-y-2 text-sm text-slate-100">
+                <span>Password</span>
+                <span className="relative block">
+                  <Lock className="pointer-events-none absolute left-3 top-3.5 h-4 w-4 text-slate-200" />
+                  <input
+                    id="password"
+                    type="password"
+                    autoComplete="current-password"
+                    required
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                    className="input-field pl-10"
+                    placeholder="••••••••"
+                  />
+                </span>
               </label>
-              <div className="relative">
-                <Lock className="absolute left-3 top-3 h-5 w-5 text-slate-400" />
-                <input
-                  id="password"
-                  type="password"
-                  autoComplete="current-password"
-                  required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="input-field pl-10"
-                  placeholder="Password"
-                />
-              </div>
-            </div>
 
-            <button type="submit" disabled={loading} className="btn-primary w-full px-4 py-3">
-              {loading ? 'Signing in...' : 'Sign in'}
-            </button>
+              <button type="submit" disabled={loading} className="cta-primary inline-flex w-full items-center justify-center gap-2 py-3">
+                {loading ? 'Signing in...' : 'Sign in'}
+                <ArrowUpRight className="h-4 w-4" />
+              </button>
+            </form>
 
-            <div className="text-center">
-              <p className="text-sm text-slate-600">
-                Need access? Contact{' '}
-                <a
-                  href={`mailto:${SITE_CONTACT_EMAIL}`}
-                  className="font-medium text-amber-600 hover:underline"
-                >
-                  {SITE_CONTACT_EMAIL}
-                </a>
-                .
-              </p>
-            </div>
-          </form>
+            <p className="mt-5 text-sm text-slate-200">
+              Need credentials?{' '}
+              <a href={`mailto:${SITE_CONTACT_EMAIL}`} className="font-semibold text-cyan-100 underline underline-offset-4">
+                Contact support
+              </a>
+              .
+            </p>
+            <p className="mt-2 text-sm text-slate-200">
+              New employer?{' '}
+              <Link href="/auth/register" className="font-semibold text-cyan-100 underline underline-offset-4">
+                Create an account
+              </Link>
+              .
+            </p>
+          </div>
         </div>
-      </div>
+      </GlassCard>
     </div>
   )
 }

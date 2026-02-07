@@ -1,40 +1,92 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { BookOpen, Shield, Users, Clock, AlertTriangle, CheckCircle, LogOut } from 'lucide-react'
+import {
+  AlertTriangle,
+  ArrowUpRight,
+  BookOpen,
+  CalendarClock,
+  CheckCircle2,
+  ShieldCheck,
+  Users,
+} from 'lucide-react'
+import { DashboardShell } from '../../components/dashboard/dashboard-shell.js'
+import { GlassCard } from '../../components/ui/glass-card.js'
+
+const statCards = [
+  { name: 'Total Employees', value: '24', change: '+12%', icon: Users },
+  { name: 'Courses Completed', value: '18', change: '+25%', icon: BookOpen },
+  { name: 'Pending Renewals', value: '3', change: '-2', icon: CalendarClock },
+  { name: 'Compliance Rate', value: '92%', change: '+5%', icon: CheckCircle2 },
+]
+
+const employeeRows = [
+  {
+    id: 'EMP001',
+    name: 'Maria Santos',
+    passport: 'PH1234567',
+    status: 'active',
+    course: 'Completed',
+    skillsPass: 'Not required',
+    renewal: '2024-12-15',
+  },
+  {
+    id: 'EMP002',
+    name: 'Ahmed Hassan',
+    passport: 'EG7654321',
+    status: 'pending',
+    course: 'In progress',
+    skillsPass: 'Pending',
+    renewal: '2025-01-20',
+  },
+  {
+    id: 'EMP003',
+    name: 'Keiko Tanaka',
+    passport: 'JP1122334',
+    status: 'overdue',
+    course: 'Not started',
+    skillsPass: 'Not required',
+    renewal: '2024-11-30',
+  },
+]
+
+const renewalAlerts = [
+  { employee: 'Keiko Tanaka', note: 'Renewal due in 15 days', variant: 'alert' },
+  { employee: 'Ahmed Hassan', note: 'Course completion overdue', variant: 'info' },
+]
+
+const complianceTips = [
+  { icon: CheckCircle2, copy: 'All vacancies posted for 3+ weeks as required' },
+  { icon: CheckCircle2, copy: 'Electronic salary payments verified' },
+  { icon: AlertTriangle, copy: 'Approaching workforce quota limit (85%)' },
+]
 
 export default function Dashboard() {
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
-  const [mounted, setMounted] = useState(false)
   const router = useRouter()
 
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  useEffect(() => {
-    if (mounted) {
-      fetchUser()
-    }
-  }, [mounted])
-
-  const fetchUser = async () => {
+  const fetchUser = useCallback(async () => {
     try {
       const response = await fetch('/api/auth/me')
-      if (response.ok) {
-        const data = await response.json()
-        setUser(data.user)
-      } else {
+      if (!response.ok) {
         router.push('/auth/login')
+        return
       }
-    } catch (error) {
+
+      const data = await response.json()
+      setUser(data.user)
+    } catch {
       router.push('/auth/login')
     } finally {
       setLoading(false)
     }
-  }
+  }, [router])
+
+  useEffect(() => {
+    fetchUser()
+  }, [fetchUser])
 
   const handleLogout = async () => {
     await fetch('/api/auth/logout', { method: 'POST' })
@@ -42,204 +94,144 @@ export default function Dashboard() {
     router.refresh()
   }
 
-  if (!mounted || loading) {
+  if (loading) {
     return (
-      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-500 mx-auto"></div>
-          <p className="mt-4 text-slate-600">Loading dashboard...</p>
-        </div>
+      <div className="mx-auto max-w-7xl px-4 pb-16 pt-12 text-center sm:px-6 lg:px-8">
+        <GlassCard className="inline-flex items-center gap-3 px-5 py-3 text-slate-100">
+          <span className="h-4 w-4 animate-spin rounded-full border-2 border-cyan-200 border-t-transparent" />
+          Loading dashboard...
+        </GlassCard>
       </div>
     )
   }
 
-  const stats = [
-    { name: 'Total Employees', value: '24', change: '+12%', icon: Users },
-    { name: 'Courses Completed', value: '18', change: '+25%', icon: BookOpen },
-    { name: 'Pending Renewals', value: '3', change: '-2', icon: Clock },
-    { name: 'Compliance Rate', value: '92%', change: '+5%', icon: CheckCircle },
-  ]
-
-  const employees = [
-    {
-      id: 'EMP001',
-      name: 'Maria Santos',
-      passport: 'PH1234567',
-      status: 'active',
-      course: 'Completed',
-      renewal: '2024-12-15',
-      skillsPass: 'Not Required',
-    },
-    {
-      id: 'EMP002',
-      name: 'Ahmed Hassan',
-      passport: 'EG7654321',
-      status: 'pending',
-      course: 'In Progress',
-      renewal: '2025-01-20',
-      skillsPass: 'Pending',
-    },
-    {
-      id: 'EMP003',
-      name: 'Keiko Tanaka',
-      passport: 'JP1122334',
-      status: 'overdue',
-      course: 'Not Started',
-      renewal: '2024-11-30',
-      skillsPass: 'Not Required',
-    },
-  ]
-
   return (
-    <div className="min-h-screen bg-slate-50">
-      <header className="bg-white shadow-sm border-b border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex justify-between items-center">
-            <a href="/" className="flex items-center space-x-3">
-              <img src="/logo.svg" alt="TCN Comply Malta Logo" className="w-12 h-12" />
-              <div>
-                <span className="text-xl font-bold text-slate-800">TCN Comply</span>
-                <span className="text-xl font-bold text-amber-500">Malta</span>
-              </div>
-            </a>
-            <div className="flex items-center space-x-4">
-              <span className="text-slate-600">{user?.email}</span>
-              <button
-                onClick={handleLogout}
-                className="flex items-center space-x-2 text-slate-600 hover:text-amber-600"
-              >
-                <LogOut className="w-5 h-5" />
-                <span>Logout</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </header>
-
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold text-slate-900">Dashboard</h1>
-          <p className="text-slate-600">
-            Welcome back, {user?.name}. Here&apos;s what&apos;s happening with your TCN compliance.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          {stats.map((stat, index) => (
-            <div key={index} className="bg-white rounded-xl shadow-sm border border-slate-100 p-6">
-              <div className="flex items-center justify-between">
+    <DashboardShell
+      title="Compliance overview"
+      subtitle={`Welcome back${user?.name ? `, ${user.name}` : ''}. Monitor your current policy posture and critical deadlines.`}
+      activePath="/dashboard"
+      userEmail={user?.email}
+      onLogout={handleLogout}
+      actions={
+        <button type="button" onClick={() => router.push('/dashboard/employees')} className="cta-primary inline-flex items-center gap-2">
+          Employee Console
+          <ArrowUpRight className="h-4 w-4" />
+        </button>
+      }
+    >
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {statCards.map(item => {
+          const Icon = item.icon
+          return (
+            <GlassCard key={item.name} className="p-5">
+              <div className="flex items-start justify-between">
                 <div>
-                  <p className="text-sm font-medium text-slate-600">{stat.name}</p>
-                  <p className="text-2xl font-bold text-slate-900 mt-1">{stat.value}</p>
+                  <p className="text-xs uppercase tracking-[0.14em] text-slate-300">{item.name}</p>
+                  <p className="mt-2 font-display text-3xl font-semibold text-white">{item.value}</p>
                 </div>
-                <div className="p-3 bg-amber-100 rounded-lg">
-                  <stat.icon className="w-6 h-6 text-amber-600" />
-                </div>
+                <span className="rounded-xl border border-white/20 bg-white/10 p-2.5">
+                  <Icon className="h-5 w-5 text-cyan-100" />
+                </span>
               </div>
-              <p className="text-sm text-emerald-600 font-medium mt-4">
-                {stat.change} from last period
-              </p>
-            </div>
-          ))}
+              <p className="mt-4 text-sm text-emerald-200">{item.change} from last month</p>
+            </GlassCard>
+          )
+        })}
+      </div>
+
+      <GlassCard className="overflow-hidden">
+        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/15 px-5 py-4">
+          <div>
+            <h2 className="font-display text-xl font-semibold text-white">Current Workforce Snapshot</h2>
+            <p className="text-sm text-slate-200">A quick look at the highest-priority employee records</p>
+          </div>
+          <span className="glass-chip">Live policy view</span>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden mb-8">
-          <div className="px-6 py-4 border-b border-slate-200">
-            <h2 className="text-lg font-semibold text-slate-900">TCN Employees</h2>
-            <p className="text-sm text-slate-600">
-              Manage your Third-Country National workforce compliance
-            </p>
-          </div>
-          <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-slate-200">
-              <thead className="bg-slate-50">
-                <tr>
-                  <th className="table-header">Employee</th>
-                  <th className="table-header">Status</th>
-                  <th className="table-header">Course</th>
-                  <th className="table-header">Skills Pass</th>
-                  <th className="table-header">Renewal</th>
+        <div className="overflow-x-auto">
+          <table className="w-full min-w-[720px]">
+            <thead className="border-b border-white/10">
+              <tr>
+                <th className="table-header">Employee</th>
+                <th className="table-header">Status</th>
+                <th className="table-header">Course</th>
+                <th className="table-header">Skills Pass</th>
+                <th className="table-header">Renewal</th>
+              </tr>
+            </thead>
+            <tbody>
+              {employeeRows.map(row => (
+                <tr key={row.id} className="border-b border-white/10 last:border-b-0">
+                  <td className="table-cell">
+                    <p className="font-medium text-white">{row.name}</p>
+                    <p className="text-xs text-slate-300">{row.passport}</p>
+                  </td>
+                  <td className="table-cell">
+                    <span
+                      className={`rounded-full border px-2.5 py-1 text-xs uppercase tracking-[0.08em] ${
+                        row.status === 'active'
+                          ? 'border-emerald-200/40 bg-emerald-200/20 text-emerald-100'
+                          : row.status === 'pending'
+                            ? 'border-amber-200/40 bg-amber-200/20 text-amber-100'
+                            : 'border-rose-200/40 bg-rose-200/20 text-rose-100'
+                      }`}
+                    >
+                      {row.status}
+                    </span>
+                  </td>
+                  <td className="table-cell">{row.course}</td>
+                  <td className="table-cell">{row.skillsPass}</td>
+                  <td className="table-cell">{row.renewal}</td>
                 </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-slate-200">
-                {employees.map((emp) => (
-                  <tr key={emp.id} className="hover:bg-slate-50">
-                    <td className="table-cell">
-                      <div className="flex items-center">
-                        <div className="h-10 w-10 bg-slate-100 rounded-full flex items-center justify-center">
-                          <Users className="w-5 h-5 text-slate-600" />
-                        </div>
-                        <div className="ml-4">
-                          <div className="text-sm font-medium text-slate-900">{emp.name}</div>
-                          <div className="text-sm text-slate-500">{emp.passport}</div>
-                        </div>
-                      </div>
-                    </td>
-                    <td className="table-cell">
-                      <span
-                        className={`inline-flex px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                          emp.status === 'active'
-                            ? 'bg-emerald-100 text-emerald-800'
-                            : emp.status === 'pending'
-                              ? 'bg-amber-100 text-amber-800'
-                              : 'bg-rose-100 text-rose-800'
-                        }`}
-                      >
-                        {emp.status.charAt(0).toUpperCase() + emp.status.slice(1)}
-                      </span>
-                    </td>
-                    <td className="table-cell text-slate-900">{emp.course}</td>
-                    <td className="table-cell text-slate-900">{emp.skillsPass}</td>
-                    <td className="table-cell text-slate-900">{emp.renewal}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+              ))}
+            </tbody>
+          </table>
         </div>
+      </GlassCard>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6">
-            <h3 className="text-lg font-semibold text-slate-900 mb-4">Upcoming Renewals</h3>
-            <div className="space-y-4">
-              <div className="flex items-center justify-between p-3 bg-amber-50 rounded-lg">
-                <div>
-                  <p className="font-medium text-slate-900">Keiko Tanaka</p>
-                  <p className="text-sm text-slate-600">Renewal due in 15 days</p>
-                </div>
-                <AlertTriangle className="w-5 h-5 text-amber-600" />
+      <div className="grid gap-4 lg:grid-cols-2">
+        <GlassCard className="p-5">
+          <h3 className="font-display text-xl font-semibold text-white">Renewal alerts</h3>
+          <div className="mt-4 space-y-3">
+            {renewalAlerts.map(alert => (
+              <div
+                key={alert.employee}
+                className={`rounded-xl border px-4 py-3 ${
+                  alert.variant === 'alert'
+                    ? 'border-amber-200/35 bg-amber-200/15 text-amber-50'
+                    : 'border-sky-200/35 bg-sky-200/15 text-sky-50'
+                }`}
+              >
+                <p className="font-medium">{alert.employee}</p>
+                <p className="text-sm opacity-90">{alert.note}</p>
               </div>
-              <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
-                <div>
-                  <p className="font-medium text-slate-900">Ahmed Hassan</p>
-                  <p className="text-sm text-slate-600">Course completion overdue</p>
-                </div>
-                <AlertTriangle className="w-5 h-5 text-blue-600" />
-              </div>
-            </div>
+            ))}
           </div>
+        </GlassCard>
 
-          <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6">
-            <h3 className="text-lg font-semibold text-slate-900 mb-4">Compliance Tips</h3>
-            <div className="space-y-3">
-              <div className="flex items-start">
-                <CheckCircle className="w-5 h-5 text-emerald-500 mt-0.5 mr-3" />
-                <p className="text-sm text-slate-700">
-                  All vacancies posted for 3+ weeks as required
+        <GlassCard className="p-5">
+          <h3 className="font-display text-xl font-semibold text-white">Compliance pulse</h3>
+          <div className="mt-4 space-y-3">
+            {complianceTips.map(item => {
+              const Icon = item.icon
+              return (
+                <p key={item.copy} className="flex items-start gap-2 text-sm text-slate-100">
+                  <Icon className="mt-0.5 h-4 w-4 flex-shrink-0 text-cyan-200" />
+                  {item.copy}
                 </p>
-              </div>
-              <div className="flex items-start">
-                <CheckCircle className="w-5 h-5 text-emerald-500 mt-0.5 mr-3" />
-                <p className="text-sm text-slate-700">Electronic salary payments verified</p>
-              </div>
-              <div className="flex items-start">
-                <AlertTriangle className="w-5 h-5 text-amber-500 mt-0.5 mr-3" />
-                <p className="text-sm text-slate-700">Approaching workforce quota limit (85%)</p>
-              </div>
-            </div>
+              )
+            })}
           </div>
-        </div>
-      </main>
-    </div>
+
+          <div className="mt-6 rounded-xl border border-white/15 bg-white/8 px-4 py-3 text-sm text-slate-200">
+            <span className="inline-flex items-center gap-2 font-semibold text-cyan-100">
+              <ShieldCheck className="h-4 w-4" />
+              Next recommended action
+            </span>
+            <p className="mt-2">Review two pending records before the next reporting cycle cutoff.</p>
+          </div>
+        </GlassCard>
+      </div>
+    </DashboardShell>
   )
 }

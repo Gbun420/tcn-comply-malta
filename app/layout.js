@@ -1,11 +1,27 @@
+import { Manrope, Space_Grotesk } from 'next/font/google'
 import './globals.css'
-import { Mail, Phone } from 'lucide-react'
+import { SiteFooter } from '../components/site/site-footer.js'
+import { SiteHeader } from '../components/site/site-header.js'
 import {
   SITE_CONTACT_EMAIL,
   SITE_CONTACT_PHONE,
   SITE_NAME,
   SITE_SUPPORT_TAGLINE,
 } from '../lib/site-content.js'
+
+const bodyFont = Manrope({
+  subsets: ['latin'],
+  variable: '--font-body',
+  display: 'swap',
+  weight: ['400', '500', '600', '700', '800'],
+})
+
+const displayFont = Space_Grotesk({
+  subsets: ['latin'],
+  variable: '--font-display',
+  display: 'swap',
+  weight: ['500', '600', '700'],
+})
 
 export const metadata = {
   title: `${SITE_NAME} - Automated TCN Compliance for Maltese Employers | 2026 Labour Migration Policy`,
@@ -87,97 +103,27 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
-        <link rel="canonical" href="https://tcn-comply-malta.vercel.app" />
       </head>
-      <body className="min-h-screen bg-slate-50">
-        <header className="border-b border-slate-200 bg-white shadow-sm">
-          <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-            <a href="/" className="flex items-center space-x-3">
-              <img src="/logo.svg" alt="TCN Comply Malta Logo" className="h-12 w-12" />
-              <div>
-                <span className="text-xl font-bold text-slate-800">TCN Comply</span>
-                <span className="text-xl font-bold text-amber-500">Malta</span>
-              </div>
-            </a>
+      <body className={`${bodyFont.variable} ${displayFont.variable}`}>
+        <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+          <span className="absolute -left-40 top-10 h-80 w-80 rounded-full bg-cyan-300/20 blur-[90px]" />
+          <span className="absolute right-0 top-1/3 h-96 w-96 rounded-full bg-emerald-300/20 blur-[110px]" />
+          <span className="absolute bottom-0 left-1/3 h-72 w-72 rounded-full bg-sky-400/25 blur-[100px]" />
+        </div>
 
-            <nav className="hidden space-x-8 md:flex">
-              <a href="#features" className="nav-link">
-                Features
-              </a>
-              <a href="#compliance" className="nav-link">
-                Compliance
-              </a>
-              <a href="#contact" className="nav-link">
-                Contact
-              </a>
-              <a href="/auth/login" className="btn-primary">
-                Login
-              </a>
-            </nav>
-
-            <span className="hidden text-sm text-slate-500 sm:inline">{SITE_SUPPORT_TAGLINE}</span>
-          </div>
-        </header>
-
-        <main>{children}</main>
-
-        <footer className="bg-slate-800 py-12 text-white">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="grid gap-8 md:grid-cols-3">
-              <div>
-                <div className="mb-4 flex items-center space-x-3">
-                  <img src="/logo.svg" alt="TCN Comply Malta Logo" className="h-10 w-10" />
-                  <span className="font-semibold">{SITE_NAME}</span>
-                </div>
-                <p className="text-sm text-slate-300">
-                  Navigate Malta&apos;s 2026 Labour Migration Policy with confidence.
-                </p>
-              </div>
-
-              <div>
-                <h3 className="mb-4 text-lg font-semibold">Contact</h3>
-                <div className="space-y-2 text-sm text-slate-300">
-                  <div className="flex items-center">
-                    <Mail className="mr-2 h-4 w-4" />
-                    <a href={`mailto:${SITE_CONTACT_EMAIL}`}>{SITE_CONTACT_EMAIL}</a>
-                  </div>
-                  <div className="flex items-center">
-                    <Phone className="mr-2 h-4 w-4" />
-                    <span>{SITE_CONTACT_PHONE}</span>
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <h3 className="mb-4 text-lg font-semibold">Compliance</h3>
-                <ul className="space-y-2 text-sm text-slate-300">
-                  <li>Malta 2026 Labour Migration Policy</li>
-                  <li>GDPR Compliant</li>
-                  <li>Jobsplus Integration</li>
-                </ul>
-              </div>
-            </div>
-
-            <div className="mt-8 border-t border-slate-700 pt-8 text-center text-sm text-slate-400">
-              <p>© 2026 {SITE_NAME}. All rights reserved.</p>
-              <p className="mt-2">
-                <a href="/privacy" className="hover:text-amber-400">
-                  Privacy Policy
-                </a>{' '}
-                •
-                <a href="/terms" className="ml-2 hover:text-amber-400">
-                  Terms of Service
-                </a>
-              </p>
-            </div>
-          </div>
-        </footer>
+        <div className="relative z-10 min-h-screen">
+          <SiteHeader supportTagline={SITE_SUPPORT_TAGLINE} />
+          <main>{children}</main>
+          <SiteFooter
+            siteName={SITE_NAME}
+            contactEmail={SITE_CONTACT_EMAIL}
+            contactPhone={SITE_CONTACT_PHONE}
+          />
+        </div>
       </body>
     </html>
   )

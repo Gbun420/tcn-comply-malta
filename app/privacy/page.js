@@ -1,3 +1,4 @@
+import { GlassCard } from '../../components/ui/glass-card.js'
 import { SITE_CONTACT_EMAIL, SITE_CONTACT_LOCATION, SITE_NAME } from '../../lib/site-content.js'
 
 export const metadata = {
@@ -5,145 +6,93 @@ export const metadata = {
   description: `Privacy policy for ${SITE_NAME} - Automated TCN compliance platform for Maltese employers.`,
 }
 
+const sections = [
+  {
+    title: '1. Introduction',
+    content: [
+      `${SITE_NAME} ("we", "our", or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard information while you use the platform.`,
+      `By using ${SITE_NAME}, you agree to the collection and use of information in accordance with this policy.`,
+    ],
+  },
+  {
+    title: '2. Information We Collect',
+    bullets: [
+      'Personal data such as names, contact details, and company information.',
+      'Operational compliance records related to workforce workflows.',
+      'Technical data including browser metadata and session security logs.',
+    ],
+  },
+  {
+    title: '3. How We Use Information',
+    bullets: [
+      'Deliver and improve compliance tracking services.',
+      'Authenticate users and secure access to the employer console.',
+      'Generate compliance summaries and audit-support exports.',
+      'Communicate account, policy, and support updates.',
+    ],
+  },
+  {
+    title: '4. Data Protection and GDPR',
+    content: [
+      `${SITE_NAME} is designed to support GDPR-aligned controls and secure operational data handling.`
+    ],
+    bullets: [
+      'Access, rectification, and portability rights for personal data.',
+      'Data minimization and access controls for compliance records.',
+      'Secure storage and transport protections for sensitive information.',
+    ],
+  },
+  {
+    title: '5. Retention and Security',
+    content: [
+      'Data is retained only as long as required for service delivery and regulatory obligations.',
+      'We apply encryption, access controls, and audit logging to protect customer data.',
+    ],
+  },
+]
+
 export default function PrivacyPage() {
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <h1 className="text-3xl font-bold text-gray-900 mb-8">Privacy Policy</h1>
+    <div className="mx-auto max-w-5xl space-y-6 px-4 pb-16 pt-8 sm:px-6 lg:px-8">
+      <GlassCard intense className="p-7 md:p-9">
+        <span className="glass-chip">Legal</span>
+        <h1 className="mt-4 font-display text-4xl font-semibold text-white">Privacy Policy</h1>
+        <p className="mt-2 text-sm text-slate-200">
+          Last updated: {new Date().toLocaleDateString('en-MT')}
+        </p>
+      </GlassCard>
 
-      <div className="prose prose-lg text-gray-600">
-        <p className="mb-6">Last updated: {new Date().toLocaleDateString('en-MT')}</p>
+      {sections.map(section => (
+        <GlassCard key={section.title} className="p-6 md:p-7">
+          <h2 className="font-display text-2xl font-semibold text-white">{section.title}</h2>
 
-        <section className="mb-8">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">1. Introduction</h2>
-          <p className="mb-4">
-            {SITE_NAME} (&quot;we&quot;, &quot;our&quot;, or &quot;us&quot;) is committed to
-            protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard
-            your information when you use our TCN compliance management platform.
-          </p>
-          <p>
-            By using {SITE_NAME}, you agree to the collection and use of information in accordance
-            with this policy.
-          </p>
-        </section>
-
-        <section className="mb-8">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">2. Information We Collect</h2>
-          <h3 className="text-lg font-medium text-gray-900 mb-2">Personal Information</h3>
-          <ul className="list-disc pl-6 mb-4 space-y-2">
-            <li>Name and contact information (email address)</li>
-            <li>Employer/organization details</li>
-            <li>TCN (Third-Country National) employee data</li>
-            <li>Compliance documentation and records</li>
-          </ul>
-          <h3 className="text-lg font-medium text-gray-900 mb-2">Technical Information</h3>
-          <ul className="list-disc pl-6 space-y-2">
-            <li>IP address and browser type</li>
-            <li>Usage data and analytics</li>
-            <li>Session cookies for authentication</li>
-          </ul>
-        </section>
-
-        <section className="mb-8">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">
-            3. How We Use Your Information
-          </h2>
-          <ul className="list-disc pl-6 space-y-2">
-            <li>Provide and maintain our TCN compliance services</li>
-            <li>Authenticate users and secure access to the platform</li>
-            <li>Track TCN employee compliance status</li>
-            <li>Generate compliance reports and documentation</li>
-            <li>Communicate with users about their accounts</li>
-            <li>Improve our services and user experience</li>
-          </ul>
-        </section>
-
-        <section className="mb-8">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">
-            4. Data Protection (GDPR Compliance)
-          </h2>
-          <p className="mb-4">
-            {SITE_NAME} is designed to comply with the General Data Protection Regulation (GDPR) and
-            Malta&apos;s Data Protection Act.
-          </p>
-          <h3 className="text-lg font-medium text-gray-900 mb-2">Your Rights</h3>
-          <ul className="list-disc pl-6 space-y-2">
-            <li>Right to access your personal data</li>
-            <li>Right to rectification of inaccurate data</li>
-            <li>Right to erasure (&quot;right to be forgotten&quot;)</li>
-            <li>Right to data portability</li>
-            <li>Right to restrict processing</li>
-            <li>Right to object to processing</li>
-          </ul>
-        </section>
-
-        <section className="mb-8">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">5. Data Security</h2>
-          <p className="mb-4">
-            We implement appropriate technical and organizational security measures to protect your
-            personal information against unauthorized access, alteration, disclosure, or
-            destruction.
-          </p>
-          <ul className="list-disc pl-6 space-y-2">
-            <li>Encryption of data in transit and at rest</li>
-            <li>HTTP-only cookies for session management</li>
-            <li>Secure authentication protocols</li>
-            <li>Regular security assessments</li>
-          </ul>
-        </section>
-
-        <section className="mb-8">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">6. Third-Party Services</h2>
-          <p className="mb-4">We use the following third-party services:</p>
-          <ul className="list-disc pl-6 space-y-2">
-            <li>
-              <strong>Vercel</strong> - Hosting and deployment (Germany/EU data centers)
-            </li>
-            <li>
-              <strong>Firebase</strong> - Authentication and database (GDPR compliant)
-            </li>
-          </ul>
-        </section>
-
-        <section className="mb-8">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">7. Cookies and Tracking</h2>
-          <p className="mb-4">We use essential cookies for:</p>
-          <ul className="list-disc pl-6 space-y-2">
-            <li>User authentication (session management)</li>
-            <li>Security and fraud prevention</li>
-            <li>Remembering your preferences</li>
-          </ul>
-        </section>
-
-        <section className="mb-8">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">8. Data Retention</h2>
-          <p className="mb-4">
-            We retain your personal data for as long as your account is active or as needed to
-            provide our services. After account termination, data is retained for legal compliance
-            purposes in accordance with Malta&apos;s immigration requirements.
-          </p>
-        </section>
-
-        <section className="mb-8">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">9. Contact Information</h2>
-          <p className="mb-4">For privacy-related inquiries or to exercise your rights:</p>
-          <div className="bg-gray-50 p-4 rounded-lg">
-            <p>
-              <strong>{SITE_NAME} Privacy Team</strong>
+          {section.content?.map(paragraph => (
+            <p key={paragraph} className="mt-3 text-sm leading-7 text-slate-100/95">
+              {paragraph}
             </p>
-            <p>Email: {SITE_CONTACT_EMAIL}</p>
-            <p>{SITE_CONTACT_LOCATION}</p>
-          </div>
-        </section>
+          ))}
 
-        <section className="mb-8">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">10. Changes to This Policy</h2>
-          <p>
-            We may update this Privacy Policy from time to time. We will notify you of any material
-            changes by posting the new Privacy Policy on this page and updating the &quot;Last
-            updated&quot; date.
-          </p>
-        </section>
-      </div>
+          {section.bullets ? (
+            <ul className="mt-4 space-y-2 text-sm text-slate-100/95">
+              {section.bullets.map(item => (
+                <li key={item} className="rounded-xl border border-white/12 bg-white/7 px-3 py-2">
+                  {item}
+                </li>
+              ))}
+            </ul>
+          ) : null}
+        </GlassCard>
+      ))}
+
+      <GlassCard className="p-6">
+        <h2 className="font-display text-2xl font-semibold text-white">Contact</h2>
+        <p className="mt-3 text-sm text-slate-100/95">For privacy-related inquiries:</p>
+        <p className="mt-2 text-sm text-slate-100">
+          <strong>{SITE_NAME} Privacy Team</strong>
+        </p>
+        <p className="text-sm text-slate-100">Email: {SITE_CONTACT_EMAIL}</p>
+        <p className="text-sm text-slate-100">Location: {SITE_CONTACT_LOCATION}</p>
+      </GlassCard>
     </div>
   )
 }

@@ -1,190 +1,211 @@
 'use client'
 
-import { useState } from 'react'
-import { Plus, Search, Download, Users } from 'lucide-react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { Download, Plus, Search, Users } from 'lucide-react'
+import { DashboardShell } from '../../../components/dashboard/dashboard-shell.js'
+import { GlassCard } from '../../../components/ui/glass-card.js'
+
+const employeeSeed = [
+  {
+    id: 'EMP001',
+    name: 'Maria Santos',
+    passport: 'PH1234567',
+    nationality: 'Philippines',
+    position: 'Hotel Receptionist',
+    status: 'active',
+    courseStatus: 'completed',
+    skillsPass: 'not_required',
+    permitExpiry: '2024-12-15',
+    salary: '€22,000',
+  },
+  {
+    id: 'EMP002',
+    name: 'Ahmed Hassan',
+    passport: 'EG7654321',
+    nationality: 'Egypt',
+    position: 'Chef',
+    status: 'pending',
+    courseStatus: 'in_progress',
+    skillsPass: 'pending',
+    permitExpiry: '2025-01-20',
+    salary: '€28,000',
+  },
+  {
+    id: 'EMP003',
+    name: 'Keiko Tanaka',
+    passport: 'JP1122334',
+    nationality: 'Japan',
+    position: 'IT Specialist',
+    status: 'overdue',
+    courseStatus: 'not_started',
+    skillsPass: 'not_required',
+    permitExpiry: '2024-11-30',
+    salary: '€35,000',
+  },
+]
 
 export default function EmployeesPage() {
-  const [employees] = useState([
-    {
-      id: 'EMP001',
-      name: 'Maria Santos',
-      passport: 'PH1234567',
-      nationality: 'Philippines',
-      position: 'Hotel Receptionist',
-      status: 'active',
-      courseStatus: 'completed',
-      skillsPass: 'not_required',
-      permitExpiry: '2024-12-15',
-      salary: '€22,000',
-    },
-    {
-      id: 'EMP002',
-      name: 'Ahmed Hassan',
-      passport: 'EG7654321',
-      nationality: 'Egypt',
-      position: 'Chef',
-      status: 'pending',
-      courseStatus: 'in_progress',
-      skillsPass: 'pending',
-      permitExpiry: '2025-01-20',
-      salary: '€28,000',
-    },
-    {
-      id: 'EMP003',
-      name: 'Keiko Tanaka',
-      passport: 'JP1122334',
-      nationality: 'Japan',
-      position: 'IT Specialist',
-      status: 'overdue',
-      courseStatus: 'not_started',
-      skillsPass: 'not_required',
-      permitExpiry: '2024-11-30',
-      salary: '€35,000',
-    },
-  ])
-
+  const [employees] = useState(employeeSeed)
   const [searchTerm, setSearchTerm] = useState('')
   const [filterStatus, setFilterStatus] = useState('all')
+  const [userEmail, setUserEmail] = useState('')
+  const router = useRouter()
 
-  const filteredEmployees = employees.filter((employee) => {
-    const matchesSearch =
-      employee.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      employee.passport.includes(searchTerm)
-    const matchesFilter = filterStatus === 'all' || employee.status === filterStatus
-    return matchesSearch && matchesFilter
-  })
+  const fetchUser = useCallback(async () => {
+    try {
+      const response = await fetch('/api/auth/me')
+      if (!response.ok) {
+        router.push('/auth/login')
+        return
+      }
 
-  const getStatusColor = (status) => {
+      const data = await response.json()
+      setUserEmail(data.user?.email || '')
+    } catch {
+      router.push('/auth/login')
+    }
+  }, [router])
+
+  useEffect(() => {
+    fetchUser()
+  }, [fetchUser])
+
+  const handleLogout = async () => {
+    await fetch('/api/auth/logout', { method: 'POST' })
+    router.push('/auth/login')
+    router.refresh()
+  }
+
+  const filteredEmployees = useMemo(() => {
+    return employees.filter(employee => {
+      const matchesSearch =
+        employee.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        employee.passport.toLowerCase().includes(searchTerm.toLowerCase())
+      const matchesFilter = filterStatus === 'all' || employee.status === filterStatus
+      return matchesSearch && matchesFilter
+    })
+  }, [employees, filterStatus, searchTerm])
+
+  const getStatusClass = status => {
     switch (status) {
       case 'active':
-        return 'bg-green-100 text-green-800'
+        return 'border-emerald-200/40 bg-emerald-200/20 text-emerald-100'
       case 'pending':
-        return 'bg-yellow-100 text-yellow-800'
+        return 'border-amber-200/40 bg-amber-200/20 text-amber-100'
       case 'overdue':
-        return 'bg-red-100 text-red-800'
+        return 'border-rose-200/40 bg-rose-200/20 text-rose-100'
       default:
-        return 'bg-gray-100 text-gray-800'
+        return 'border-white/30 bg-white/10 text-slate-100'
     }
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">TCN Employees</h1>
-        <p className="text-gray-600 mt-2">Manage your Third-Country National workforce</p>
-      </div>
-
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-6">
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-4 sm:space-y-0">
-          <div className="relative flex-1 max-w-md">
-            <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+    <DashboardShell
+      title="Employee records"
+      subtitle="Search, filter, and review workforce compliance attributes in a single interface."
+      activePath="/dashboard/employees"
+      userEmail={userEmail}
+      onLogout={handleLogout}
+      actions={
+        <button type="button" className="cta-primary inline-flex items-center gap-2">
+          <Plus className="h-4 w-4" />
+          Add Employee
+        </button>
+      }
+    >
+      <GlassCard className="p-5">
+        <div className="grid gap-3 md:grid-cols-[1fr_auto_auto] md:items-center">
+          <label className="relative block">
+            <Search className="pointer-events-none absolute left-3 top-3 h-4 w-4 text-slate-200" />
             <input
               type="text"
-              placeholder="Search employees..."
+              placeholder="Search by name or passport"
               value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 block w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500"
+              onChange={e => setSearchTerm(e.target.value)}
+              className="input-field pl-10"
             />
-          </div>
+          </label>
 
-          <div className="flex space-x-3">
-            <select
-              value={filterStatus}
-              onChange={(e) => setFilterStatus(e.target.value)}
-              className="border border-gray-300 rounded-lg px-3 py-2 text-sm"
-            >
-              <option value="all">All Status</option>
-              <option value="active">Active</option>
-              <option value="pending">Pending</option>
-              <option value="overdue">Overdue</option>
-            </select>
+          <select
+            value={filterStatus}
+            onChange={e => setFilterStatus(e.target.value)}
+            className="input-field max-w-[180px] bg-white/10"
+          >
+            <option value="all">All Statuses</option>
+            <option value="active">Active</option>
+            <option value="pending">Pending</option>
+            <option value="overdue">Overdue</option>
+          </select>
 
-            <button className="flex items-center px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
-              <Download className="w-4 h-4 mr-2" />
-              Export
-            </button>
-
-            <button className="flex items-center px-4 py-2 border border-transparent rounded-lg text-sm font-medium text-white bg-red-600 hover:bg-red-700">
-              <Plus className="w-4 h-4 mr-2" />
-              Add Employee
-            </button>
-          </div>
+          <button type="button" className="cta-ghost inline-flex items-center justify-center gap-2">
+            <Download className="h-4 w-4" />
+            Export
+          </button>
         </div>
-      </div>
+      </GlassCard>
 
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+      <GlassCard className="overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
+          <table className="w-full min-w-[860px]">
+            <thead className="border-b border-white/15">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                  Employee
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                  Position
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                  Status
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                  Course
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                  Permit Expiry
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                  Actions
-                </th>
+                <th className="table-header">Employee</th>
+                <th className="table-header">Position</th>
+                <th className="table-header">Status</th>
+                <th className="table-header">Course</th>
+                <th className="table-header">Skills Pass</th>
+                <th className="table-header">Permit Expiry</th>
+                <th className="table-header">Salary</th>
               </tr>
             </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {filteredEmployees.map((employee) => (
-                <tr key={employee.id} className="hover:bg-gray-50">
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="flex items-center">
-                      <div className="flex-shrink-0 h-10 w-10 bg-red-100 rounded-full flex items-center justify-center">
-                        <Users className="w-5 h-5 text-red-600" />
-                      </div>
-                      <div className="ml-4">
-                        <div className="text-sm font-medium text-gray-900">{employee.name}</div>
-                        <div className="text-sm text-gray-500">{employee.passport}</div>
-                      </div>
-                    </div>
+            <tbody>
+              {filteredEmployees.map(employee => (
+                <tr key={employee.id} className="border-b border-white/10 last:border-b-0">
+                  <td className="table-cell">
+                    <p className="font-medium text-white">{employee.name}</p>
+                    <p className="text-xs text-slate-300">{employee.passport}</p>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm text-gray-900">{employee.position}</div>
-                    <div className="text-sm text-gray-500">{employee.nationality}</div>
+                  <td className="table-cell">
+                    <p>{employee.position}</p>
+                    <p className="text-xs text-slate-300">{employee.nationality}</p>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <span
-                      className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(employee.status)}`}
-                    >
-                      {employee.status.charAt(0).toUpperCase() + employee.status.slice(1)}
+                  <td className="table-cell">
+                    <span className={`rounded-full border px-2.5 py-1 text-xs uppercase tracking-[0.08em] ${getStatusClass(employee.status)}`}>
+                      {employee.status}
                     </span>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 capitalize">
-                    {employee.courseStatus.replace('_', ' ')}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                    {employee.permitExpiry}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                    <button className="text-red-600 hover:text-red-900 mr-3">View</button>
-                    <button className="text-gray-600 hover:text-gray-900">Edit</button>
-                  </td>
+                  <td className="table-cell">{employee.courseStatus.replace('_', ' ')}</td>
+                  <td className="table-cell">{employee.skillsPass.replace('_', ' ')}</td>
+                  <td className="table-cell">{employee.permitExpiry}</td>
+                  <td className="table-cell">{employee.salary}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
 
-        {filteredEmployees.length === 0 && (
-          <div className="text-center py-12">
-            <div className="text-gray-400 mb-2">No employees found</div>
-            <div className="text-sm text-gray-500">Try adjusting your search or filters</div>
+        {filteredEmployees.length === 0 ? (
+          <div className="p-8 text-center text-sm text-slate-200">
+            No employees found. Try a different filter or search term.
           </div>
-        )}
+        ) : null}
+      </GlassCard>
+
+      <div className="grid gap-4 md:grid-cols-3">
+        <GlassCard className="p-4">
+          <p className="text-xs uppercase tracking-[0.13em] text-slate-300">Workforce Status Mix</p>
+          <p className="mt-2 font-display text-3xl text-white">62% Active</p>
+        </GlassCard>
+        <GlassCard className="p-4">
+          <p className="text-xs uppercase tracking-[0.13em] text-slate-300">Upcoming Renewals</p>
+          <p className="mt-2 font-display text-3xl text-white">3 in 30 days</p>
+        </GlassCard>
+        <GlassCard className="p-4">
+          <p className="text-xs uppercase tracking-[0.13em] text-slate-300">Skills Pass Pending</p>
+          <p className="mt-2 font-display text-3xl text-white">4 records</p>
+        </GlassCard>
       </div>
-    </div>
+    </DashboardShell>
   )
 }

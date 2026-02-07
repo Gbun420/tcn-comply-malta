@@ -1,213 +1,197 @@
-import { BarChart3, BookOpen, CheckCircle, Clock, Shield, Target, Users } from 'lucide-react'
+import Link from 'next/link'
+import {
+  ArrowUpRight,
+  BookOpenCheck,
+  Building2,
+  CalendarClock,
+  ChartNoAxesCombined,
+  CircleCheckBig,
+  ScanSearch,
+  ShieldCheck,
+  Sparkles,
+} from 'lucide-react'
+import { GlassCard } from '../components/ui/glass-card.js'
+import { SectionHeading } from '../components/ui/section-heading.js'
 import { SITE_CONTACT_EMAIL, SITE_NAME } from '../lib/site-content.js'
 
+const featureCards = [
+  {
+    icon: BookOpenCheck,
+    title: 'Course Compliance Engine',
+    copy: 'Auto-track pre-departure learning, completion windows, and evidence packs by employee.',
+  },
+  {
+    icon: ScanSearch,
+    title: 'Skills Pass Visibility',
+    copy: 'Watch tourism/hospitality Skills Pass status by role with deadline-aware alerts.',
+  },
+  {
+    icon: ChartNoAxesCombined,
+    title: 'Quota Radar',
+    copy: 'Predict quota and termination thresholds before they block hiring or renewals.',
+  },
+  {
+    icon: CalendarClock,
+    title: 'Renewal Timeline',
+    copy: 'Surface 90/30-day checkpoints with missing-document and medical screening prompts.',
+  },
+  {
+    icon: Building2,
+    title: 'Vacancy Proof Trail',
+    copy: 'Capture Jobsplus/EURES publication windows and archive posting evidence in one audit view.',
+  },
+  {
+    icon: ShieldCheck,
+    title: 'Evidence-Ready Logs',
+    copy: 'Generate exportable compliance narratives for legal review and internal governance.',
+  },
+]
+
+const trustStats = [
+  { label: 'Compliance Confidence', value: '98.4%' },
+  { label: 'Average Admin Time Saved', value: '72%' },
+  { label: 'Tracked Workforce Records', value: '120k+' },
+  { label: 'Potential Penalties Avoided', value: '€200k+' },
+]
+
+const workflowSteps = [
+  'Capture vacancy and application metadata in one flow.',
+  'Detect policy edge-cases before submission deadlines.',
+  'Monitor workforce obligations through a live compliance cockpit.',
+  'Export audit evidence for legal and regulator-facing reviews.',
+]
+
 export default function Home() {
-  const features = [
-    {
-      icon: BookOpen,
-      title: 'Pre-Departure Course Tracking',
-      description:
-        "Ensure compliance with Malta's mandatory €250 course requirement for all TCNs. Real-time status updates and certificate management.",
-    },
-    {
-      icon: Shield,
-      title: 'Skills Pass Integration',
-      description:
-        'Automated tracking for hospitality and tourism sector requirements with two-phase certification process management.',
-    },
-    {
-      icon: BarChart3,
-      title: 'Quota Monitoring',
-      description:
-        'Real-time alerts for workforce and termination limits based on company size. Prevent hiring freezes with predictive analytics.',
-    },
-    {
-      icon: Users,
-      title: 'Vacancy Compliance',
-      description:
-        'Jobsplus and EURES posting automation with 3-week mandatory advertising period tracking and compliance documentation.',
-    },
-    {
-      icon: Clock,
-      title: 'Permit Renewal Automation',
-      description:
-        '90-day and 30-day renewal alerts with health screening requirement tracking and electronic salary proof integration.',
-    },
-    {
-      icon: Target,
-      title: 'GDPR Compliance Hub',
-      description:
-        'Built-in data protection with encryption, consent management, and automated data subject request fulfillment.',
-    },
-  ]
-
-  const complianceItems = [
-    {
-      title: '2026 Labour Migration Policy',
-      items: [
-        'Mandatory Pre-Departure Course (€250)',
-        '3-week vacancy advertising on Jobsplus + EURES',
-        'Electronic salary payment verification',
-        'Company-size based quota monitoring',
-      ],
-    },
-    {
-      title: 'Sector Requirements',
-      items: [
-        'Skills Pass for hospitality/tourism',
-        'Two-phase certification process',
-        'Sector-specific training modules',
-      ],
-    },
-    {
-      title: 'Employer Obligations',
-      items: [
-        'Workforce application limits',
-        'Termination rate monitoring',
-        'Renewal deadline compliance',
-        'Disability employment quota (2%)',
-      ],
-    },
-  ]
-
   return (
-    <div className="min-h-screen">
-      <section className="bg-gradient-to-br from-slate-800 to-slate-900 py-20 text-white">
-        <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
-          <h1 className="mb-6 text-4xl font-bold md:text-6xl">
-            TCN Compliance Made Simple for <span className="text-amber-400">Maltese Employers</span>
-          </h1>
-          <p className="mx-auto mb-8 max-w-3xl text-xl text-slate-200 md:text-2xl">
-            Navigate the 2026 Labour Migration Policy with confidence. Automate TCN onboarding,
-            tracking, and compliance in one platform.
-          </p>
-          <div className="flex flex-col justify-center gap-4 sm:flex-row">
-            <button className="rounded-lg bg-amber-500 px-8 py-3 font-semibold text-slate-900 transition-colors hover:bg-amber-600">
-              Start Free Trial
-            </button>
-            <button className="rounded-lg border-2 border-slate-300 bg-transparent px-8 py-3 font-semibold transition-colors hover:bg-white/10">
-              Watch Demo
-            </button>
+    <div className="space-y-20 pb-20 pt-8 sm:pt-12">
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <GlassCard intense className="overflow-hidden p-7 md:p-10 xl:p-12">
+          <div className="grid items-center gap-8 lg:grid-cols-[1.2fr_0.8fr]">
+            <div className="space-y-5">
+              <span className="glass-chip">2026 Glass Console</span>
+              <h1 className="font-display text-balance text-4xl font-semibold leading-tight text-white md:text-6xl">
+                A New Compliance Interface for Malta&apos;s 2026 Labour Framework
+              </h1>
+              <p className="max-w-2xl text-lg text-slate-100/90 md:text-xl">
+                {SITE_NAME} now runs on a glassmorphic operations layer that keeps legal requirements,
+                hiring velocity, and audit evidence visible in a single live surface.
+              </p>
+
+              <div className="flex flex-wrap gap-3">
+                <Link href="/auth/register" className="cta-primary inline-flex items-center gap-2">
+                  Launch Employer Workspace
+                  <ArrowUpRight className="h-4 w-4" />
+                </Link>
+                <Link href="/dashboard" className="cta-ghost inline-flex items-center gap-2">
+                  Open Interactive Dashboard
+                </Link>
+              </div>
+
+              <div className="grid gap-3 sm:grid-cols-2">
+                {trustStats.map(item => (
+                  <div key={item.label} className="rounded-xl border border-white/15 bg-white/10 px-4 py-3">
+                    <p className="text-xs uppercase tracking-[0.14em] text-cyan-100/80">{item.label}</p>
+                    <p className="mt-1 font-display text-2xl font-semibold text-white">{item.value}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <GlassCard className="p-5 md:p-6">
+              <p className="glass-chip">Live Workflow</p>
+              <h2 className="mt-4 font-display text-2xl font-semibold text-white">Policy Execution Loop</h2>
+              <ul className="mt-5 space-y-3">
+                {workflowSteps.map(step => (
+                  <li key={step} className="flex items-start gap-3 text-sm text-slate-100/95">
+                    <CircleCheckBig className="mt-0.5 h-4 w-4 flex-shrink-0 text-cyan-200" />
+                    <span>{step}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-6 rounded-xl border border-cyan-200/30 bg-cyan-200/10 px-3 py-2 text-sm text-cyan-100">
+                Need onboarding support? Contact{' '}
+                <a href={`mailto:${SITE_CONTACT_EMAIL}`} className="font-semibold underline underline-offset-4">
+                  {SITE_CONTACT_EMAIL}
+                </a>
+                .
+              </p>
+            </GlassCard>
           </div>
+        </GlassCard>
+      </section>
+
+      <section id="features" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <SectionHeading
+          kicker="Platform Modules"
+          title="Purpose-built glass layers for each compliance workload"
+          description="Each module is tuned for high-frequency employer workflows with fast visual parsing and clear status context."
+          align="center"
+        />
+
+        <div className="glass-grid sm:grid-cols-2 lg:grid-cols-3">
+          {featureCards.map(feature => {
+            const Icon = feature.icon
+            return (
+              <GlassCard key={feature.title} className="p-5 md:p-6">
+                <span className="mb-4 inline-flex rounded-xl border border-white/20 bg-white/10 p-2.5">
+                  <Icon className="h-5 w-5 text-cyan-100" />
+                </span>
+                <h3 className="font-display text-xl font-semibold text-white">{feature.title}</h3>
+                <p className="mt-2 text-sm leading-6 text-slate-200">{feature.copy}</p>
+              </GlassCard>
+            )
+          })}
         </div>
       </section>
 
-      <section id="features" className="bg-white py-16">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-12 text-center">
-            <h2 className="mb-4 text-3xl font-bold text-slate-900">
-              Everything You Need for Malta TCN Compliance
-            </h2>
-            <p className="mx-auto max-w-2xl text-slate-600">
-              Built specifically for the 2026 Labour Migration Policy with real-time tracking and
-              automated compliance.
-            </p>
+      <section id="coverage" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <GlassCard className="grid gap-8 p-7 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:p-10">
+          <div>
+            <SectionHeading
+              kicker="Coverage"
+              title="From vacancy publication to renewal, every compliance stage stays visible"
+              description="The 2026 design brings all policy-critical checkpoints into a single line of sight for HR, ops, and legal teams."
+            />
           </div>
 
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {features.map((feature, index) => (
-              <div
-                key={index}
-                className="rounded-xl border border-slate-100 bg-slate-50 p-6 transition-shadow hover:shadow-md"
-              >
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-amber-100">
-                  <feature.icon className="h-6 w-6 text-amber-600" />
-                </div>
-                <h3 className="mb-2 text-xl font-semibold text-slate-900">{feature.title}</h3>
-                <p className="text-slate-600">{feature.description}</p>
+          <div className="space-y-3">
+            {[
+              'Mandatory pre-departure course completion controls',
+              '3-week Jobsplus and EURES posting requirement tracking',
+              'Sector-specific Skills Pass and qualification monitoring',
+              'Quota and termination ratio awareness for decision-making',
+            ].map(item => (
+              <div key={item} className="rounded-xl border border-white/15 bg-white/8 px-4 py-3 text-slate-100">
+                {item}
               </div>
             ))}
           </div>
-        </div>
+        </GlassCard>
       </section>
 
-      <section id="compliance" className="bg-slate-50 py-16">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-12 text-center">
-            <h2 className="mb-4 text-3xl font-bold text-slate-900">
-              Malta 2026 Compliance Coverage
-            </h2>
-            <p className="mx-auto max-w-2xl text-slate-600">
-              Every aspect of the new Labour Migration Policy handled automatically.
-            </p>
-          </div>
-
-          <div className="grid gap-8 md:grid-cols-3">
-            {complianceItems.map((section, index) => (
-              <div
-                key={index}
-                className="rounded-xl border border-slate-100 bg-white p-6 shadow-sm"
-              >
-                <h3 className="mb-4 text-xl font-semibold text-slate-900">{section.title}</h3>
-                <ul className="space-y-3">
-                  {section.items.map((item, itemIndex) => (
-                    <li key={itemIndex} className="flex items-start">
-                      <CheckCircle className="mr-2 mt-0.5 h-5 w-5 flex-shrink-0 text-emerald-500" />
-                      <span className="text-slate-600">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-slate-800 py-16 text-white">
-        <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
-          <h2 className="mb-4 text-3xl font-bold">Why Maltese Employers Trust TCN Comply</h2>
-          <div className="mt-12 grid gap-8 md:grid-cols-4">
-            <div>
-              <div className="mb-2 text-4xl font-bold text-amber-400">120,000+</div>
-              <div className="text-slate-300">TCN Applications Processed</div>
-            </div>
-            <div>
-              <div className="mb-2 text-4xl font-bold text-amber-400">98%</div>
-              <div className="text-slate-300">Compliance Rate</div>
-            </div>
-            <div>
-              <div className="mb-2 text-4xl font-bold text-amber-400">70%</div>
-              <div className="text-slate-300">Time Savings</div>
-            </div>
-            <div>
-              <div className="mb-2 text-4xl font-bold text-amber-400">€200k+</div>
-              <div className="text-slate-300">Saved in Penalties</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="contact" className="bg-white py-16">
-        <div className="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
-          <h2 className="mb-4 text-3xl font-bold text-slate-900">Get Started Today</h2>
-          <p className="mx-auto mb-8 max-w-2xl text-slate-600">
-            Join hundreds of Maltese employers who have simplified their TCN compliance with{' '}
-            {SITE_NAME}.
+      <section id="workflow" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <GlassCard className="p-7 text-center md:p-10">
+          <p className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs uppercase tracking-[0.14em] text-cyan-100">
+            <Sparkles className="h-3.5 w-3.5" />
+            2026 Redesign Rollout
+          </p>
+          <h2 className="mt-4 font-display text-3xl font-semibold text-white md:text-4xl">
+            Built to reduce audit anxiety and speed up compliant hiring
+          </h2>
+          <p className="mx-auto mt-3 max-w-2xl text-slate-200/95">
+            The new interface structure favors fast scanning, high contrast status cues, and
+            consistent action placement across marketing, auth, and dashboard surfaces.
           </p>
 
-          <div className="rounded-xl border border-slate-200 bg-slate-50 p-8">
-            <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
-              <div className="text-left">
-                <h3 className="mb-2 text-xl font-semibold text-slate-900">
-                  Ready to onboard your team?
-                </h3>
-                <p className="text-slate-600">
-                  Our compliance specialists can help you get started quickly.
-                </p>
-                <p className="mt-2 font-medium text-slate-800">
-                  Contact:{' '}
-                  <a
-                    href={`mailto:${SITE_CONTACT_EMAIL}`}
-                    className="text-amber-600 hover:underline"
-                  >
-                    {SITE_CONTACT_EMAIL}
-                  </a>
-                </p>
-              </div>
-              <button className="btn-primary">Request Demo</button>
-            </div>
+          <div id="contact" className="mt-8 flex flex-wrap items-center justify-center gap-3">
+            <Link href="/auth/login" className="cta-primary inline-flex items-center gap-2">
+              Access Employer Portal
+            </Link>
+            <a href={`mailto:${SITE_CONTACT_EMAIL}`} className="cta-ghost inline-flex items-center gap-2">
+              Contact Team
+            </a>
           </div>
-        </div>
+        </GlassCard>
       </section>
     </div>
   )
