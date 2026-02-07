@@ -1,11 +1,11 @@
 import Link from 'next/link'
 import {
   ArrowUpRight,
+  BarChart3,
   BookOpenCheck,
   Building2,
   CalendarClock,
-  ChartNoAxesCombined,
-  CircleCheckBig,
+  CheckCircle2,
   ScanSearch,
   ShieldCheck,
   Sparkles,
@@ -26,7 +26,7 @@ const featureCards = [
     copy: 'Watch tourism/hospitality Skills Pass status by role with deadline-aware alerts.',
   },
   {
-    icon: ChartNoAxesCombined,
+    icon: BarChart3,
     title: 'Quota Radar',
     copy: 'Predict quota and termination thresholds before they block hiring or renewals.',
   },
@@ -112,7 +112,7 @@ export default function Home() {
               <ul className="mt-5 space-y-3">
                 {workflowSteps.map((step) => (
                   <li key={step} className="flex items-start gap-3 text-sm text-slate-100/95">
-                    <CircleCheckBig className="mt-0.5 h-4 w-4 flex-shrink-0 text-cyan-200" />
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 flex-shrink-0 text-cyan-200" />
                     <span>{step}</span>
                   </li>
                 ))}
