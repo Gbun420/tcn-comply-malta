@@ -55,6 +55,45 @@ Audit artifacts are written to `docs/audits/`.
 npm run deploy
 ```
 
+## MaltaWork Verified (Local MVP)
+
+MaltaWork Verified is implemented as a separate nested app at `apps/maltawork-verified/` so it does not
+impact the existing product.
+
+### Run locally
+
+```bash
+cd apps/maltawork-verified
+npm i
+npm run db:start
+npm run db:reset
+# After `supabase status`, copy keys into `.env.local` (see `.env.example`)
+npm run seed
+npm run dev
+# Open http://localhost:3001
+```
+
+### Admin bootstrap
+
+```bash
+cd apps/maltawork-verified
+npm run make-admin -- user@example.com
+```
+
+### Evidence purge
+
+```bash
+cd apps/maltawork-verified
+npm run purge:evidence
+```
+
+### Tests
+
+```bash
+cd apps/maltawork-verified
+npm test
+```
+
 ## Compliance Disclaimer
 
 TCN Comply Malta is a compliance management platform, not a legal service. Employers should consult qualified legal counsel for specific legal advice regarding Malta's Labour Migration Policy.
