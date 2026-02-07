@@ -15,12 +15,12 @@ export default function SolutionsPage() {
       title="Client-ready compliance solutions for each stage of the TCN lifecycle"
       description="These modules define what employers and partner integrators can operationalize inside the portal, including evidence outputs for legal and audit teams."
       actions={[
-        <Link key="portal" href="/dashboard" className="cta-primary inline-flex items-center gap-2">
-          Open Portal Dashboard
+        <Link key="demo" href="/demo" className="cta-primary inline-flex items-center gap-2">
+          Book Demo
           <ArrowUpRight className="h-4 w-4" />
         </Link>,
-        <Link key="workflow" href="/workflow" className="cta-ghost inline-flex items-center gap-2">
-          View Workflow
+        <Link key="pricing" href="/pricing" className="cta-ghost inline-flex items-center gap-2">
+          View Pricing
         </Link>,
       ]}
     >
