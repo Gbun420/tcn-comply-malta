@@ -73,8 +73,8 @@ export default function Home() {
                 A New Compliance Interface for Malta&apos;s 2026 Labour Framework
               </h1>
               <p className="max-w-2xl text-lg text-slate-100/90 md:text-xl">
-                {SITE_NAME} now runs on a glassmorphic operations layer that keeps legal requirements,
-                hiring velocity, and audit evidence visible in a single live surface.
+                {SITE_NAME} now runs on a glassmorphic operations layer that keeps legal
+                requirements, hiring velocity, and audit evidence visible in a single live surface.
               </p>
 
               <div className="flex flex-wrap gap-3">
@@ -88,10 +88,17 @@ export default function Home() {
               </div>
 
               <div className="grid gap-3 sm:grid-cols-2">
-                {trustStats.map(item => (
-                  <div key={item.label} className="rounded-xl border border-white/15 bg-white/10 px-4 py-3">
-                    <p className="text-xs uppercase tracking-[0.14em] text-cyan-100/80">{item.label}</p>
-                    <p className="mt-1 font-display text-2xl font-semibold text-white">{item.value}</p>
+                {trustStats.map((item) => (
+                  <div
+                    key={item.label}
+                    className="rounded-xl border border-white/15 bg-white/10 px-4 py-3"
+                  >
+                    <p className="text-xs uppercase tracking-[0.14em] text-cyan-100/80">
+                      {item.label}
+                    </p>
+                    <p className="mt-1 font-display text-2xl font-semibold text-white">
+                      {item.value}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -99,9 +106,11 @@ export default function Home() {
 
             <GlassCard className="p-5 md:p-6">
               <p className="glass-chip">Live Workflow</p>
-              <h2 className="mt-4 font-display text-2xl font-semibold text-white">Policy Execution Loop</h2>
+              <h2 className="mt-4 font-display text-2xl font-semibold text-white">
+                Policy Execution Loop
+              </h2>
               <ul className="mt-5 space-y-3">
-                {workflowSteps.map(step => (
+                {workflowSteps.map((step) => (
                   <li key={step} className="flex items-start gap-3 text-sm text-slate-100/95">
                     <CircleCheckBig className="mt-0.5 h-4 w-4 flex-shrink-0 text-cyan-200" />
                     <span>{step}</span>
@@ -110,7 +119,10 @@ export default function Home() {
               </ul>
               <p className="mt-6 rounded-xl border border-cyan-200/30 bg-cyan-200/10 px-3 py-2 text-sm text-cyan-100">
                 Need onboarding support? Contact{' '}
-                <a href={`mailto:${SITE_CONTACT_EMAIL}`} className="font-semibold underline underline-offset-4">
+                <a
+                  href={`mailto:${SITE_CONTACT_EMAIL}`}
+                  className="font-semibold underline underline-offset-4"
+                >
                   {SITE_CONTACT_EMAIL}
                 </a>
                 .
@@ -129,7 +141,7 @@ export default function Home() {
         />
 
         <div className="glass-grid sm:grid-cols-2 lg:grid-cols-3">
-          {featureCards.map(feature => {
+          {featureCards.map((feature) => {
             const Icon = feature.icon
             return (
               <GlassCard key={feature.title} className="p-5 md:p-6">
@@ -160,8 +172,11 @@ export default function Home() {
               '3-week Jobsplus and EURES posting requirement tracking',
               'Sector-specific Skills Pass and qualification monitoring',
               'Quota and termination ratio awareness for decision-making',
-            ].map(item => (
-              <div key={item} className="rounded-xl border border-white/15 bg-white/8 px-4 py-3 text-slate-100">
+            ].map((item) => (
+              <div
+                key={item}
+                className="rounded-xl border border-white/15 bg-white/8 px-4 py-3 text-slate-100"
+              >
                 {item}
               </div>
             ))}
@@ -187,7 +202,10 @@ export default function Home() {
             <Link href="/auth/login" className="cta-primary inline-flex items-center gap-2">
               Access Employer Portal
             </Link>
-            <a href={`mailto:${SITE_CONTACT_EMAIL}`} className="cta-ghost inline-flex items-center gap-2">
+            <a
+              href={`mailto:${SITE_CONTACT_EMAIL}`}
+              className="cta-ghost inline-flex items-center gap-2"
+            >
               Contact Team
             </a>
           </div>

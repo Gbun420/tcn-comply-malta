@@ -78,7 +78,7 @@ export default function EmployeesPage() {
   }
 
   const filteredEmployees = useMemo(() => {
-    return employees.filter(employee => {
+    return employees.filter((employee) => {
       const matchesSearch =
         employee.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         employee.passport.toLowerCase().includes(searchTerm.toLowerCase())
@@ -87,7 +87,7 @@ export default function EmployeesPage() {
     })
   }, [employees, filterStatus, searchTerm])
 
-  const getStatusClass = status => {
+  const getStatusClass = (status) => {
     switch (status) {
       case 'active':
         return 'border-emerald-200/40 bg-emerald-200/20 text-emerald-100'
@@ -122,14 +122,14 @@ export default function EmployeesPage() {
               type="text"
               placeholder="Search by name or passport"
               value={searchTerm}
-              onChange={e => setSearchTerm(e.target.value)}
+              onChange={(e) => setSearchTerm(e.target.value)}
               className="input-field pl-10"
             />
           </label>
 
           <select
             value={filterStatus}
-            onChange={e => setFilterStatus(e.target.value)}
+            onChange={(e) => setFilterStatus(e.target.value)}
             className="input-field max-w-[180px] bg-white/10"
           >
             <option value="all">All Statuses</option>
@@ -160,7 +160,7 @@ export default function EmployeesPage() {
               </tr>
             </thead>
             <tbody>
-              {filteredEmployees.map(employee => (
+              {filteredEmployees.map((employee) => (
                 <tr key={employee.id} className="border-b border-white/10 last:border-b-0">
                   <td className="table-cell">
                     <p className="font-medium text-white">{employee.name}</p>
@@ -171,7 +171,9 @@ export default function EmployeesPage() {
                     <p className="text-xs text-slate-300">{employee.nationality}</p>
                   </td>
                   <td className="table-cell">
-                    <span className={`rounded-full border px-2.5 py-1 text-xs uppercase tracking-[0.08em] ${getStatusClass(employee.status)}`}>
+                    <span
+                      className={`rounded-full border px-2.5 py-1 text-xs uppercase tracking-[0.08em] ${getStatusClass(employee.status)}`}
+                    >
                       {employee.status}
                     </span>
                   </td>

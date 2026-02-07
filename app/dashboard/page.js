@@ -113,21 +113,27 @@ export default function Dashboard() {
       userEmail={user?.email}
       onLogout={handleLogout}
       actions={
-        <button type="button" onClick={() => router.push('/dashboard/employees')} className="cta-primary inline-flex items-center gap-2">
+        <button
+          type="button"
+          onClick={() => router.push('/dashboard/employees')}
+          className="cta-primary inline-flex items-center gap-2"
+        >
           Employee Console
           <ArrowUpRight className="h-4 w-4" />
         </button>
       }
     >
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {statCards.map(item => {
+        {statCards.map((item) => {
           const Icon = item.icon
           return (
             <GlassCard key={item.name} className="p-5">
               <div className="flex items-start justify-between">
                 <div>
                   <p className="text-xs uppercase tracking-[0.14em] text-slate-300">{item.name}</p>
-                  <p className="mt-2 font-display text-3xl font-semibold text-white">{item.value}</p>
+                  <p className="mt-2 font-display text-3xl font-semibold text-white">
+                    {item.value}
+                  </p>
                 </div>
                 <span className="rounded-xl border border-white/20 bg-white/10 p-2.5">
                   <Icon className="h-5 w-5 text-cyan-100" />
@@ -142,8 +148,12 @@ export default function Dashboard() {
       <GlassCard className="overflow-hidden">
         <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/15 px-5 py-4">
           <div>
-            <h2 className="font-display text-xl font-semibold text-white">Current Workforce Snapshot</h2>
-            <p className="text-sm text-slate-200">A quick look at the highest-priority employee records</p>
+            <h2 className="font-display text-xl font-semibold text-white">
+              Current Workforce Snapshot
+            </h2>
+            <p className="text-sm text-slate-200">
+              A quick look at the highest-priority employee records
+            </p>
           </div>
           <span className="glass-chip">Live policy view</span>
         </div>
@@ -160,7 +170,7 @@ export default function Dashboard() {
               </tr>
             </thead>
             <tbody>
-              {employeeRows.map(row => (
+              {employeeRows.map((row) => (
                 <tr key={row.id} className="border-b border-white/10 last:border-b-0">
                   <td className="table-cell">
                     <p className="font-medium text-white">{row.name}</p>
@@ -193,7 +203,7 @@ export default function Dashboard() {
         <GlassCard className="p-5">
           <h3 className="font-display text-xl font-semibold text-white">Renewal alerts</h3>
           <div className="mt-4 space-y-3">
-            {renewalAlerts.map(alert => (
+            {renewalAlerts.map((alert) => (
               <div
                 key={alert.employee}
                 className={`rounded-xl border px-4 py-3 ${
@@ -212,7 +222,7 @@ export default function Dashboard() {
         <GlassCard className="p-5">
           <h3 className="font-display text-xl font-semibold text-white">Compliance pulse</h3>
           <div className="mt-4 space-y-3">
-            {complianceTips.map(item => {
+            {complianceTips.map((item) => {
               const Icon = item.icon
               return (
                 <p key={item.copy} className="flex items-start gap-2 text-sm text-slate-100">
@@ -228,7 +238,9 @@ export default function Dashboard() {
               <ShieldCheck className="h-4 w-4" />
               Next recommended action
             </span>
-            <p className="mt-2">Review two pending records before the next reporting cycle cutoff.</p>
+            <p className="mt-2">
+              Review two pending records before the next reporting cycle cutoff.
+            </p>
           </div>
         </GlassCard>
       </div>

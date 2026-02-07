@@ -9,7 +9,15 @@ const navItems = [
   { href: '/dashboard/employees', label: 'Employees', icon: Users },
 ]
 
-export function DashboardShell({ title, subtitle, activePath, userEmail, onLogout, children, actions }) {
+export function DashboardShell({
+  title,
+  subtitle,
+  activePath,
+  userEmail,
+  onLogout,
+  children,
+  actions,
+}) {
   return (
     <div className="mx-auto max-w-7xl space-y-6 pb-14 pt-8">
       <GlassCard intense className="p-5 md:p-7">
@@ -17,11 +25,13 @@ export function DashboardShell({ title, subtitle, activePath, userEmail, onLogou
           <div className="space-y-3">
             <p className="glass-chip">Employer Console</p>
             <div>
-              <h1 className="font-display text-3xl font-semibold text-white md:text-4xl">{title}</h1>
+              <h1 className="font-display text-3xl font-semibold text-white md:text-4xl">
+                {title}
+              </h1>
               <p className="mt-2 text-slate-200/90">{subtitle}</p>
             </div>
             <div className="flex flex-wrap items-center gap-2">
-              {navItems.map(item => {
+              {navItems.map((item) => {
                 const Icon = item.icon
                 const isActive = activePath === item.href
                 return (
@@ -48,7 +58,11 @@ export function DashboardShell({ title, subtitle, activePath, userEmail, onLogou
             </p>
             <div className="flex items-center gap-3">
               {actions}
-              <button type="button" onClick={onLogout} className="cta-ghost inline-flex items-center gap-2">
+              <button
+                type="button"
+                onClick={onLogout}
+                className="cta-ghost inline-flex items-center gap-2"
+              >
                 <LogOut className="h-4 w-4" />
                 Logout
               </button>

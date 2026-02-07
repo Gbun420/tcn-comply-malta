@@ -16,7 +16,10 @@ export function SiteFooter({ siteName, contactEmail, contactPhone }) {
           <div>
             <p className="mb-3 text-xs uppercase tracking-[0.2em] text-cyan-200">Contact</p>
             <div className="space-y-2 text-sm text-slate-100">
-              <a href={`mailto:${contactEmail}`} className="inline-flex items-center gap-2 hover:text-cyan-200">
+              <a
+                href={`mailto:${contactEmail}`}
+                className="inline-flex items-center gap-2 hover:text-cyan-200"
+              >
                 <Mail className="h-4 w-4" />
                 {contactEmail}
               </a>

@@ -15,7 +15,7 @@ export default function Login() {
   const [loading, setLoading] = useState(false)
   const router = useRouter()
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)
     setError('')
@@ -57,7 +57,13 @@ export default function Login() {
             <div className="mt-6 rounded-2xl border border-white/15 bg-white/8 p-4">
               <div className="flex items-center gap-3">
                 <div className="relative h-10 w-10 overflow-hidden rounded-lg border border-white/20 bg-white/10">
-                  <Image src="/logo.svg" alt="TCN Comply Malta" fill sizes="40px" className="object-contain p-1.5" />
+                  <Image
+                    src="/logo.svg"
+                    alt="TCN Comply Malta"
+                    fill
+                    sizes="40px"
+                    className="object-contain p-1.5"
+                  />
                 </div>
                 <div>
                   <p className="text-sm font-semibold text-white">Employer Workspace</p>
@@ -91,7 +97,7 @@ export default function Login() {
                     autoComplete="email"
                     required
                     value={email}
-                    onChange={e => setEmail(e.target.value)}
+                    onChange={(e) => setEmail(e.target.value)}
                     className="input-field pl-10"
                     placeholder="name@company.mt"
                   />
@@ -108,14 +114,18 @@ export default function Login() {
                     autoComplete="current-password"
                     required
                     value={password}
-                    onChange={e => setPassword(e.target.value)}
+                    onChange={(e) => setPassword(e.target.value)}
                     className="input-field pl-10"
                     placeholder="••••••••"
                   />
                 </span>
               </label>
 
-              <button type="submit" disabled={loading} className="cta-primary inline-flex w-full items-center justify-center gap-2 py-3">
+              <button
+                type="submit"
+                disabled={loading}
+                className="cta-primary inline-flex w-full items-center justify-center gap-2 py-3"
+              >
                 {loading ? 'Signing in...' : 'Sign in'}
                 <ArrowUpRight className="h-4 w-4" />
               </button>
@@ -123,14 +133,20 @@ export default function Login() {
 
             <p className="mt-5 text-sm text-slate-200">
               Need credentials?{' '}
-              <a href={`mailto:${SITE_CONTACT_EMAIL}`} className="font-semibold text-cyan-100 underline underline-offset-4">
+              <a
+                href={`mailto:${SITE_CONTACT_EMAIL}`}
+                className="font-semibold text-cyan-100 underline underline-offset-4"
+              >
                 Contact support
               </a>
               .
             </p>
             <p className="mt-2 text-sm text-slate-200">
               New employer?{' '}
-              <Link href="/auth/register" className="font-semibold text-cyan-100 underline underline-offset-4">
+              <Link
+                href="/auth/register"
+                className="font-semibold text-cyan-100 underline underline-offset-4"
+              >
                 Create an account
               </Link>
               .

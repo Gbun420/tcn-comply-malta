@@ -34,7 +34,7 @@ const sections = [
   {
     title: '4. Data Protection and GDPR',
     content: [
-      `${SITE_NAME} is designed to support GDPR-aligned controls and secure operational data handling.`
+      `${SITE_NAME} is designed to support GDPR-aligned controls and secure operational data handling.`,
     ],
     bullets: [
       'Access, rectification, and portability rights for personal data.',
@@ -62,11 +62,11 @@ export default function PrivacyPage() {
         </p>
       </GlassCard>
 
-      {sections.map(section => (
+      {sections.map((section) => (
         <GlassCard key={section.title} className="p-6 md:p-7">
           <h2 className="font-display text-2xl font-semibold text-white">{section.title}</h2>
 
-          {section.content?.map(paragraph => (
+          {section.content?.map((paragraph) => (
             <p key={paragraph} className="mt-3 text-sm leading-7 text-slate-100/95">
               {paragraph}
             </p>
@@ -74,7 +74,7 @@ export default function PrivacyPage() {
 
           {section.bullets ? (
             <ul className="mt-4 space-y-2 text-sm text-slate-100/95">
-              {section.bullets.map(item => (
+              {section.bullets.map((item) => (
                 <li key={item} className="rounded-xl border border-white/12 bg-white/7 px-3 py-2">
                   {item}
                 </li>

@@ -1,10 +1,4 @@
-export function SectionHeading({
-  kicker,
-  title,
-  description,
-  align = 'left',
-  className = '',
-}) {
+export function SectionHeading({ kicker, title, description, align = 'left', className = '' }) {
   const alignment = align === 'center' ? 'text-center items-center' : 'text-left items-start'
 
   return (

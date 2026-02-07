@@ -19,11 +19,11 @@ export default function Register() {
   const [loading, setLoading] = useState(false)
   const router = useRouter()
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)
     setError('')
@@ -62,7 +62,9 @@ export default function Register() {
         <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
           <div className="space-y-5">
             <span className="glass-chip">New Employer Setup</span>
-            <h1 className="font-display text-3xl font-semibold text-white">Create your 2026 workspace</h1>
+            <h1 className="font-display text-3xl font-semibold text-white">
+              Create your 2026 workspace
+            </h1>
             <p className="text-sm text-slate-200">
               Register your company, assign your first admin account, and launch into the compliance
               cockpit immediately.
@@ -71,7 +73,13 @@ export default function Register() {
             <div className="rounded-2xl border border-white/15 bg-white/8 p-4">
               <div className="flex items-center gap-3">
                 <div className="relative h-11 w-11 overflow-hidden rounded-xl border border-white/20 bg-white/10 p-2">
-                  <Image src="/logo.svg" alt="TCN Comply Malta" fill sizes="44px" className="object-contain" />
+                  <Image
+                    src="/logo.svg"
+                    alt="TCN Comply Malta"
+                    fill
+                    sizes="44px"
+                    className="object-contain"
+                  />
                 </div>
                 <div>
                   <p className="text-sm font-semibold text-white">Fast onboarding</p>
@@ -82,7 +90,10 @@ export default function Register() {
 
             <p className="text-sm text-slate-200">
               Already onboarded?{' '}
-              <Link href="/auth/login" className="font-semibold text-cyan-100 underline underline-offset-4">
+              <Link
+                href="/auth/login"
+                className="font-semibold text-cyan-100 underline underline-offset-4"
+              >
                 Sign in here
               </Link>
               .
@@ -177,7 +188,11 @@ export default function Register() {
               </span>
             </label>
 
-            <button type="submit" disabled={loading} className="cta-primary inline-flex w-full items-center justify-center gap-2 py-3">
+            <button
+              type="submit"
+              disabled={loading}
+              className="cta-primary inline-flex w-full items-center justify-center gap-2 py-3"
+            >
               {loading ? 'Creating account...' : 'Create account'}
               <ArrowUpRight className="h-4 w-4" />
             </button>

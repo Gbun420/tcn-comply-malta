@@ -36,7 +36,7 @@ export default function TermsPage() {
         </p>
       </GlassCard>
 
-      {clauses.map(clause => (
+      {clauses.map((clause) => (
         <GlassCard key={clause.title} className="p-6 md:p-7">
           <h2 className="font-display text-2xl font-semibold text-white">{clause.title}</h2>
           <p className="mt-3 text-sm leading-7 text-slate-100/95">{clause.copy}</p>
@@ -47,7 +47,10 @@ export default function TermsPage() {
         <h2 className="font-display text-2xl font-semibold text-white">Contact</h2>
         <p className="mt-3 text-sm text-slate-100/95">
           For terms-related questions, contact{' '}
-          <a className="font-semibold text-cyan-100 underline underline-offset-4" href={`mailto:${SITE_CONTACT_EMAIL}`}>
+          <a
+            className="font-semibold text-cyan-100 underline underline-offset-4"
+            href={`mailto:${SITE_CONTACT_EMAIL}`}
+          >
             {SITE_CONTACT_EMAIL}
           </a>
           .
