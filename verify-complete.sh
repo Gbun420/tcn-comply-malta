@@ -1,8 +1,15 @@
 #!/bin/bash
 
-echo "🔍 Verifying Complete TCN Comply Malta Implementation"
+echo "🔍 Verifying TCN Comply Malta repository hygiene"
 
-required_files=("app/page.js" "app/layout.js" "app/dashboard/page.js" "package.json" "tailwind.config.js")
+required_files=(
+  "app/page.js"
+  "app/layout.js"
+  "app/dashboard/page.js"
+  "app/terms/page.js"
+  "package.json"
+  "tailwind.config.js"
+)
 missing_files=()
 
 for file in "${required_files[@]}"; do
@@ -12,31 +19,24 @@ for file in "${required_files[@]}"; do
 done
 
 if [ ${#missing_files[@]} -eq 0 ]; then
-    echo "✅ All required files present"
+  echo "✅ All required files present"
 else
-    echo "❌ Missing files: ${missing_files[*]}"
-    exit 1
+  echo "❌ Missing files: ${missing_files[*]}"
+  exit 1
 fi
 
-if grep -q "bundyglenn@gmail.com" app/layout.js app/page.js; then
-    echo "✅ Contact email correctly configured"
+if grep -q "bundyglenn@gmail.com" app/layout.js app/page.js app/auth/login/page.js README.md; then
+  echo "❌ Personal email still present"
+  exit 1
 else
-    echo "❌ Contact email not found in files"
+  echo "✅ Personal email removed from public-facing files"
 fi
 
-malta_terms=("2026 Labour Migration Policy" "Pre-Departure Course" "Skills Pass" "Jobsplus" "EURES")
-found_terms=0
-
-for term in "${malta_terms[@]}"; do
-  if grep -q "$term" app/page.js; then
-    ((found_terms++))
-  fi
-done
-
-if [ $found_terms -ge 3 ]; then
-    echo "✅ Malta compliance terms present (${found_terms}/5)"
+if grep -q "contact@tcncomply.mt" app/layout.js app/page.js README.md; then
+  echo "✅ Placeholder contact email configured"
 else
-    echo "⚠️  Some Malta compliance terms missing (${found_terms}/5)"
+  echo "❌ Placeholder contact email missing"
+  exit 1
 fi
 
-echo "✅ Verification complete - ready for deployment!"
+echo "✅ Verification complete"

@@ -12,7 +12,7 @@ export default function Login() {
   const [loading, setLoading] = useState(false)
   const router = useRouter()
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)
     setError('')
@@ -48,7 +48,9 @@ export default function Login() {
               <img src="/logo.svg" alt="TCN Comply Malta Logo" className="mx-auto h-20 w-20" />
             </div>
             <h2 className="text-3xl font-bold text-slate-900">Sign in to TCN Comply</h2>
-            <p className="mt-2 text-sm text-slate-600">Enter your credentials to access the dashboard</p>
+            <p className="mt-2 text-sm text-slate-600">
+              Enter your credentials to access the dashboard
+            </p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -71,7 +73,7 @@ export default function Login() {
                   autoComplete="email"
                   required
                   value={email}
-                  onChange={e => setEmail(e.target.value)}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="input-field pl-10"
                   placeholder="Email address"
                 />
@@ -90,7 +92,7 @@ export default function Login() {
                   autoComplete="current-password"
                   required
                   value={password}
-                  onChange={e => setPassword(e.target.value)}
+                  onChange={(e) => setPassword(e.target.value)}
                   className="input-field pl-10"
                   placeholder="Password"
                 />
@@ -104,7 +106,10 @@ export default function Login() {
             <div className="text-center">
               <p className="text-sm text-slate-600">
                 Need access? Contact{' '}
-                <a href={`mailto:${SITE_CONTACT_EMAIL}`} className="font-medium text-amber-600 hover:underline">
+                <a
+                  href={`mailto:${SITE_CONTACT_EMAIL}`}
+                  className="font-medium text-amber-600 hover:underline"
+                >
                   {SITE_CONTACT_EMAIL}
                 </a>
                 .

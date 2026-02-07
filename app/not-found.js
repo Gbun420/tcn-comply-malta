@@ -14,18 +14,18 @@ export default function NotFound() {
           <h1 className="text-6xl font-bold text-slate-800 mb-2">404</h1>
           <h2 className="text-xl font-semibold text-slate-600 mb-4">Page Not Found</h2>
           <p className="text-slate-500 mb-8">
-            Sorry, the page you're looking for doesn't exist or has been moved.
+            Sorry, the page you&apos;re looking for doesn&apos;t exist or has been moved.
           </p>
         </div>
-        
+
         <div className="space-y-4">
-          <Link 
+          <Link
             href="/"
             className="block w-full bg-slate-800 hover:bg-slate-900 text-white font-semibold py-3 px-4 rounded-lg transition-colors"
           >
             Go to Homepage
           </Link>
-          <Link 
+          <Link
             href="/auth/login"
             className="block w-full bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 font-semibold py-3 px-4 rounded-lg transition-colors"
           >
@@ -34,9 +34,7 @@ export default function NotFound() {
         </div>
 
         <div className="mt-12 p-4 bg-white rounded-lg border border-slate-100">
-          <p className="text-sm text-slate-500">
-            TCN Comply Malta - TCN Compliance Platform
-          </p>
+          <p className="text-sm text-slate-500">TCN Comply Malta - TCN Compliance Platform</p>
         </div>
       </div>
     </div>

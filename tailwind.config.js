@@ -13,7 +13,7 @@ export default {
         'compliance-green': '#00A859',
         'warning-amber': '#FF8C00',
         'red-light': '#F8D7DA',
-        'blue-light': '#CCE5FF', 
+        'blue-light': '#CCE5FF',
         'green-light': '#D4EDDA',
         'gray-900': '#2D3748',
         'gray-700': '#4A5568',

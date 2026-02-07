@@ -29,7 +29,7 @@ npx vercel --prod --yes
 if [ $? -eq 0 ]; then
     echo "✅ Complete deployment successful!"
     echo "🎉 TCN Comply Malta is now live with full features!"
-    echo "📧 Contact: bundyglenn@gmail.com"
+    echo "📧 Contact: contact@tcncomply.mt"
 else
     echo "❌ Deployment failed"
     exit 1

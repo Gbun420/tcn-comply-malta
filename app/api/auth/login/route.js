@@ -1,5 +1,8 @@
-import { NextResponse } from 'next/server'
-import { JWT_SECRET_PRODUCTION_ERROR, authenticateUser, generateToken } from '../../../../lib/auth.js'
+import {
+  JWT_SECRET_PRODUCTION_ERROR,
+  authenticateUser,
+  generateToken,
+} from '../../../../lib/auth.js'
 
 export const dynamic = 'force-dynamic'
 
@@ -37,27 +40,31 @@ export async function POST(request) {
     return Response.json({ error: 'Internal server error' }, { status: 500 })
   }
 
-  const response = NextResponse.json(
-    {
-      success: true,
-      user: {
-        uid: user.uid,
-        email: user.email,
-        name: user.name,
-        role: user.role,
-        company: user.company,
-      },
+  const responseData = {
+    success: true,
+    user: {
+      uid: user.uid,
+      email: user.email,
+      name: user.name,
+      role: user.role,
+      company: user.company,
     },
-    { status: 200 }
-  )
+  }
 
-  response.cookies.set('auth-token', token, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'lax',
-    maxAge: 7 * 24 * 60 * 60,
-    path: '/',
+  const secureFlag = process.env.NODE_ENV === 'production' ? '; Secure' : ''
+  const cookieHeader = [
+    `auth-token=${token}`,
+    'HttpOnly',
+    'Path=/',
+    `Max-Age=${7 * 24 * 60 * 60}`,
+    'SameSite=Lax',
+  ].join('; ')
+
+  return new Response(JSON.stringify(responseData), {
+    status: 200,
+    headers: {
+      'Content-Type': 'application/json',
+      'Set-Cookie': `${cookieHeader}${secureFlag}`,
+    },
   })
-
-  return response
 }

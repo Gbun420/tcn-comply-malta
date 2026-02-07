@@ -1,21 +1,18 @@
-# TCN Comply Malta - Development Version
+# TCN Comply Malta
 
-Navigate Malta's 2026 Labour Migration Policy with Confidence
+Navigate Malta's 2026 Labour Migration Policy with confidence.
 
-Development version for testing and iteration.
+## Contact
 
-## Contact Information
-
-- **Developer**: Glenn Bundy
-- **Email**: <bundyglenn@gmail.com>
-- **Domain**: Temporary Vercel deployment
+- Support: <contact@tcncomply.mt>
+- Website: temporary Vercel deployment
 
 ## Quick Start
 
 ### Prerequisites
 
 - Node.js 18+
-- npm or yarn
+- npm
 
 ### Installation
 
@@ -32,34 +29,21 @@ npm run dev
 # Open http://localhost:3000
 ```
 
-### Build for Development Deployment
+### Quality Checks
 
 ```bash
+npm run format:check
+npm run lint
+node --test tests/*.test.mjs
 npm run build
 ```
 
-### Deploy to Development Vercel
+### Deployment
 
 ```bash
 npm run deploy
 ```
 
-## Development Notes
-
-This is a development version using:
-
-- Vercel for hosting
-- <bundyglenn@gmail.com> for contact
-- Temporary domain until official launch
-
-## Project Structure
-
-Same as production but with development configurations.
-
-## Support
-
-For development questions, contact <bundyglenn@gmail.com>
-
 ## Compliance Disclaimer
 
-TCN Comply Malta is a compliance management platform, not a legal service. Employers should consult with qualified legal counsel for specific legal advice regarding Malta's Labour Migration Policy.
+TCN Comply Malta is a compliance management platform, not a legal service. Employers should consult qualified legal counsel for specific legal advice regarding Malta's Labour Migration Policy.

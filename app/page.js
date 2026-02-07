@@ -1,12 +1,4 @@
-import {
-  BarChart3,
-  BookOpen,
-  CheckCircle,
-  Clock,
-  Shield,
-  Target,
-  Users,
-} from 'lucide-react'
+import { BarChart3, BookOpen, CheckCircle, Clock, Shield, Target, Users } from 'lucide-react'
 import { SITE_CONTACT_EMAIL, SITE_NAME } from '../lib/site-content.js'
 
 export default function Home() {
@@ -83,8 +75,7 @@ export default function Home() {
       <section className="bg-gradient-to-br from-slate-800 to-slate-900 py-20 text-white">
         <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
           <h1 className="mb-6 text-4xl font-bold md:text-6xl">
-            TCN Compliance Made Simple for{' '}
-            <span className="text-amber-400">Maltese Employers</span>
+            TCN Compliance Made Simple for <span className="text-amber-400">Maltese Employers</span>
           </h1>
           <p className="mx-auto mb-8 max-w-3xl text-xl text-slate-200 md:text-2xl">
             Navigate the 2026 Labour Migration Policy with confidence. Automate TCN onboarding,
@@ -133,7 +124,9 @@ export default function Home() {
       <section id="compliance" className="bg-slate-50 py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-12 text-center">
-            <h2 className="mb-4 text-3xl font-bold text-slate-900">Malta 2026 Compliance Coverage</h2>
+            <h2 className="mb-4 text-3xl font-bold text-slate-900">
+              Malta 2026 Compliance Coverage
+            </h2>
             <p className="mx-auto max-w-2xl text-slate-600">
               Every aspect of the new Labour Migration Policy handled automatically.
             </p>
@@ -141,7 +134,10 @@ export default function Home() {
 
           <div className="grid gap-8 md:grid-cols-3">
             {complianceItems.map((section, index) => (
-              <div key={index} className="rounded-xl border border-slate-100 bg-white p-6 shadow-sm">
+              <div
+                key={index}
+                className="rounded-xl border border-slate-100 bg-white p-6 shadow-sm"
+              >
                 <h3 className="mb-4 text-xl font-semibold text-slate-900">{section.title}</h3>
                 <ul className="space-y-3">
                   {section.items.map((item, itemIndex) => (
@@ -185,17 +181,25 @@ export default function Home() {
         <div className="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
           <h2 className="mb-4 text-3xl font-bold text-slate-900">Get Started Today</h2>
           <p className="mx-auto mb-8 max-w-2xl text-slate-600">
-            Join hundreds of Maltese employers who have simplified their TCN compliance with {SITE_NAME}.
+            Join hundreds of Maltese employers who have simplified their TCN compliance with{' '}
+            {SITE_NAME}.
           </p>
 
           <div className="rounded-xl border border-slate-200 bg-slate-50 p-8">
             <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
               <div className="text-left">
-                <h3 className="mb-2 text-xl font-semibold text-slate-900">Ready to onboard your team?</h3>
-                <p className="text-slate-600">Our compliance specialists can help you get started quickly.</p>
+                <h3 className="mb-2 text-xl font-semibold text-slate-900">
+                  Ready to onboard your team?
+                </h3>
+                <p className="text-slate-600">
+                  Our compliance specialists can help you get started quickly.
+                </p>
                 <p className="mt-2 font-medium text-slate-800">
                   Contact:{' '}
-                  <a href={`mailto:${SITE_CONTACT_EMAIL}`} className="text-amber-600 hover:underline">
+                  <a
+                    href={`mailto:${SITE_CONTACT_EMAIL}`}
+                    className="text-amber-600 hover:underline"
+                  >
                     {SITE_CONTACT_EMAIL}
                   </a>
                 </p>

@@ -1,5 +1,5 @@
-const lighthouse = require('lighthouse');
-const chromeLauncher = require('chrome-launcher');
+const lighthouse = require('lighthouse')
+const chromeLauncher = require('chrome-launcher')
 
 const config = {
   extends: 'lighthouse:default',
@@ -17,7 +17,7 @@ const config = {
       deviceScaleFactor: 1,
     },
   },
-};
+}
 
 const categories = {
   performance: {
@@ -52,6 +52,6 @@ const categories = {
       { id: 'title', weight: 10 },
     ],
   },
-};
+}
 
-module.exports = { config, categories };
+module.exports = { config, categories }

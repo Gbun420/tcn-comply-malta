@@ -1,9 +1,11 @@
 # Code and Folder Cleanup Implementation Plan (2026-02-07)
 
 ## Summary
+
 Clean the repository structure and codebase in one pass by removing tracked clutter files, standardizing lint/format tooling, hardening auth behavior, deleting dead code, normalizing public-facing copy, and adding basic API smoke tests.
 
 ## Locked Decisions
+
 1. Scope: balanced cleanup.
 2. Demo auth: remove fallback now.
 3. Tooling: add ESLint + Prettier.
@@ -20,6 +22,7 @@ Clean the repository structure and codebase in one pass by removing tracked clut
 14. `components/DashboardNav.js`: delete.
 
 ## Public API / Interface Changes
+
 1. `POST /api/auth/login`: remove hardcoded demo credential fallback.
 2. `GET /api/auth/me`: require signature-valid JWT.
 3. `POST /api/employees`: require explicit route-level JWT verification.
@@ -29,6 +32,7 @@ Clean the repository structure and codebase in one pass by removing tracked clut
 7. Env contract: `JWT_SECRET` required in production, dev fallback allowed in non-production.
 
 ## Implementation Plan
+
 1. Baseline and plan artifact.
 2. Repository hygiene and folder cleanup.
 3. Audit artifact relocation and script standardization.
@@ -41,6 +45,7 @@ Clean the repository structure and codebase in one pass by removing tracked clut
 10. Final verification and commit sequence.
 
 ## Test Cases and Scenarios
+
 1. `npm run lint` runs without interactive setup.
 2. `npm run format:check` passes.
 3. `npm run build` passes.
@@ -55,6 +60,7 @@ Clean the repository structure and codebase in one pass by removing tracked clut
 12. Root folder no longer contains tracked clutter or root audit artifacts.
 
 ## Assumptions and Defaults
+
 1. Placeholder contact defaults: `contact@tcncomply.mt` and `+356 0000 0000`.
 2. No dependency pruning beyond lint/format tooling additions.
 3. API response shapes stay stable where practical.

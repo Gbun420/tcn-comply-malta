@@ -1,6 +1,7 @@
 # TCN Compliance Redesign - Design Plan (2026-02-06)
 
 ## Goals
+
 - Redesign marketing site, auth, and dashboard to match professional compliance brand.
 - Remove all public-facing dev/testing/disclaimer messaging.
 - Replace mock data with real Firestore-backed data only.
@@ -8,16 +9,19 @@
 - Improve information architecture, accessibility, and mobile responsiveness.
 
 ## Non-Goals
+
 - No deployment changes in this phase.
 - No deep integrations (Jobsplus, Identita, Skills Pass) beyond placeholders and data model readiness.
 
 ## Scope
+
 - Marketing site: homepage, footer, global header, privacy, and legal links.
 - Auth: login and register pages.
 - App: dashboard overview, employees, compliance tracking, reports, settings, support nav.
 - New API routes for live metrics and dashboard aggregation.
 
 ## Brand and Visual Direction
+
 - Colors:
   - Primary: #1a365d (professional blue)
   - Secondary: #2d8659 (trust green)
@@ -32,6 +36,7 @@
   - Remove all developer/test language from UI and metadata.
 
 ## IA and UX
+
 - Marketing header: Logo | Solutions | Resources | About | Support | Login | Free Trial
 - Homepage sections:
   - Hero with CTA
@@ -51,7 +56,9 @@
   - Otherwise show clean empty states with primary CTA
 
 ## Data Model (Firestore)
+
 Collections:
+
 - orgs: profile, quota limits, policy flags, contact info
 - applications: orgId, status, sector, createdAt, complianceStatus
 - employees: orgId, status, renewalDate, courseStatus, skillsPassStatus
@@ -62,6 +69,7 @@ Collections:
 All records include orgId and createdAt for aggregation and tenancy.
 
 ## Metrics Strategy (Hybrid)
+
 - Computed metrics from Firestore:
   - applicationsProcessed (count of applications)
   - complianceRate (compliant / total)
@@ -76,6 +84,7 @@ All records include orgId and createdAt for aggregation and tenancy.
   - Admin settings page allows updating admin-managed metrics
 
 ## API Routes
+
 - GET /api/metrics (public): aggregated metrics only
 - GET /api/dashboard (auth): stats + recent activity, scoped by orgId
 - GET /api/employees (auth): list by orgId
@@ -83,27 +92,32 @@ All records include orgId and createdAt for aggregation and tenancy.
 - POST routes for create flows (applications, employees, vacancies)
 
 ## Auth and Access
+
 - Firebase-only auth (remove demo credentials and fallback)
 - Middleware remains, but allow public access to GET /api/metrics
 - All non-metrics data behind auth; orgId required
 
 ## Error Handling
+
 - API returns: error, code, setupRequired when configuration missing
 - UI shows a single setup card for missing config
 - Inline error states for forms and actions
 
 ## Accessibility and Performance
+
 - WCAG 2.1 AA, keyboard-friendly forms
 - Mobile nav drawer, stacked cards on small screens
 - Lazy load non-critical sections
 - Limit animations to hero fade-in and section stagger
 
 ## Testing
+
 - Basic API tests for metrics and dashboard aggregation
 - Smoke checks for homepage and auth
 - Build and lint validation
 
 ## Risks and Mitigations
+
 - Firestore not configured: handled via setupRequired and empty states
 - Metrics credibility: computed when possible, admin managed otherwise
 - Data migration: no reliance on mock data

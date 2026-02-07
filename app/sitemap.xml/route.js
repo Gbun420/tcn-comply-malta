@@ -7,18 +7,23 @@ export async function GET() {
     { url: '/dashboard', changefreq: 'daily', priority: '0.9' },
     { url: '/dashboard/employees', changefreq: 'daily', priority: '0.8' },
     { url: '/privacy', changefreq: 'yearly', priority: '0.3' },
+    { url: '/terms', changefreq: 'yearly', priority: '0.3' },
   ]
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
-  ${pages.map(page => `
+  ${pages
+    .map(
+      (page) => `
     <url>
       <loc>${baseUrl}${page.url}</loc>
       <changefreq>${page.changefreq}</changefreq>
       <priority>${page.priority}</priority>
       <lastmod>${new Date().toISOString()}</lastmod>
     </url>
-  `).join('')}
+  `
+    )
+    .join('')}
 </urlset>`
 
   return new Response(sitemap, {

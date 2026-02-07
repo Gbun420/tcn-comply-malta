@@ -1,0 +1,96 @@
+import assert from 'node:assert/strict'
+import test from 'node:test'
+
+import { POST as loginPost } from '../app/api/auth/login/route.js'
+import { GET as meGet } from '../app/api/auth/me/route.js'
+import { generateToken } from '../lib/auth.js'
+
+process.env.NODE_ENV = 'test'
+process.env.JWT_SECRET = 'test-jwt-secret-1234567890'
+
+test('POST /api/auth/login returns 400 when credentials are missing', async () => {
+  const request = new Request('http://localhost/api/auth/login', {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({}),
+  })
+
+  const response = await loginPost(request)
+  const body = await response.json()
+
+  assert.equal(response.status, 400)
+  assert.equal(body.error, 'Email and password required')
+})
+
+test('POST /api/auth/login returns 401 for invalid credentials', async () => {
+  const request = new Request('http://localhost/api/auth/login', {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({
+      email: 'invalid@example.com',
+      password: 'wrong-password',
+    }),
+  })
+
+  const response = await loginPost(request)
+  const body = await response.json()
+
+  assert.equal(response.status, 401)
+  assert.equal(body.error, 'Invalid credentials')
+})
+
+test('GET /api/auth/me returns 401 without auth cookie', async () => {
+  const request = new Request('http://localhost/api/auth/me')
+
+  const response = await meGet(request)
+  const body = await response.json()
+
+  assert.equal(response.status, 401)
+  assert.equal(body.error, 'Unauthorized')
+})
+
+test('GET /api/auth/me returns 401 for tampered token', async () => {
+  const validToken = generateToken({
+    uid: 'user-1',
+    email: 'user@example.com',
+    role: 'employer',
+    company: 'Example Ltd',
+    name: 'User Example',
+  })
+
+  const request = new Request('http://localhost/api/auth/me', {
+    headers: {
+      cookie: `auth-token=${validToken}tampered`,
+    },
+  })
+
+  const response = await meGet(request)
+  const body = await response.json()
+
+  assert.equal(response.status, 401)
+  assert.equal(body.error, 'Invalid token')
+})
+
+test('GET /api/auth/me returns 200 with a valid signed token', async () => {
+  const token = generateToken({
+    uid: 'user-2',
+    email: 'valid@example.com',
+    role: 'employer',
+    company: 'Valid Co',
+    name: 'Valid User',
+  })
+
+  const request = new Request('http://localhost/api/auth/me', {
+    headers: {
+      cookie: `auth-token=${token}`,
+    },
+  })
+
+  const response = await meGet(request)
+  const body = await response.json()
+
+  assert.equal(response.status, 200)
+  assert.equal(body.user.email, 'valid@example.com')
+  assert.equal(body.user.role, 'employer')
+  assert.equal(body.user.name, 'Valid User')
+})

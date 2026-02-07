@@ -123,7 +123,7 @@ export async function GET(request) {
 
     const vacanciesRef = db.collection('vacancies')
     const snapshot = await vacanciesRef.get()
-    const vacancies = snapshot.docs.map(doc => doc.data())
+    const vacancies = snapshot.docs.map((doc) => doc.data())
 
     return Response.json({ vacancies })
   } catch {

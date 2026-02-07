@@ -13,6 +13,7 @@
 ### Task 1: Resolve JSX unescaped-entity lint failures
 
 **Files:**
+
 - Modify: `app/dashboard/page.js`
 - Modify: `app/layout.js`
 - Modify: `app/not-found.js`
@@ -71,6 +72,7 @@ git commit -m "fix: escape jsx entities and update footer contact"
 ### Task 2: Run automated tests
 
 **Files:**
+
 - Test: `tests/*.test.mjs`
 
 **Step 1: Run tests**
@@ -88,6 +90,7 @@ git commit -m "test: confirm portal and seo coverage"
 ### Task 3: Capture post-redesign Lighthouse audits
 
 **Files:**
+
 - Create: `docs/audits/2026-02-06-lighthouse-post.md`
 
 **Step 1: Run performance audits**
@@ -108,11 +111,13 @@ Create `docs/audits/2026-02-06-lighthouse-post.md` with summary and links, simil
 # Lighthouse Post-Redesign Audit (2026-02-06)
 
 ## Summary
+
 - `/`: Performance XX, Accessibility XX, Best Practices XX, SEO XX
 - `/auth/login`: Performance XX, Accessibility XX, Best Practices XX, SEO XX
 - `/dashboard`: Performance XX, Accessibility XX, Best Practices XX, SEO XX
 
 ## Notes
+
 - Keep `lighthouse-report-*.html` files for reference.
 ```
 

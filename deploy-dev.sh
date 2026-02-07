@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "🚀 Deploying TCN Comply Malta Development Version"
+echo "🚀 Deploying TCN Comply Malta"
 
 # Check prerequisites
 if ! command -v node &> /dev/null; then
@@ -37,7 +37,7 @@ npx vercel --prod --yes
 
 if [ $? -eq 0 ]; then
     echo "✅ Development deployment successful!"
-    echo "📧 Contact: bundyglenn@gmail.com"
+    echo "📧 Contact: contact@tcncomply.mt"
 else
     echo "❌ Deployment failed"
     exit 1

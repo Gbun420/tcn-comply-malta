@@ -40,7 +40,7 @@ export const metadata = {
   openGraph: {
     title: `${SITE_NAME} - Automated TCN Compliance Platform`,
     description:
-      'Navigate Malta\'s 2026 Labour Migration Policy with confidence. Automate TCN onboarding, tracking, and compliance.',
+      "Navigate Malta's 2026 Labour Migration Policy with confidence. Automate TCN onboarding, tracking, and compliance.",
     type: 'website',
     locale: 'en_MT',
     siteName: SITE_NAME,

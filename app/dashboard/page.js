@@ -61,9 +61,33 @@ export default function Dashboard() {
   ]
 
   const employees = [
-    { id: 'EMP001', name: 'Maria Santos', passport: 'PH1234567', status: 'active', course: 'Completed', renewal: '2024-12-15', skillsPass: 'Not Required' },
-    { id: 'EMP002', name: 'Ahmed Hassan', passport: 'EG7654321', status: 'pending', course: 'In Progress', renewal: '2025-01-20', skillsPass: 'Pending' },
-    { id: 'EMP003', name: 'Keiko Tanaka', passport: 'JP1122334', status: 'overdue', course: 'Not Started', renewal: '2024-11-30', skillsPass: 'Not Required' }
+    {
+      id: 'EMP001',
+      name: 'Maria Santos',
+      passport: 'PH1234567',
+      status: 'active',
+      course: 'Completed',
+      renewal: '2024-12-15',
+      skillsPass: 'Not Required',
+    },
+    {
+      id: 'EMP002',
+      name: 'Ahmed Hassan',
+      passport: 'EG7654321',
+      status: 'pending',
+      course: 'In Progress',
+      renewal: '2025-01-20',
+      skillsPass: 'Pending',
+    },
+    {
+      id: 'EMP003',
+      name: 'Keiko Tanaka',
+      passport: 'JP1122334',
+      status: 'overdue',
+      course: 'Not Started',
+      renewal: '2024-11-30',
+      skillsPass: 'Not Required',
+    },
   ]
 
   return (
@@ -95,7 +119,9 @@ export default function Dashboard() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
           <h1 className="text-2xl font-bold text-slate-900">Dashboard</h1>
-          <p className="text-slate-600">Welcome back, {user?.name}. Here's what's happening with your TCN compliance.</p>
+          <p className="text-slate-600">
+            Welcome back, {user?.name}. Here&apos;s what&apos;s happening with your TCN compliance.
+          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
@@ -110,7 +136,9 @@ export default function Dashboard() {
                   <stat.icon className="w-6 h-6 text-amber-600" />
                 </div>
               </div>
-              <p className="text-sm text-emerald-600 font-medium mt-4">{stat.change} from last period</p>
+              <p className="text-sm text-emerald-600 font-medium mt-4">
+                {stat.change} from last period
+              </p>
             </div>
           ))}
         </div>
@@ -118,7 +146,9 @@ export default function Dashboard() {
         <div className="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden mb-8">
           <div className="px-6 py-4 border-b border-slate-200">
             <h2 className="text-lg font-semibold text-slate-900">TCN Employees</h2>
-            <p className="text-sm text-slate-600">Manage your Third-Country National workforce compliance</p>
+            <p className="text-sm text-slate-600">
+              Manage your Third-Country National workforce compliance
+            </p>
           </div>
           <div className="overflow-x-auto">
             <table className="min-w-full divide-y divide-slate-200">
@@ -146,11 +176,15 @@ export default function Dashboard() {
                       </div>
                     </td>
                     <td className="table-cell">
-                      <span className={`inline-flex px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                        emp.status === 'active' ? 'bg-emerald-100 text-emerald-800' :
-                        emp.status === 'pending' ? 'bg-amber-100 text-amber-800' :
-                        'bg-rose-100 text-rose-800'
-                      }`}>
+                      <span
+                        className={`inline-flex px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                          emp.status === 'active'
+                            ? 'bg-emerald-100 text-emerald-800'
+                            : emp.status === 'pending'
+                              ? 'bg-amber-100 text-amber-800'
+                              : 'bg-rose-100 text-rose-800'
+                        }`}
+                      >
                         {emp.status.charAt(0).toUpperCase() + emp.status.slice(1)}
                       </span>
                     </td>
@@ -190,7 +224,9 @@ export default function Dashboard() {
             <div className="space-y-3">
               <div className="flex items-start">
                 <CheckCircle className="w-5 h-5 text-emerald-500 mt-0.5 mr-3" />
-                <p className="text-sm text-slate-700">All vacancies posted for 3+ weeks as required</p>
+                <p className="text-sm text-slate-700">
+                  All vacancies posted for 3+ weeks as required
+                </p>
               </div>
               <div className="flex items-start">
                 <CheckCircle className="w-5 h-5 text-emerald-500 mt-0.5 mr-3" />

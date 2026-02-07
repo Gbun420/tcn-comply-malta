@@ -10,7 +10,7 @@ export default function Register() {
     email: '',
     password: '',
     company: '',
-    confirmPassword: ''
+    confirmPassword: '',
   })
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
@@ -138,11 +138,7 @@ export default function Register() {
               />
             </div>
 
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full py-3 px-4 btn-primary"
-            >
+            <button type="submit" disabled={loading} className="w-full py-3 px-4 btn-primary">
               {loading ? 'Creating Account...' : 'Create Account'}
             </button>
 

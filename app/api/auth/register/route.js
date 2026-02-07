@@ -11,7 +11,7 @@ export async function POST(request) {
 
   try {
     const contentType = request.headers.get('content-type') || ''
-    
+
     if (contentType.includes('application/json')) {
       const bodyText = await request.text()
       if (bodyText) {
@@ -27,17 +27,11 @@ export async function POST(request) {
   }
 
   if (!name || !email || !password || !company) {
-    return NextResponse.json(
-      { error: 'All fields are required' },
-      { status: 400 }
-    )
+    return NextResponse.json({ error: 'All fields are required' }, { status: 400 })
   }
 
   if (password.length < 6) {
-    return NextResponse.json(
-      { error: 'Password must be at least 6 characters' },
-      { status: 400 }
-    )
+    return NextResponse.json({ error: 'Password must be at least 6 characters' }, { status: 400 })
   }
 
   let newUser = null
@@ -46,14 +40,11 @@ export async function POST(request) {
     newUser = await createUser({ name, email, password, company, role: 'employer' })
   } catch (createError) {
     console.error('Create user error:', createError)
-    
+
     if (createError.message === 'User already exists') {
-      return NextResponse.json(
-        { error: 'User with this email already exists' },
-        { status: 409 }
-      )
+      return NextResponse.json({ error: 'User with this email already exists' }, { status: 409 })
     }
-    
+
     return NextResponse.json(
       { error: 'Registration temporarily unavailable. Please try again later.' },
       { status: 503 }
@@ -66,10 +57,7 @@ export async function POST(request) {
     token = generateToken(newUser)
   } catch (error) {
     if (error?.message === JWT_SECRET_PRODUCTION_ERROR) {
-      return NextResponse.json(
-        { error: 'Authentication service unavailable' },
-        { status: 503 }
-      )
+      return NextResponse.json({ error: 'Authentication service unavailable' }, { status: 503 })
     }
 
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })

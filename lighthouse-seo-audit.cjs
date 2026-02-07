@@ -59,7 +59,7 @@ async function runSEOAudit(url) {
 
     if (criticalIssues.length > 0) {
       console.log('❌ CRITICAL SEO ISSUES:')
-      criticalIssues.forEach(issue => {
+      criticalIssues.forEach((issue) => {
         console.log(`\n${issue.title}: ${issue.score}/100`)
         console.log(`Description: ${issue.description}`)
       })
@@ -67,14 +67,14 @@ async function runSEOAudit(url) {
 
     if (warnings.length > 0) {
       console.log('\n⚠️  SEO WARNINGS:')
-      warnings.forEach(warning => {
+      warnings.forEach((warning) => {
         console.log(`${warning.title}: ${warning.score}/100`)
       })
     }
 
     if (passed.length > 0) {
       console.log('\n✅ PASSED SEO AUDITS:')
-      passed.forEach(pass => {
+      passed.forEach((pass) => {
         console.log(`${pass.title}: ${pass.score}/100`)
       })
     }
@@ -130,8 +130,8 @@ async function runAllSEOAudits() {
 }
 
 if (require.main === module) {
-  runAllSEOAudits().then(results => {
-    const validResults = results.filter(r => r.result && r.result.score !== null)
+  runAllSEOAudits().then((results) => {
+    const validResults = results.filter((r) => r.result && r.result.score !== null)
     const avgScore =
       validResults.reduce((sum, { result }) => sum + result.score, 0) / validResults.length
     console.log(`\n📈 AVERAGE SEO SCORE: ${Math.round(avgScore * 100)}/100`)
