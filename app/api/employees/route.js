@@ -1,12 +1,9 @@
-import { getFirestore } from 'firebase-admin/firestore'
-import { initializeApp, getApps, cert } from 'firebase-admin/app'
 import { applyCorsHeaders, preflightResponse } from '../../../lib/api-cors.js'
+import { getFirebaseAdminDb } from '../../../lib/firebase-admin.js'
 import { requireAuth } from '../../../lib/request-auth.js'
 
 export const dynamic = 'force-dynamic'
 const CORS_OPTIONS = { methods: 'GET,POST,OPTIONS' }
-
-let db = null
 
 function withCors(request, response) {
   return applyCorsHeaders(request, response, CORS_OPTIONS)
@@ -16,40 +13,13 @@ export function OPTIONS(request) {
   return preflightResponse(request, CORS_OPTIONS)
 }
 
-function getFirebaseAdmin() {
-  if (db) return db
-
-  if (!getApps().length) {
-    const projectId = process.env.FIREBASE_PROJECT_ID
-    const privateKey = process.env.FIREBASE_PRIVATE_KEY
-    const clientEmail = process.env.FIREBASE_CLIENT_EMAIL
-
-    if (!projectId || !privateKey || !clientEmail) {
-      return null
-    }
-
-    try {
-      initializeApp({
-        credential: cert({
-          projectId,
-          privateKey: privateKey.replace(/\\n/g, '\n'),
-          clientEmail,
-        }),
-      })
-    } catch (error) {
-      console.warn('Firebase admin initialization skipped:', error.message)
-      return null
-    }
-  }
-
+function getDbSafe() {
   try {
-    db = getFirestore()
+    return getFirebaseAdminDb()
   } catch (error) {
-    console.warn('Firestore get failed:', error.message)
+    console.warn('Firestore unavailable:', error?.message || error)
     return null
   }
-
-  return db
 }
 
 export async function POST(request) {
@@ -59,7 +29,7 @@ export async function POST(request) {
   }
 
   try {
-    const db = getFirebaseAdmin()
+    const db = getDbSafe()
     if (!db) {
       return withCors(request, Response.json({ error: 'Database not configured' }, { status: 503 }))
     }
@@ -138,9 +108,12 @@ export async function GET(request) {
   }
 
   try {
-    const db = getFirebaseAdmin()
+    const db = getDbSafe()
     if (!db) {
-      return withCors(request, Response.json({ employees: [] }))
+      return withCors(
+        request,
+        Response.json({ employees: [], error: 'Database not configured' }, { status: 503 })
+      )
     }
 
     const employeesRef = db.collection('employees')
@@ -149,6 +122,12 @@ export async function GET(request) {
 
     return withCors(request, Response.json({ employees }))
   } catch {
-    return withCors(request, Response.json({ error: 'Failed to fetch employees' }, { status: 500 }))
+    return withCors(
+      request,
+      Response.json(
+        { employees: [], error: 'Employee service temporarily unavailable' },
+        { status: 503 }
+      )
+    )
   }
 }
