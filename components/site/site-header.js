@@ -62,11 +62,14 @@ export function SiteHeader({ supportTagline }) {
               {supportTagline}
             </span>
             <Link
-              href="/contact?subject=Demo%20request"
+              href="/demo"
               className="cta-primary inline-flex items-center gap-2 text-sm"
             >
               Book Demo
               <ArrowUpRight className="h-4 w-4" />
+            </Link>
+            <Link href="/auth/login" className="cta-ghost hidden items-center gap-2 text-sm sm:inline-flex">
+              Portal
             </Link>
           </div>
         </div>

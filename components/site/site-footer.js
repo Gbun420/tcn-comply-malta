@@ -1,6 +1,10 @@
 import { Mail, Phone } from 'lucide-react'
 import Link from 'next/link'
-import { MARKETING_NAV_LINKS } from '../../lib/portal-content.js'
+import {
+  FOOTER_RESOURCE_LINKS,
+  FOOTER_TRUST_LINKS,
+  MARKETING_NAV_LINKS,
+} from '../../lib/portal-content.js'
 import { SITE_CONTACT_PHONE_HREF } from '../../lib/site-content.js'
 
 export function SiteFooter({ siteName, contactEmail, contactPhone }) {
@@ -9,7 +13,7 @@ export function SiteFooter({ siteName, contactEmail, contactPhone }) {
   return (
     <footer className="px-4 pb-10 pt-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl rounded-3xl border border-white/12 bg-slate-950/40 p-6 shadow-2xl backdrop-blur-xl md:p-8">
-        <div className="grid gap-8 md:grid-cols-4">
+        <div className="grid gap-8 md:grid-cols-5">
           <div>
             <p className="font-display text-xl font-semibold text-white">{siteName}</p>
             <p className="mt-2 max-w-xs text-sm text-slate-200">
@@ -20,7 +24,18 @@ export function SiteFooter({ siteName, contactEmail, contactPhone }) {
           <div>
             <p className="mb-3 text-xs uppercase tracking-[0.2em] text-teal-100">Explore</p>
             <div className="space-y-2 text-sm text-slate-100">
-              {MARKETING_NAV_LINKS.map((link) => (
+              {MARKETING_NAV_LINKS.slice(0, 4).map((link) => (
+                <Link key={link.href} href={link.href} className="block hover:text-teal-100">
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <p className="mb-3 text-xs uppercase tracking-[0.2em] text-teal-100">Resources</p>
+            <div className="space-y-2 text-sm text-slate-100">
+              {FOOTER_RESOURCE_LINKS.map((link) => (
                 <Link key={link.href} href={link.href} className="block hover:text-teal-100">
                   {link.label}
                 </Link>
@@ -57,8 +72,13 @@ export function SiteFooter({ siteName, contactEmail, contactPhone }) {
           </div>
 
           <div>
-            <p className="mb-3 text-xs uppercase tracking-[0.2em] text-teal-100">Legal</p>
+            <p className="mb-3 text-xs uppercase tracking-[0.2em] text-teal-100">Trust</p>
             <div className="space-y-2 text-sm text-slate-100">
+              {FOOTER_TRUST_LINKS.map((link) => (
+                <Link key={link.href} href={link.href} className="block hover:text-teal-100">
+                  {link.label}
+                </Link>
+              ))}
               <Link href="/privacy" className="block hover:text-teal-100">
                 Privacy Policy
               </Link>

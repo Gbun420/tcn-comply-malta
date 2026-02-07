@@ -1,24 +1,7 @@
 import { NextResponse } from 'next/server'
 import { applyCorsHeaders, preflightResponse } from './lib/api-cors.js'
 import { evaluateMiddlewareRequest } from './lib/middleware-policy.js'
-
-const PUBLIC_PATHS = new Set([
-  '/',
-  '/auth/login',
-  '/auth/register',
-  '/privacy',
-  '/terms',
-  '/audit-app',
-  '/solutions',
-  '/coverage',
-  '/workflow',
-  '/contact',
-  '/robots.txt',
-  '/sitemap.xml',
-  '/api/auth/login',
-  '/api/auth/register',
-  '/api/auth/logout',
-])
+import { PUBLIC_PATHS } from './lib/public-pages.js'
 
 export function proxy(request) {
   const method = request.method
