@@ -1,4 +1,4 @@
-import { Manrope, Space_Grotesk } from 'next/font/google'
+import { IBM_Plex_Sans, Outfit } from 'next/font/google'
 import './globals.css'
 import { SiteFooter } from '../components/site/site-footer.js'
 import { SiteHeader } from '../components/site/site-header.js'
@@ -11,14 +11,14 @@ import {
 import { BASE_KEYWORDS, OG_IMAGE_PATH } from '../lib/seo.js'
 import { siteUrl } from '../lib/site.js'
 
-const bodyFont = Manrope({
+const bodyFont = IBM_Plex_Sans({
   subsets: ['latin'],
   variable: '--font-body',
   display: 'swap',
-  weight: ['400', '500', '600', '700', '800'],
+  weight: ['400', '500', '600', '700'],
 })
 
-const displayFont = Space_Grotesk({
+const displayFont = Outfit({
   subsets: ['latin'],
   variable: '--font-display',
   display: 'swap',
@@ -33,7 +33,9 @@ export const metadata = {
   description:
     'Audit-ready compliance workspace for Maltese employers managing Third-Country Nationals under the 2026 Labour Migration Policy.',
   keywords: BASE_KEYWORDS.join(', '),
-  authors: SITE_CONTACT_EMAIL ? [{ name: SITE_NAME, email: SITE_CONTACT_EMAIL }] : [{ name: SITE_NAME }],
+  authors: SITE_CONTACT_EMAIL
+    ? [{ name: SITE_NAME, email: SITE_CONTACT_EMAIL }]
+    : [{ name: SITE_NAME }],
   creator: SITE_NAME,
   publisher: SITE_NAME,
   metadataBase: new URL(siteUrl),

@@ -95,11 +95,11 @@ export default function Home() {
 
               <div className="flex flex-wrap gap-3">
                 <Link href="/auth/register" className="cta-primary inline-flex items-center gap-2">
-                  Launch Employer Workspace
+                  Book a Demo
                   <ArrowUpRight className="h-4 w-4" />
                 </Link>
                 <Link href="/dashboard" className="cta-ghost inline-flex items-center gap-2">
-                  Open Interactive Dashboard
+                  Open Dashboard Preview
                 </Link>
                 <Link href="/audit-app" className="cta-ghost inline-flex items-center gap-2">
                   Audit App
@@ -205,7 +205,7 @@ export default function Home() {
             2026 Platform Release
           </p>
           <h2 className="mt-4 font-display text-3xl font-semibold text-white md:text-4xl">
-            Built to reduce audit anxiety and speed up compliant hiring
+            Built to simplify compliance operations and reduce filing risk
           </h2>
           <p className="section-copy mx-auto mt-3 max-w-2xl text-sm md:text-base">
             The portal structure includes dedicated operations, vacancy, and audit surfaces so

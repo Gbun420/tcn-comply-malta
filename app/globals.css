@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 :root {
-  --font-display: 'Space Grotesk', 'Avenir Next', sans-serif;
-  --font-body: 'Manrope', 'Segoe UI', sans-serif;
+  --font-display: 'Outfit', 'Avenir Next', sans-serif;
+  --font-body: 'IBM Plex Sans', 'Segoe UI', sans-serif;
   --bg-ink: #070d18;
   --bg-ocean: #0f182a;
   --bg-cyan: #2f8dc0;
