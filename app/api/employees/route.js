@@ -1,5 +1,6 @@
 import { getFirestore } from 'firebase-admin/firestore'
 import { initializeApp, getApps, cert } from 'firebase-admin/app'
+import { requireAuth } from '../../../lib/request-auth.js'
 
 export const dynamic = 'force-dynamic'
 
@@ -42,6 +43,11 @@ function getFirebaseAdmin() {
 }
 
 export async function POST(request) {
+  const { errorResponse } = requireAuth(request)
+  if (errorResponse) {
+    return errorResponse
+  }
+
   try {
     const db = getFirebaseAdmin()
     if (!db) {

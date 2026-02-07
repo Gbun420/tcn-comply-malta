@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { generateToken, createUser } from '../../../../lib/auth.js'
+import { JWT_SECRET_PRODUCTION_ERROR, createUser, generateToken } from '../../../../lib/auth.js'
 
 export const dynamic = 'force-dynamic'
 
@@ -60,7 +60,20 @@ export async function POST(request) {
     )
   }
 
-  const token = generateToken(newUser)
+  let token = null
+
+  try {
+    token = generateToken(newUser)
+  } catch (error) {
+    if (error?.message === JWT_SECRET_PRODUCTION_ERROR) {
+      return NextResponse.json(
+        { error: 'Authentication service unavailable' },
+        { status: 503 }
+      )
+    }
+
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+  }
 
   const response = NextResponse.json(
     {
