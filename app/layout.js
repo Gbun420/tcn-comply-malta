@@ -8,7 +8,8 @@ import {
   SITE_NAME,
   SITE_SUPPORT_TAGLINE,
 } from '../lib/site-content.js'
-import { BASE_KEYWORDS, OG_IMAGE_PATH, SITE_URL } from '../lib/seo.js'
+import { BASE_KEYWORDS, OG_IMAGE_PATH } from '../lib/seo.js'
+import { siteUrl } from '../lib/site.js'
 
 const bodyFont = Manrope({
   subsets: ['latin'],
@@ -25,21 +26,27 @@ const displayFont = Space_Grotesk({
 })
 
 export const metadata = {
-  title: `${SITE_NAME} | Employer TCN Compliance Platform`,
+  title: {
+    default: `${SITE_NAME} | Employer TCN Compliance Platform`,
+    template: `%s`,
+  },
   description:
     'Audit-ready compliance workspace for Maltese employers managing Third-Country Nationals under the 2026 Labour Migration Policy.',
   keywords: BASE_KEYWORDS.join(', '),
-  authors: [{ name: SITE_NAME, email: SITE_CONTACT_EMAIL }],
+  authors: SITE_CONTACT_EMAIL ? [{ name: SITE_NAME, email: SITE_CONTACT_EMAIL }] : [{ name: SITE_NAME }],
   creator: SITE_NAME,
   publisher: SITE_NAME,
-  metadataBase: new URL(SITE_URL),
+  metadataBase: new URL(siteUrl),
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
     title: `${SITE_NAME} | Employer TCN Compliance Platform`,
     description: 'Audit-ready compliance workspace for Maltese employers managing TCN obligations.',
     type: 'website',
     locale: 'en_MT',
     siteName: SITE_NAME,
-    url: SITE_URL,
+    url: siteUrl,
     images: [OG_IMAGE_PATH],
   },
   twitter: {
@@ -54,40 +61,11 @@ export const metadata = {
   },
 }
 
-const structuredData = {
-  '@context': 'https://schema.org',
-  '@type': 'SoftwareApplication',
-  name: SITE_NAME,
-  applicationCategory: 'BusinessApplication',
-  operatingSystem: 'Web',
-  description:
-    "TCN compliance platform for Maltese employers managing Third-Country Nationals under Malta's 2026 Labour Migration Policy",
-  url: SITE_URL,
-  author: {
-    '@type': 'Organization',
-    name: SITE_NAME,
-    url: SITE_URL,
-    address: {
-      '@type': 'PostalAddress',
-      addressCountry: 'MT',
-    },
-  },
-  offers: {
-    '@type': 'Offer',
-    price: '0',
-    priceCurrency: 'EUR',
-  },
-}
-
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-        />
       </head>
       <body className={`${bodyFont.variable} ${displayFont.variable}`}>
         <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
