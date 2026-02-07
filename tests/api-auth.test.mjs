@@ -22,7 +22,7 @@ test('POST /api/auth/login returns 400 when credentials are missing', async () =
   assert.equal(body.error, 'Email and password required')
 })
 
-test('POST /api/auth/login returns 401 for invalid credentials', async () => {
+test('POST /api/auth/login returns 503 when auth provider is not configured', async () => {
   const request = new Request('http://localhost/api/auth/login', {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
@@ -35,8 +35,8 @@ test('POST /api/auth/login returns 401 for invalid credentials', async () => {
   const response = await loginPost(request)
   const body = await response.json()
 
-  assert.equal(response.status, 401)
-  assert.equal(body.error, 'Invalid credentials')
+  assert.equal(response.status, 503)
+  assert.equal(body.error, 'Authentication provider is not configured. Please contact support.')
 })
 
 test('GET /api/auth/me returns 401 without auth cookie', async () => {

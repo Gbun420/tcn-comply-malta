@@ -2,6 +2,7 @@ import {
   JWT_SECRET_PRODUCTION_ERROR,
   authenticateUser,
   generateToken,
+  isFirebaseAuthConfigured,
 } from '../../../../lib/auth.js'
 
 export const dynamic = 'force-dynamic'
@@ -20,6 +21,13 @@ export async function POST(request) {
 
   if (!email || !password) {
     return Response.json({ error: 'Email and password required' }, { status: 400 })
+  }
+
+  if (!isFirebaseAuthConfigured()) {
+    return Response.json(
+      { error: 'Authentication provider is not configured. Please contact support.' },
+      { status: 503 }
+    )
   }
 
   const user = await authenticateUser(email, password)
