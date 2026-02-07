@@ -45,6 +45,30 @@ const employeeSeed = [
   },
 ]
 
+function normalizeEmployeeRecord(record) {
+  return {
+    id: record.id || `EMP-${Math.random().toString(36).slice(2, 8).toUpperCase()}`,
+    name: record.name || record.email || 'Employee',
+    passport: record.passport || record.passportNumber || 'Not provided',
+    nationality: record.nationality || 'Unknown',
+    position: record.position || 'Unassigned',
+    status: record.status || 'pending',
+    courseStatus:
+      record.courseStatus ||
+      record.certificates?.pre_departure?.status ||
+      (record.MaltaCompliance?.preDepartureCourseRequired ? 'in_progress' : 'not_required'),
+    skillsPass:
+      record.skillsPass ||
+      record.certificates?.skills_pass?.status ||
+      (record.MaltaCompliance?.skillsPassRequired ? 'pending' : 'not_required'),
+    permitExpiry: record.permitExpiry || 'Pending assignment',
+    salary:
+      record.salary && typeof record.salary === 'number'
+        ? `€${record.salary.toLocaleString('en-US')}`
+        : record.salary || 'n/a',
+  }
+}
+
 export default function EmployeesPage() {
   const [employees, setEmployees] = useState(employeeSeed)
   const [searchTerm, setSearchTerm] = useState('')
@@ -64,6 +88,36 @@ export default function EmployeesPage() {
   })
   const router = useRouter()
 
+  const fetchEmployees = useCallback(async () => {
+    try {
+      const response = await fetch('/api/employees')
+
+      if (response.status === 401) {
+        router.push('/auth/login')
+        return
+      }
+
+      if (!response.ok) {
+        setNotice('Unable to load employee records. Showing sample data.')
+        setEmployees(employeeSeed)
+        return
+      }
+
+      const data = await response.json()
+      const apiEmployees = Array.isArray(data.employees) ? data.employees : []
+
+      if (apiEmployees.length === 0) {
+        setEmployees(employeeSeed)
+        return
+      }
+
+      setEmployees(apiEmployees.map(normalizeEmployeeRecord))
+    } catch {
+      setNotice('Network error while loading records. Showing sample data.')
+      setEmployees(employeeSeed)
+    }
+  }, [router])
+
   const fetchUser = useCallback(async () => {
     try {
       const response = await fetch('/api/auth/me')
@@ -74,10 +128,11 @@ export default function EmployeesPage() {
 
       const data = await response.json()
       setUserEmail(data.user?.email || '')
+      fetchEmployees()
     } catch {
       router.push('/auth/login')
     }
-  }, [router])
+  }, [fetchEmployees, router])
 
   useEffect(() => {
     fetchUser()

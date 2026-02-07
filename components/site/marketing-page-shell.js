@@ -11,6 +11,7 @@ export function MarketingPageShell({ kicker, title, description, actions, childr
             title={title}
             description={description}
             className="mb-0"
+            level={1}
           />
           {actions ? <div className="mt-5 flex flex-wrap gap-3">{actions}</div> : null}
         </GlassCard>

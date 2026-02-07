@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 
-import { POST as employeesPost } from '../app/api/employees/route.js'
+import { GET as employeesGet, POST as employeesPost } from '../app/api/employees/route.js'
 import { GET as vacanciesGet, POST as vacanciesPost } from '../app/api/vacancies/route.js'
 
 process.env.NODE_ENV = 'test'
@@ -22,6 +22,16 @@ test('POST /api/employees returns 401 without auth token', async () => {
   })
 
   const response = await employeesPost(request)
+  const body = await response.json()
+
+  assert.equal(response.status, 401)
+  assert.equal(body.error, 'Unauthorized')
+})
+
+test('GET /api/employees returns 401 without auth token', async () => {
+  const request = new Request('http://localhost/api/employees')
+
+  const response = await employeesGet(request)
   const body = await response.json()
 
   assert.equal(response.status, 401)

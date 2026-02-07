@@ -117,3 +117,25 @@ export async function POST(request) {
     return Response.json({ error: 'Internal server error' }, { status: 500 })
   }
 }
+
+export async function GET(request) {
+  const { errorResponse } = requireAuth(request)
+  if (errorResponse) {
+    return errorResponse
+  }
+
+  try {
+    const db = getFirebaseAdmin()
+    if (!db) {
+      return Response.json({ employees: [] })
+    }
+
+    const employeesRef = db.collection('employees')
+    const snapshot = await employeesRef.get()
+    const employees = snapshot.docs.map((doc) => doc.data())
+
+    return Response.json({ employees })
+  } catch {
+    return Response.json({ error: 'Failed to fetch employees' }, { status: 500 })
+  }
+}
