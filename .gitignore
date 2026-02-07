@@ -45,3 +45,13 @@ next-env.d.ts
 node_modules
 .env*.local
 .aider*
+
+# Repository hygiene guards (accidental root clutter)
+/2/
+/Users/
+/Review
+/and
+/code
+/folder
+/improvements
+/suggest

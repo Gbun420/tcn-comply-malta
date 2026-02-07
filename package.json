@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "next lint --no-cache",
+    "lint:fix": "next lint --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "deploy": "npm run build && npx vercel --prod --yes",
     "lighthouse": "node lighthouse-test.cjs",
     "lighthouse:seo": "node lighthouse-seo-audit.cjs"
@@ -43,6 +46,8 @@
     "chrome-launcher": "^1.2.1",
     "eslint": "^8.0.0",
     "eslint-config-next": "14.0.0",
-    "lighthouse": "^13.0.1"
+    "eslint-config-prettier": "^10.1.8",
+    "lighthouse": "^13.0.1",
+    "prettier": "^3.6.2"
   }
 }
