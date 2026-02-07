@@ -55,3 +55,8 @@ node_modules
 /folder
 /improvements
 /suggest
+
+# Audit artifacts
+docs/audits/*.json
+docs/audits/*.html
+docs/audits/latest-audit-report.md

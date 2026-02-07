@@ -13,11 +13,14 @@
     "audit:api": "node scripts/audit/api-check.mjs",
     "audit:seo": "node scripts/audit/seo-check.mjs",
     "audit:content": "node scripts/audit/content-check.mjs",
-    "audit:full": "npm run audit:api && npm run audit:seo && npm run audit:content",
+    "audit:report": "node scripts/audit/generate-report.mjs",
+    "audit:full": "npm run audit:api && npm run audit:seo && npm run audit:content && npm run audit:report",
     "audit:prod": "npm run audit:full",
     "deploy": "npm run build && npx vercel --prod --yes",
     "lighthouse": "node lighthouse-test.cjs",
-    "lighthouse:seo": "node lighthouse-seo-audit.cjs"
+    "lighthouse:seo": "node lighthouse-seo-audit.cjs",
+    "test": "node --test tests/*.test.mjs",
+    "prepare": "husky"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.73.0",
@@ -53,6 +56,7 @@
     "eslint": "^8.0.0",
     "eslint-config-next": "14.0.0",
     "eslint-config-prettier": "^10.1.8",
+    "husky": "^9.1.7",
     "lighthouse": "^13.0.1",
     "prettier": "^3.6.2"
   }
