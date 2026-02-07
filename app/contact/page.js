@@ -16,12 +16,15 @@ export default function ContactPage() {
       description="Use these channels to scope implementation, align portal modules to your process, and confirm integration/security requirements with stakeholders."
       actions={[
         <Link
-          key="register"
-          href="/auth/register"
+          key="demo"
+          href="/demo"
           className="cta-primary inline-flex items-center gap-2"
         >
-          Start Client Onboarding
+          Book Demo
           <ArrowUpRight className="h-4 w-4" />
+        </Link>,
+        <Link key="pricing" href="/pricing" className="cta-ghost inline-flex items-center gap-2">
+          View Pricing
         </Link>,
       ]}
     >
