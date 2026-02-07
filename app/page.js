@@ -13,6 +13,8 @@ import {
 import { GlassCard } from '../components/ui/glass-card.js'
 import { SectionHeading } from '../components/ui/section-heading.js'
 import { PORTAL_OFFERINGS } from '../lib/portal-content.js'
+import { buildPageMetadata } from '../lib/seo.js'
+import { EVIDENCE_SIGNALS, HOME_COPY, PUBLIC_PAGE_COPY } from '../lib/site-copy.js'
 import { SITE_CONTACT_EMAIL, SITE_NAME } from '../lib/site-content.js'
 
 const featureCards = [
@@ -48,12 +50,7 @@ const featureCards = [
   },
 ]
 
-const trustStats = [
-  { label: 'Compliance Confidence', value: '98.4%' },
-  { label: 'Average Admin Time Saved', value: '72%' },
-  { label: 'Tracked Workforce Records', value: '120k+' },
-  { label: 'Potential Penalties Avoided', value: '€200k+' },
-]
+export const metadata = buildPageMetadata(PUBLIC_PAGE_COPY.home)
 
 const quickPageCards = [
   {
@@ -90,14 +87,11 @@ export default function Home() {
         <GlassCard intense className="overflow-hidden p-7 md:p-10 xl:p-12">
           <div className="grid items-center gap-8 lg:grid-cols-[1.2fr_0.8fr]">
             <div className="space-y-5">
-              <span className="glass-chip">2026 Glass Console</span>
+              <span className="glass-chip">{HOME_COPY.kicker}</span>
               <h1 className="font-display text-balance text-4xl font-semibold leading-tight text-white md:text-6xl">
-                Portal and Dashboard Operations for Malta&apos;s 2026 Compliance Model
+                {HOME_COPY.title}
               </h1>
-              <p className="max-w-2xl text-lg text-slate-100/90 md:text-xl">
-                {SITE_NAME} provides a client-ready workspace where policy controls, workflow
-                execution, and audit evidence stay visible in one operating layer.
-              </p>
+              <p className="lead-copy text-lg md:text-xl">{HOME_COPY.description}</p>
 
               <div className="flex flex-wrap gap-3">
                 <Link href="/auth/register" className="cta-primary inline-flex items-center gap-2">
@@ -113,7 +107,7 @@ export default function Home() {
               </div>
 
               <div className="grid gap-3 sm:grid-cols-2">
-                {trustStats.map((item) => (
+                {EVIDENCE_SIGNALS.map((item) => (
                   <div
                     key={item.label}
                     className="rounded-xl border border-white/15 bg-white/10 px-4 py-3"
@@ -121,9 +115,7 @@ export default function Home() {
                     <p className="text-xs uppercase tracking-[0.14em] text-cyan-100/80">
                       {item.label}
                     </p>
-                    <p className="mt-1 font-display text-2xl font-semibold text-white">
-                      {item.value}
-                    </p>
+                    <p className="mt-1 text-sm font-semibold leading-6 text-white">{item.value}</p>
                   </div>
                 ))}
               </div>
@@ -186,7 +178,7 @@ export default function Home() {
         <SectionHeading
           kicker="Platform Modules"
           title="Purpose-built glass layers for each compliance workload"
-          description="Each module is tuned for high-frequency employer workflows with fast visual parsing and clear status context."
+          description="Each module is tuned for high-frequency employer workflows with fast visual parsing, policy context, and evidence visibility."
           align="center"
         />
 
@@ -199,7 +191,7 @@ export default function Home() {
                   <Icon className="h-5 w-5 text-cyan-100" />
                 </span>
                 <h3 className="font-display text-xl font-semibold text-white">{feature.title}</h3>
-                <p className="mt-2 text-sm leading-6 text-slate-200">{feature.copy}</p>
+                <p className="section-copy mt-2 text-sm">{feature.copy}</p>
               </GlassCard>
             )
           })}
@@ -215,9 +207,9 @@ export default function Home() {
           <h2 className="mt-4 font-display text-3xl font-semibold text-white md:text-4xl">
             Built to reduce audit anxiety and speed up compliant hiring
           </h2>
-          <p className="mx-auto mt-3 max-w-2xl text-slate-200/95">
-            The portal structure now includes dedicated operations, vacancy, and audit surfaces to
-            cover workflows that previously had no front-end implementation.
+          <p className="section-copy mx-auto mt-3 max-w-2xl text-sm md:text-base">
+            The portal structure includes dedicated operations, vacancy, and audit surfaces so
+            compliance teams can produce evidence without spreadsheet drift.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">

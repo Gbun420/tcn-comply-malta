@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { applyCorsHeaders, preflightResponse } from './lib/api-cors.js'
 import { evaluateMiddlewareRequest } from './lib/middleware-policy.js'
 
 const PUBLIC_PATHS = new Set([
@@ -20,12 +21,14 @@ const PUBLIC_PATHS = new Set([
 ])
 
 export function proxy(request) {
+  const method = request.method
   const token = request.cookies.get('auth-token')?.value
   const pathname = request.nextUrl.pathname
   const isApiRoute = pathname.startsWith('/api/')
   const isAuthApiRoute = pathname.startsWith('/api/auth/')
 
   const outcome = evaluateMiddlewareRequest({
+    method,
     pathname,
     hasToken: Boolean(token),
     isApiRoute,
@@ -33,8 +36,12 @@ export function proxy(request) {
     publicPaths: PUBLIC_PATHS,
   })
 
+  if (outcome === 'api-preflight') {
+    return preflightResponse(request)
+  }
+
   if (outcome === 'api-unauthorized') {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    return applyCorsHeaders(request, NextResponse.json({ error: 'Unauthorized' }, { status: 401 }))
   }
 
   if (outcome === 'redirect-login') {

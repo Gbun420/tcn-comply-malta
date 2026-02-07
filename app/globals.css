@@ -111,14 +111,29 @@ body::after {
 }
 
 .nav-link {
+  display: inline-flex;
+  align-items: center;
   color: #e3eeff;
   transition:
     color 200ms ease,
-    opacity 200ms ease;
+    opacity 200ms ease,
+    border-color 200ms ease,
+    background-color 200ms ease;
 }
 
 .nav-link:hover {
   color: #95edff;
+}
+
+.lead-copy {
+  max-width: 64ch;
+  line-height: 1.75;
+  color: rgba(232, 242, 255, 0.95);
+}
+
+.section-copy {
+  line-height: 1.7;
+  color: rgba(220, 234, 252, 0.95);
 }
 
 .cta-primary {

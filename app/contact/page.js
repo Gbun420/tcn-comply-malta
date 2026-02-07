@@ -3,13 +3,17 @@ import { ArrowUpRight } from 'lucide-react'
 import { MarketingPageShell } from '../../components/site/marketing-page-shell.js'
 import { GlassCard } from '../../components/ui/glass-card.js'
 import { PORTAL_OFFERINGS } from '../../lib/portal-content.js'
+import { buildPageMetadata } from '../../lib/seo.js'
+import { PUBLIC_PAGE_COPY } from '../../lib/site-copy.js'
+
+export const metadata = buildPageMetadata(PUBLIC_PAGE_COPY.contact)
 
 export default function ContactPage() {
   return (
     <MarketingPageShell
       kicker="Contact"
       title="Plan client rollout, onboarding, and support with our compliance team"
-      description="Use these channels to scope implementation, align portal modules to your process, and coordinate testing with your stakeholders."
+      description="Use these channels to scope implementation, align portal modules to your process, and confirm integration/security requirements with stakeholders."
       actions={[
         <Link
           key="register"

@@ -3,13 +3,17 @@ import { ArrowUpRight } from 'lucide-react'
 import { MarketingPageShell } from '../../components/site/marketing-page-shell.js'
 import { GlassCard } from '../../components/ui/glass-card.js'
 import { PORTAL_OFFERINGS } from '../../lib/portal-content.js'
+import { buildPageMetadata } from '../../lib/seo.js'
+import { PUBLIC_PAGE_COPY } from '../../lib/site-copy.js'
+
+export const metadata = buildPageMetadata(PUBLIC_PAGE_COPY.workflow)
 
 export default function WorkflowPage() {
   return (
     <MarketingPageShell
       kicker="Workflow"
       title="A workflow clients can operate daily without compliance blind spots"
-      description="Our workflow model aligns product behavior with legal process order so teams can intake, validate, operate, and audit without context switching."
+      description="Our workflow model aligns product behavior with legal process order so HR, compliance, and operations can execute with shared visibility."
       actions={[
         <Link key="contact" href="/contact" className="cta-ghost inline-flex items-center gap-2">
           Talk to Implementation Team

@@ -2,3 +2,4 @@ node_modules
 .next
 coverage
 docs/audits/*.html
+docs/audits/*.json

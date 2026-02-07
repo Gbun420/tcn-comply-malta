@@ -10,6 +10,11 @@
     "lint:fix": "eslint . --ext .js,.mjs --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
+    "audit:api": "node scripts/audit/api-check.mjs",
+    "audit:seo": "node scripts/audit/seo-check.mjs",
+    "audit:content": "node scripts/audit/content-check.mjs",
+    "audit:full": "npm run audit:api && npm run audit:seo && npm run audit:content",
+    "audit:prod": "npm run audit:full",
     "deploy": "npm run build && npx vercel --prod --yes",
     "lighthouse": "node lighthouse-test.cjs",
     "lighthouse:seo": "node lighthouse-seo-audit.cjs"

@@ -8,6 +8,7 @@ import {
   SITE_NAME,
   SITE_SUPPORT_TAGLINE,
 } from '../lib/site-content.js'
+import { BASE_KEYWORDS, OG_IMAGE_PATH, SITE_URL } from '../lib/seo.js'
 
 const bodyFont = Manrope({
   subsets: ['latin'],
@@ -24,50 +25,28 @@ const displayFont = Space_Grotesk({
 })
 
 export const metadata = {
-  title: `${SITE_NAME} - Automated TCN Compliance for Maltese Employers | 2026 Labour Migration Policy`,
+  title: `${SITE_NAME} | Employer TCN Compliance Platform`,
   description:
-    'Streamline Malta TCN compliance with automated pre-departure course tracking, Skills Pass integration, and quota monitoring. Stay compliant with the 2026 Labour Migration Policy.',
-  keywords: [
-    'Malta TCN compliance',
-    'Third-Country Nationals Malta',
-    '2026 Labour Migration Policy',
-    'Malta immigration software',
-    'TCN onboarding Malta',
-    'Jobsplus integration Malta',
-    'Skills Pass tracking',
-    'Malta employer compliance',
-    'Pre-departure course Malta',
-    'Third-country national compliance',
-    'Malta work permits',
-    'Malta immigration 2026',
-    'TCN hiring Malta',
-    'Malta labor migration',
-    'compliance platform Malta',
-    'Malta business software',
-    'HR compliance Malta',
-  ].join(', '),
+    'Audit-ready compliance workspace for Maltese employers managing Third-Country Nationals under the 2026 Labour Migration Policy.',
+  keywords: BASE_KEYWORDS.join(', '),
   authors: [{ name: SITE_NAME, email: SITE_CONTACT_EMAIL }],
   creator: SITE_NAME,
   publisher: SITE_NAME,
-  metadataBase: new URL('https://tcn-comply-malta.vercel.app'),
-  alternates: {
-    canonical: '/',
-  },
+  metadataBase: new URL(SITE_URL),
   openGraph: {
-    title: `${SITE_NAME} - Automated TCN Compliance Platform`,
-    description:
-      "Navigate Malta's 2026 Labour Migration Policy with confidence. Automate TCN onboarding, tracking, and compliance.",
+    title: `${SITE_NAME} | Employer TCN Compliance Platform`,
+    description: 'Audit-ready compliance workspace for Maltese employers managing TCN obligations.',
     type: 'website',
     locale: 'en_MT',
     siteName: SITE_NAME,
-    url: 'https://tcn-comply-malta.vercel.app',
-    images: ['/og-image.svg'],
+    url: SITE_URL,
+    images: [OG_IMAGE_PATH],
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${SITE_NAME} - TCN Compliance Made Simple`,
-    description: "Navigate Malta's 2026 Labour Migration Policy with confidence",
-    images: ['/og-image.svg'],
+    title: `${SITE_NAME} | Employer TCN Compliance Platform`,
+    description: 'Audit-ready compliance workspace for Maltese employers managing TCN obligations.',
+    images: [OG_IMAGE_PATH],
   },
   robots: {
     index: true,
@@ -83,11 +62,11 @@ const structuredData = {
   operatingSystem: 'Web',
   description:
     "TCN compliance platform for Maltese employers managing Third-Country Nationals under Malta's 2026 Labour Migration Policy",
-  url: 'https://tcn-comply-malta.vercel.app',
+  url: SITE_URL,
   author: {
     '@type': 'Organization',
     name: SITE_NAME,
-    url: 'https://tcn-comply-malta.vercel.app',
+    url: SITE_URL,
     address: {
       '@type': 'PostalAddress',
       addressCountry: 'MT',

@@ -3,6 +3,7 @@ import test from 'node:test'
 
 import { POST as loginPost } from '../app/api/auth/login/route.js'
 import { GET as meGet } from '../app/api/auth/me/route.js'
+import { POST as logoutPost } from '../app/api/auth/logout/route.js'
 import { generateToken } from '../lib/auth.js'
 
 process.env.NODE_ENV = 'test'
@@ -94,4 +95,15 @@ test('GET /api/auth/me returns 200 with a valid signed token', async () => {
   assert.equal(body.user.email, 'valid@example.com')
   assert.equal(body.user.role, 'employer')
   assert.equal(body.user.name, 'Valid User')
+})
+
+test('POST /api/auth/logout returns 200 and clears auth cookie', async () => {
+  const request = new Request('http://localhost/api/auth/logout', { method: 'POST' })
+
+  const response = await logoutPost(request)
+  const body = await response.json()
+
+  assert.equal(response.status, 200)
+  assert.equal(body.success, true)
+  assert.match(response.headers.get('set-cookie') || '', /auth-token=.*Max-Age=0/i)
 })

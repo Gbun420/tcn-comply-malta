@@ -1,9 +1,22 @@
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { ArrowUpRight, Sparkles } from 'lucide-react'
 import { MARKETING_NAV_LINKS } from '../../lib/portal-content.js'
 
 export function SiteHeader({ supportTagline }) {
+  const pathname = usePathname()
+
+  const isActivePath = (href) => {
+    if (href === '/') {
+      return pathname === '/'
+    }
+
+    return pathname === href || pathname.startsWith(`${href}/`)
+  }
+
   return (
     <header className="sticky top-4 z-50 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto mt-4 w-full max-w-7xl rounded-2xl border border-white/20 bg-white/10 px-4 py-3 shadow-2xl backdrop-blur-xl">
@@ -28,7 +41,15 @@ export function SiteHeader({ supportTagline }) {
 
           <nav className="hidden items-center gap-6 lg:flex">
             {MARKETING_NAV_LINKS.map((link) => (
-              <Link key={link.href} href={link.href} className="nav-link text-sm">
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`nav-link rounded-full px-2.5 py-1.5 text-sm ${
+                  isActivePath(link.href)
+                    ? 'border border-cyan-200/45 bg-cyan-200/14 text-cyan-100'
+                    : ''
+                }`}
+              >
                 {link.label}
               </Link>
             ))}
@@ -51,7 +72,11 @@ export function SiteHeader({ supportTagline }) {
             <Link
               key={link.href}
               href={link.href}
-              className="whitespace-nowrap rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-medium text-slate-100"
+              className={`whitespace-nowrap rounded-full border px-3 py-1.5 text-xs font-medium ${
+                isActivePath(link.href)
+                  ? 'border-cyan-200/45 bg-cyan-200/14 text-cyan-100'
+                  : 'border-white/20 bg-white/10 text-slate-100'
+              }`}
             >
               {link.label}
             </Link>

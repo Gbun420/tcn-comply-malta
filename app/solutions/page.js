@@ -3,13 +3,17 @@ import { ArrowUpRight } from 'lucide-react'
 import { MarketingPageShell } from '../../components/site/marketing-page-shell.js'
 import { GlassCard } from '../../components/ui/glass-card.js'
 import { PORTAL_OFFERINGS } from '../../lib/portal-content.js'
+import { buildPageMetadata } from '../../lib/seo.js'
+import { PUBLIC_PAGE_COPY } from '../../lib/site-copy.js'
+
+export const metadata = buildPageMetadata(PUBLIC_PAGE_COPY.solutions)
 
 export default function SolutionsPage() {
   return (
     <MarketingPageShell
       kicker="Solutions"
       title="Client-ready compliance solutions for each stage of the TCN lifecycle"
-      description="These modules define what we offer clients inside the portal and how each feature supports operational, legal, and audit outcomes."
+      description="These modules define what employers and partner integrators can operationalize inside the portal, including evidence outputs for legal and audit teams."
       actions={[
         <Link key="portal" href="/dashboard" className="cta-primary inline-flex items-center gap-2">
           Open Portal Dashboard

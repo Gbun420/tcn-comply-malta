@@ -1,10 +1,12 @@
 import { GlassCard } from '../../components/ui/glass-card.js'
+import { buildPageMetadata } from '../../lib/seo.js'
+import { PUBLIC_PAGE_COPY } from '../../lib/site-copy.js'
 import { SITE_CONTACT_EMAIL, SITE_CONTACT_LOCATION, SITE_NAME } from '../../lib/site-content.js'
 
-export const metadata = {
-  title: `Privacy Policy - ${SITE_NAME}`,
-  description: `Privacy policy for ${SITE_NAME} - Automated TCN compliance platform for Maltese employers.`,
-}
+export const metadata = buildPageMetadata({
+  ...PUBLIC_PAGE_COPY.privacy,
+  keywords: ['privacy policy Malta', 'GDPR compliance platform'],
+})
 
 const sections = [
   {

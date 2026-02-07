@@ -38,7 +38,7 @@ test('public marketing paths align with separate-page routing', () => {
   assert.deepEqual(PUBLIC_MARKETING_PATHS, expected)
 })
 
-test('sitemap includes new public and dashboard module routes', async () => {
+test('sitemap includes only public/legal indexable routes', async () => {
   const response = await sitemapGet()
   const xml = await response.text()
 
@@ -47,6 +47,9 @@ test('sitemap includes new public and dashboard module routes', async () => {
   assert.equal(xml.includes('/coverage'), true)
   assert.equal(xml.includes('/workflow'), true)
   assert.equal(xml.includes('/contact'), true)
-  assert.equal(xml.includes('/dashboard/vacancies'), true)
-  assert.equal(xml.includes('/dashboard/audit'), true)
+  assert.equal(xml.includes('/privacy'), true)
+  assert.equal(xml.includes('/terms'), true)
+  assert.equal(xml.includes('/dashboard'), false)
+  assert.equal(xml.includes('/auth/login'), false)
+  assert.equal(xml.includes('/auth/register'), false)
 })

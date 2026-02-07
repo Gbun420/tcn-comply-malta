@@ -38,6 +38,17 @@ node --test tests/*.test.mjs
 npm run build
 ```
 
+### Production Audit Checks
+
+```bash
+npm run audit:api
+npm run audit:seo
+npm run audit:content
+npm run audit:full
+```
+
+Audit artifacts are written to `docs/audits/`.
+
 ### Deployment
 
 ```bash

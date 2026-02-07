@@ -2,6 +2,8 @@ import Link from 'next/link'
 import { ArrowUpRight, CheckCircle2, FlaskConical, ShieldCheck } from 'lucide-react'
 import { MarketingPageShell } from '../../components/site/marketing-page-shell.js'
 import { GlassCard } from '../../components/ui/glass-card.js'
+import { buildPageMetadata } from '../../lib/seo.js'
+import { PUBLIC_PAGE_COPY } from '../../lib/site-copy.js'
 
 const auditChecks = [
   'Review policy checkpoints against employee and vacancy records.',
@@ -10,12 +12,14 @@ const auditChecks = [
   'Track remediation actions and assign accountable owners.',
 ]
 
+export const metadata = buildPageMetadata(PUBLIC_PAGE_COPY.auditApp)
+
 export default function AuditAppPage() {
   return (
     <MarketingPageShell
       kicker="Audit App"
       title="Dedicated audit and test workspace for compliance verification"
-      description="This separate page is purpose-built for audit preparation and test execution, with direct paths into the operational dashboard."
+      description="This separate page is purpose-built for audit preparation, API checks, and evidence readiness reviews with direct paths into the operational dashboard."
       actions={[
         <Link
           key="audit-portal"

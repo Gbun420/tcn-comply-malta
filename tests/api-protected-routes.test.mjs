@@ -3,6 +3,8 @@ import test from 'node:test'
 
 import { GET as employeesGet, POST as employeesPost } from '../app/api/employees/route.js'
 import { GET as vacanciesGet, POST as vacanciesPost } from '../app/api/vacancies/route.js'
+import { OPTIONS as employeesOptions } from '../app/api/employees/route.js'
+import { OPTIONS as vacanciesOptions } from '../app/api/vacancies/route.js'
 
 process.env.NODE_ENV = 'test'
 process.env.JWT_SECRET = 'test-jwt-secret-1234567890'
@@ -66,4 +68,38 @@ test('POST /api/vacancies returns 401 without auth token', async () => {
 
   assert.equal(response.status, 401)
   assert.equal(body.error, 'Unauthorized')
+})
+
+test('OPTIONS /api/employees returns 204 for preflight without auth', async () => {
+  const request = new Request('http://localhost/api/employees', {
+    method: 'OPTIONS',
+    headers: {
+      origin: 'https://tcncomply.mt',
+      'access-control-request-method': 'POST',
+      'access-control-request-headers': 'Content-Type, Authorization',
+    },
+  })
+
+  const response = await employeesOptions(request)
+
+  assert.equal(response.status, 204)
+  assert.equal(response.headers.get('access-control-allow-origin'), 'https://tcncomply.mt')
+  assert.match(response.headers.get('access-control-allow-methods') || '', /OPTIONS/)
+})
+
+test('OPTIONS /api/vacancies returns 204 for preflight without auth', async () => {
+  const request = new Request('http://localhost/api/vacancies', {
+    method: 'OPTIONS',
+    headers: {
+      origin: 'https://tcncomply.mt',
+      'access-control-request-method': 'POST',
+      'access-control-request-headers': 'Content-Type, Authorization',
+    },
+  })
+
+  const response = await vacanciesOptions(request)
+
+  assert.equal(response.status, 204)
+  assert.equal(response.headers.get('access-control-allow-origin'), 'https://tcncomply.mt')
+  assert.match(response.headers.get('access-control-allow-methods') || '', /OPTIONS/)
 })

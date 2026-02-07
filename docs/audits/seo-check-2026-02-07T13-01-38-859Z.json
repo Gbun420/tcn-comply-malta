@@ -1,0 +1,114 @@
+{
+  "generatedAt": "2026-02-07T13:01:38.859Z",
+  "baseUrl": "https://tcn-comply-malta.vercel.app",
+  "minSeoScore": 95,
+  "passCount": 14,
+  "failCount": 0,
+  "pages": [
+    {
+      "route": "/",
+      "url": "https://tcn-comply-malta.vercel.app/",
+      "status": 200,
+      "title": "TCN Compliance Platform for Maltese Employers | TCN Comply Malta",
+      "description": "Manage TCN onboarding, vacancy proof, and renewal readiness with audit-first workflows aligned to Malta’s 2026 labour migration policy.",
+      "canonical": "https://tcn-comply-malta.vercel.app",
+      "robots": "index, follow"
+    },
+    {
+      "route": "/audit-app",
+      "url": "https://tcn-comply-malta.vercel.app/audit-app",
+      "status": 200,
+      "title": "Audit and Testing Workspace for Compliance Verification | TCN Comply Malta",
+      "description": "Use the dedicated audit app to verify API behavior, workflow readiness, and evidence completeness before stakeholder reviews.",
+      "canonical": "https://tcn-comply-malta.vercel.app/audit-app",
+      "robots": "index, follow"
+    },
+    {
+      "route": "/solutions",
+      "url": "https://tcn-comply-malta.vercel.app/solutions",
+      "status": 200,
+      "title": "Compliance Solutions for TCN Workforce Operations | TCN Comply Malta",
+      "description": "Review portal modules that support onboarding checks, vacancy publication evidence, and renewal governance for Maltese employers.",
+      "canonical": "https://tcn-comply-malta.vercel.app/solutions",
+      "robots": "index, follow"
+    },
+    {
+      "route": "/coverage",
+      "url": "https://tcn-comply-malta.vercel.app/coverage",
+      "status": 200,
+      "title": "Coverage Matrix for Malta TCN Compliance Controls | TCN Comply Malta",
+      "description": "Map each compliance obligation to evidence checkpoints, responsible actions, and audit outputs across your workforce workflows.",
+      "canonical": "https://tcn-comply-malta.vercel.app/coverage",
+      "robots": "index, follow"
+    },
+    {
+      "route": "/workflow",
+      "url": "https://tcn-comply-malta.vercel.app/workflow",
+      "status": 200,
+      "title": "Operational Workflow for TCN Compliance Execution | TCN Comply Malta",
+      "description": "Run intake, validation, operation, and audit stages in a single compliance workflow for Maltese employer teams.",
+      "canonical": "https://tcn-comply-malta.vercel.app/workflow",
+      "robots": "index, follow"
+    },
+    {
+      "route": "/contact",
+      "url": "https://tcn-comply-malta.vercel.app/contact",
+      "status": 200,
+      "title": "Contact the TCN Compliance Implementation Team | TCN Comply Malta",
+      "description": "Coordinate rollout planning, onboarding support, and partner integration requirements for your compliance program.",
+      "canonical": "https://tcn-comply-malta.vercel.app/contact",
+      "robots": "index, follow"
+    },
+    {
+      "route": "/privacy",
+      "url": "https://tcn-comply-malta.vercel.app/privacy",
+      "status": 200,
+      "title": "Privacy Policy | TCN Comply Malta",
+      "description": "Read how TCN Comply Malta handles personal and operational data for secure, GDPR-aligned compliance operations.",
+      "canonical": "https://tcn-comply-malta.vercel.app/privacy",
+      "robots": "index, follow"
+    },
+    {
+      "route": "/terms",
+      "url": "https://tcn-comply-malta.vercel.app/terms",
+      "status": 200,
+      "title": "Terms of Service | TCN Comply Malta",
+      "description": "Review service scope, account responsibilities, and regulatory boundaries for the TCN Comply Malta platform.",
+      "canonical": "https://tcn-comply-malta.vercel.app/terms",
+      "robots": "index, follow"
+    }
+  ],
+  "lighthouseResults": [
+    {
+      "route": "/",
+      "url": "https://tcn-comply-malta.vercel.app/",
+      "seoScore": 100
+    },
+    {
+      "route": "/audit-app",
+      "url": "https://tcn-comply-malta.vercel.app/audit-app",
+      "seoScore": 100
+    },
+    {
+      "route": "/solutions",
+      "url": "https://tcn-comply-malta.vercel.app/solutions",
+      "seoScore": 100
+    },
+    {
+      "route": "/coverage",
+      "url": "https://tcn-comply-malta.vercel.app/coverage",
+      "seoScore": 100
+    },
+    {
+      "route": "/workflow",
+      "url": "https://tcn-comply-malta.vercel.app/workflow",
+      "seoScore": 100
+    },
+    {
+      "route": "/contact",
+      "url": "https://tcn-comply-malta.vercel.app/contact",
+      "seoScore": 100
+    }
+  ],
+  "failures": []
+}

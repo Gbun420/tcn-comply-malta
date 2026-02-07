@@ -23,6 +23,7 @@ const publicPaths = new Set([
 
 test('auth login remains reachable even when auth cookie exists', () => {
   const outcome = evaluateMiddlewareRequest({
+    method: 'GET',
     pathname: '/auth/login',
     hasToken: true,
     isApiRoute: false,
@@ -35,6 +36,7 @@ test('auth login remains reachable even when auth cookie exists', () => {
 
 test('dashboard without token redirects to login', () => {
   const outcome = evaluateMiddlewareRequest({
+    method: 'GET',
     pathname: '/dashboard',
     hasToken: false,
     isApiRoute: false,
@@ -47,6 +49,7 @@ test('dashboard without token redirects to login', () => {
 
 test('protected api without token returns unauthorized action', () => {
   const outcome = evaluateMiddlewareRequest({
+    method: 'GET',
     pathname: '/api/employees',
     hasToken: false,
     isApiRoute: true,
@@ -59,6 +62,7 @@ test('protected api without token returns unauthorized action', () => {
 
 test('public marketing pages remain accessible without token', () => {
   const outcome = evaluateMiddlewareRequest({
+    method: 'GET',
     pathname: '/workflow',
     hasToken: false,
     isApiRoute: false,
@@ -67,4 +71,17 @@ test('public marketing pages remain accessible without token', () => {
   })
 
   assert.equal(outcome, 'allow')
+})
+
+test('api preflight requests bypass authentication', () => {
+  const outcome = evaluateMiddlewareRequest({
+    method: 'OPTIONS',
+    pathname: '/api/vacancies',
+    hasToken: false,
+    isApiRoute: true,
+    isAuthApiRoute: false,
+    publicPaths,
+  })
+
+  assert.equal(outcome, 'api-preflight')
 })

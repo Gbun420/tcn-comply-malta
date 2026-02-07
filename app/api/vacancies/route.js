@@ -1,10 +1,20 @@
 import { initializeApp, getApps, cert } from 'firebase-admin/app'
 import { getFirestore } from 'firebase-admin/firestore'
+import { applyCorsHeaders, preflightResponse } from '../../../lib/api-cors.js'
 import { requireAuth } from '../../../lib/request-auth.js'
 
 export const dynamic = 'force-dynamic'
+const CORS_OPTIONS = { methods: 'GET,POST,OPTIONS' }
 
 let db = null
+
+function withCors(request, response) {
+  return applyCorsHeaders(request, response, CORS_OPTIONS)
+}
+
+export function OPTIONS(request) {
+  return preflightResponse(request, CORS_OPTIONS)
+}
 
 function getFirebaseAdmin() {
   if (db) return db
@@ -45,7 +55,7 @@ function getFirebaseAdmin() {
 export async function POST(request) {
   const { errorResponse } = requireAuth(request)
   if (errorResponse) {
-    return errorResponse
+    return withCors(request, errorResponse)
   }
 
   try {
@@ -54,13 +64,16 @@ export async function POST(request) {
 
     const db = getFirebaseAdmin()
     if (!db) {
-      return Response.json({ error: 'Database not configured' }, { status: 503 })
+      return withCors(request, Response.json({ error: 'Database not configured' }, { status: 503 }))
     }
 
     if (durationWeeks < 3) {
-      return Response.json(
-        { error: 'Malta regulation requires minimum 3-week vacancy posting' },
-        { status: 400 }
+      return withCors(
+        request,
+        Response.json(
+          { error: 'Malta regulation requires minimum 3-week vacancy posting' },
+          { status: 400 }
+        )
       )
     }
 
@@ -96,37 +109,40 @@ export async function POST(request) {
 
     await vacancyRef.set(vacancyData)
 
-    return Response.json({
-      success: true,
-      vacancyId: vacancyRef.id,
-      jobsplusRef: jobsplusResult.refNumber,
-      complianceStatus: 'compliant',
-      message: 'Vacancy posted in compliance with Malta 2026 regulations',
-    })
+    return withCors(
+      request,
+      Response.json({
+        success: true,
+        vacancyId: vacancyRef.id,
+        jobsplusRef: jobsplusResult.refNumber,
+        complianceStatus: 'compliant',
+        message: 'Vacancy posted in compliance with Malta 2026 regulations',
+      })
+    )
   } catch (error) {
     console.error('Vacancy API Error:', error)
-    return Response.json({ error: 'Internal server error' }, { status: 500 })
+    return withCors(request, Response.json({ error: 'Internal server error' }, { status: 500 }))
   }
 }
 
 export async function GET(request) {
   const { errorResponse } = requireAuth(request)
   if (errorResponse) {
-    return errorResponse
+    return withCors(request, errorResponse)
   }
 
   try {
     const db = getFirebaseAdmin()
     if (!db) {
-      return Response.json({ vacancies: [] })
+      return withCors(request, Response.json({ vacancies: [] }))
     }
 
     const vacanciesRef = db.collection('vacancies')
     const snapshot = await vacanciesRef.get()
     const vacancies = snapshot.docs.map((doc) => doc.data())
 
-    return Response.json({ vacancies })
+    return withCors(request, Response.json({ vacancies }))
   } catch {
-    return Response.json({ error: 'Failed to fetch vacancies' }, { status: 500 })
+    return withCors(request, Response.json({ error: 'Failed to fetch vacancies' }, { status: 500 }))
   }
 }

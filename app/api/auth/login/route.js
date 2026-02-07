@@ -4,8 +4,18 @@ import {
   generateToken,
   isFirebaseAuthConfigured,
 } from '../../../../lib/auth.js'
+import { applyCorsHeaders, preflightResponse } from '../../../../lib/api-cors.js'
 
 export const dynamic = 'force-dynamic'
+const CORS_OPTIONS = { methods: 'POST,OPTIONS' }
+
+function withCors(request, response) {
+  return applyCorsHeaders(request, response, CORS_OPTIONS)
+}
+
+export function OPTIONS(request) {
+  return preflightResponse(request, CORS_OPTIONS)
+}
 
 export async function POST(request) {
   let body = null
@@ -13,27 +23,33 @@ export async function POST(request) {
   try {
     body = await request.json()
   } catch {
-    return Response.json({ error: 'Invalid request body' }, { status: 400 })
+    return withCors(request, Response.json({ error: 'Invalid request body' }, { status: 400 }))
   }
 
   const email = body?.email?.trim()
   const password = body?.password
 
   if (!email || !password) {
-    return Response.json({ error: 'Email and password required' }, { status: 400 })
+    return withCors(
+      request,
+      Response.json({ error: 'Email and password required' }, { status: 400 })
+    )
   }
 
   if (!isFirebaseAuthConfigured()) {
-    return Response.json(
-      { error: 'Authentication provider is not configured. Please contact support.' },
-      { status: 503 }
+    return withCors(
+      request,
+      Response.json(
+        { error: 'Authentication provider is not configured. Please contact support.' },
+        { status: 503 }
+      )
     )
   }
 
   const user = await authenticateUser(email, password)
 
   if (!user) {
-    return Response.json({ error: 'Invalid credentials' }, { status: 401 })
+    return withCors(request, Response.json({ error: 'Invalid credentials' }, { status: 401 }))
   }
 
   let token = null
@@ -42,10 +58,13 @@ export async function POST(request) {
     token = generateToken(user)
   } catch (error) {
     if (error?.message === JWT_SECRET_PRODUCTION_ERROR) {
-      return Response.json({ error: 'Authentication service unavailable' }, { status: 503 })
+      return withCors(
+        request,
+        Response.json({ error: 'Authentication service unavailable' }, { status: 503 })
+      )
     }
 
-    return Response.json({ error: 'Internal server error' }, { status: 500 })
+    return withCors(request, Response.json({ error: 'Internal server error' }, { status: 500 }))
   }
 
   const responseData = {
@@ -68,11 +87,14 @@ export async function POST(request) {
     'SameSite=Lax',
   ].join('; ')
 
-  return new Response(JSON.stringify(responseData), {
-    status: 200,
-    headers: {
-      'Content-Type': 'application/json',
-      'Set-Cookie': `${cookieHeader}${secureFlag}`,
-    },
-  })
+  return withCors(
+    request,
+    new Response(JSON.stringify(responseData), {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json',
+        'Set-Cookie': `${cookieHeader}${secureFlag}`,
+      },
+    })
+  )
 }

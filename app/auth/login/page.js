@@ -98,7 +98,7 @@ export default function Login() {
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="input-field pl-12"
+                    className="input-field !pl-12"
                     placeholder="name@company.mt"
                   />
                 </span>
@@ -115,7 +115,7 @@ export default function Login() {
                     required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="input-field pl-12"
+                    className="input-field !pl-12"
                     placeholder="••••••••"
                   />
                 </span>

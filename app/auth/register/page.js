@@ -119,7 +119,7 @@ export default function Register() {
                   required
                   value={formData.name}
                   onChange={handleChange}
-                  className="input-field pl-12"
+                  className="input-field !pl-12"
                   placeholder="Jane Smith"
                 />
               </span>
@@ -136,7 +136,7 @@ export default function Register() {
                   required
                   value={formData.email}
                   onChange={handleChange}
-                  className="input-field pl-12"
+                  className="input-field !pl-12"
                   placeholder="name@company.mt"
                 />
               </span>
@@ -153,7 +153,7 @@ export default function Register() {
                   required
                   value={formData.company}
                   onChange={handleChange}
-                  className="input-field pl-12"
+                  className="input-field !pl-12"
                   placeholder="Example Hospitality Ltd"
                 />
               </span>
@@ -170,7 +170,7 @@ export default function Register() {
                   required
                   value={formData.password}
                   onChange={handleChange}
-                  className="input-field pl-12"
+                  className="input-field !pl-12"
                   placeholder="Minimum 6 characters"
                 />
               </span>
@@ -187,7 +187,7 @@ export default function Register() {
                   required
                   value={formData.confirmPassword}
                   onChange={handleChange}
-                  className="input-field pl-12"
+                  className="input-field !pl-12"
                   placeholder="Re-enter password"
                 />
               </span>

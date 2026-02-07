@@ -1,7 +1,17 @@
 import { NextResponse } from 'next/server'
 import { JWT_SECRET_PRODUCTION_ERROR, createUser, generateToken } from '../../../../lib/auth.js'
+import { applyCorsHeaders, preflightResponse } from '../../../../lib/api-cors.js'
 
 export const dynamic = 'force-dynamic'
+const CORS_OPTIONS = { methods: 'POST,OPTIONS' }
+
+function withCors(request, response) {
+  return applyCorsHeaders(request, response, CORS_OPTIONS)
+}
+
+export function OPTIONS(request) {
+  return preflightResponse(request, CORS_OPTIONS)
+}
 
 export async function POST(request) {
   let name = null
@@ -27,11 +37,17 @@ export async function POST(request) {
   }
 
   if (!name || !email || !password || !company) {
-    return NextResponse.json({ error: 'All fields are required' }, { status: 400 })
+    return withCors(
+      request,
+      NextResponse.json({ error: 'All fields are required' }, { status: 400 })
+    )
   }
 
   if (password.length < 6) {
-    return NextResponse.json({ error: 'Password must be at least 6 characters' }, { status: 400 })
+    return withCors(
+      request,
+      NextResponse.json({ error: 'Password must be at least 6 characters' }, { status: 400 })
+    )
   }
 
   let newUser = null
@@ -42,12 +58,18 @@ export async function POST(request) {
     console.error('Create user error:', createError)
 
     if (createError.message === 'User already exists') {
-      return NextResponse.json({ error: 'User with this email already exists' }, { status: 409 })
+      return withCors(
+        request,
+        NextResponse.json({ error: 'User with this email already exists' }, { status: 409 })
+      )
     }
 
-    return NextResponse.json(
-      { error: 'Registration temporarily unavailable. Please try again later.' },
-      { status: 503 }
+    return withCors(
+      request,
+      NextResponse.json(
+        { error: 'Registration temporarily unavailable. Please try again later.' },
+        { status: 503 }
+      )
     )
   }
 
@@ -57,18 +79,24 @@ export async function POST(request) {
     token = generateToken(newUser)
   } catch (error) {
     if (error?.message === JWT_SECRET_PRODUCTION_ERROR) {
-      return NextResponse.json({ error: 'Authentication service unavailable' }, { status: 503 })
+      return withCors(
+        request,
+        NextResponse.json({ error: 'Authentication service unavailable' }, { status: 503 })
+      )
     }
 
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+    return withCors(request, NextResponse.json({ error: 'Internal server error' }, { status: 500 }))
   }
 
-  const response = NextResponse.json(
-    {
-      success: true,
-      user: newUser,
-    },
-    { status: 201 }
+  const response = withCors(
+    request,
+    NextResponse.json(
+      {
+        success: true,
+        user: newUser,
+      },
+      { status: 201 }
+    )
   )
 
   response.cookies.set('auth-token', token, {

@@ -1,0 +1,62 @@
+{
+  "generatedAt": "2026-02-07T12:44:47.817Z",
+  "baseUrl": "https://tcn-comply-malta.vercel.app",
+  "passCount": 6,
+  "failCount": 3,
+  "results": [
+    {
+      "name": "logout route clears auth cookie",
+      "pass": false,
+      "status": 500,
+      "body": ""
+    },
+    {
+      "name": "login missing credentials returns 400",
+      "pass": true,
+      "status": 400,
+      "body": "{\"error\":\"Email and password required\"}"
+    },
+    {
+      "name": "auth/me without token returns 401",
+      "pass": true,
+      "status": 401,
+      "body": "{\"error\":\"Unauthorized\"}"
+    },
+    {
+      "name": "employees GET without token returns 401",
+      "pass": true,
+      "status": 401,
+      "body": "{\"error\":\"Unauthorized\"}"
+    },
+    {
+      "name": "employees POST without token returns 401",
+      "pass": true,
+      "status": 401,
+      "body": "{\"error\":\"Unauthorized\"}"
+    },
+    {
+      "name": "vacancies GET without token returns 401",
+      "pass": true,
+      "status": 401,
+      "body": "{\"error\":\"Unauthorized\"}"
+    },
+    {
+      "name": "vacancies POST without token returns 401",
+      "pass": true,
+      "status": 401,
+      "body": "{\"error\":\"Unauthorized\"}"
+    },
+    {
+      "name": "employees OPTIONS preflight returns 204",
+      "pass": false,
+      "status": 401,
+      "body": "{\"error\":\"Unauthorized\"}"
+    },
+    {
+      "name": "vacancies OPTIONS preflight returns 204",
+      "pass": false,
+      "status": 401,
+      "body": "{\"error\":\"Unauthorized\"}"
+    }
+  ]
+}

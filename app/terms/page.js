@@ -1,10 +1,12 @@
 import { GlassCard } from '../../components/ui/glass-card.js'
+import { buildPageMetadata } from '../../lib/seo.js'
+import { PUBLIC_PAGE_COPY } from '../../lib/site-copy.js'
 import { SITE_CONTACT_EMAIL, SITE_NAME } from '../../lib/site-content.js'
 
-export const metadata = {
-  title: `Terms of Service - ${SITE_NAME}`,
-  description: `Terms of Service for ${SITE_NAME}.`,
-}
+export const metadata = buildPageMetadata({
+  ...PUBLIC_PAGE_COPY.terms,
+  keywords: ['terms of service Malta', 'compliance platform terms'],
+})
 
 const clauses = [
   {

@@ -1,0 +1,87 @@
+{
+  "generatedAt": "2026-02-07T12:59:43.894Z",
+  "baseUrl": "https://tcn-comply-malta.vercel.app",
+  "passCount": 12,
+  "failCount": 0,
+  "pages": [
+    {
+      "pathname": "/",
+      "status": 200,
+      "title": "TCN Compliance Platform for Maltese Employers | TCN Comply Malta",
+      "description": "Manage TCN onboarding, vacancy proof, and renewal readiness with audit-first workflows aligned to Malta’s 2026 labour migration policy.",
+      "robots": "index, follow"
+    },
+    {
+      "pathname": "/audit-app",
+      "status": 200,
+      "title": "Audit and Testing Workspace for Compliance Verification | TCN Comply Malta",
+      "description": "Use the dedicated audit app to verify API behavior, workflow readiness, and evidence completeness before stakeholder reviews.",
+      "robots": "index, follow"
+    },
+    {
+      "pathname": "/solutions",
+      "status": 200,
+      "title": "Compliance Solutions for TCN Workforce Operations | TCN Comply Malta",
+      "description": "Review portal modules that support onboarding checks, vacancy publication evidence, and renewal governance for Maltese employers.",
+      "robots": "index, follow"
+    },
+    {
+      "pathname": "/coverage",
+      "status": 200,
+      "title": "Coverage Matrix for Malta TCN Compliance Controls | TCN Comply Malta",
+      "description": "Map each compliance obligation to evidence checkpoints, responsible actions, and audit outputs across your workforce workflows.",
+      "robots": "index, follow"
+    },
+    {
+      "pathname": "/workflow",
+      "status": 200,
+      "title": "Operational Workflow for TCN Compliance Execution | TCN Comply Malta",
+      "description": "Run intake, validation, operation, and audit stages in a single compliance workflow for Maltese employer teams.",
+      "robots": "index, follow"
+    },
+    {
+      "pathname": "/contact",
+      "status": 200,
+      "title": "Contact the TCN Compliance Implementation Team | TCN Comply Malta",
+      "description": "Coordinate rollout planning, onboarding support, and partner integration requirements for your compliance program.",
+      "robots": "index, follow"
+    },
+    {
+      "pathname": "/privacy",
+      "status": 200,
+      "title": "Privacy Policy | TCN Comply Malta",
+      "description": "Read how TCN Comply Malta handles personal and operational data for secure, GDPR-aligned compliance operations.",
+      "robots": "index, follow"
+    },
+    {
+      "pathname": "/terms",
+      "status": 200,
+      "title": "Terms of Service | TCN Comply Malta",
+      "description": "Review service scope, account responsibilities, and regulatory boundaries for the TCN Comply Malta platform.",
+      "robots": "index, follow"
+    }
+  ],
+  "authPages": [
+    {
+      "pathname": "/auth/login",
+      "status": 200,
+      "robots": "noindex, nofollow, nocache"
+    },
+    {
+      "pathname": "/auth/register",
+      "status": 200,
+      "robots": "noindex, nofollow, nocache"
+    }
+  ],
+  "sitemapPaths": [
+    "/",
+    "/audit-app",
+    "/solutions",
+    "/coverage",
+    "/workflow",
+    "/contact",
+    "/privacy",
+    "/terms"
+  ],
+  "failures": []
+}
